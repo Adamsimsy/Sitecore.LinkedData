@@ -4,6 +4,17 @@
 .\Debug\App_Config\Sitecore.config
 .\Debug\App_Config\AppSettings.config
 .\Debug\App_Config\Log4Net.config
+.\Debug\packages.config
+.\Debug\bin\dotNetRDF.dll
+.\Debug\bin\dotNetRDF.xml
+.\Debug\bin\HtmlAgilityPack.dll
+.\Debug\bin\HtmlAgilityPack.pdb
+.\Debug\bin\HtmlAgilityPack.xml
 .\Debug\bin\LinkedData.Website.dll
 .\Debug\bin\LinkedData.Website.pdb
+.\Debug\bin\Newtonsoft.Json.dll
+.\Debug\bin\Newtonsoft.Json.xml
 .\Debug\bin\Sitecore.Kernel.dll
+.\Debug\bin\VDS.Common.dll
+.\Debug\bin\VDS.Common.pdb
+.\Debug\bin\VDS.Common.xml

@@ -33,7 +33,7 @@ namespace LinkedData.Website.LinkedData
             //ntwriter.Save(g, "HelloWorld.nt");
 
             RdfXmlWriter rdfxmlwriter = new RdfXmlWriter();
-            //rdfxmlwriter.Save(g, "HelloWorld.rdf");
+            rdfxmlwriter.Save(g, Server.MapPath("~/HelloWorld.rdf"));
 
             System.IO.StringWriter sw = new System.IO.StringWriter();
 

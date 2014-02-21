@@ -10,6 +10,8 @@
 .\Debug\bin\HtmlAgilityPack.dll
 .\Debug\bin\HtmlAgilityPack.pdb
 .\Debug\bin\HtmlAgilityPack.xml
+.\Debug\bin\LinkedData.dll
+.\Debug\bin\LinkedData.pdb
 .\Debug\bin\LinkedData.Website.dll
 .\Debug\bin\LinkedData.Website.pdb
 .\Debug\bin\Newtonsoft.Json.dll

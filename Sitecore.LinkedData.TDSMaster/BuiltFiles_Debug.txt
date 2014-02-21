@@ -1,0 +1,3 @@
+.\Debug\Web.config
+.\Debug\bin\Sitecore.LinkedData.Website.dll
+.\Debug\bin\Sitecore.LinkedData.Website.pdb

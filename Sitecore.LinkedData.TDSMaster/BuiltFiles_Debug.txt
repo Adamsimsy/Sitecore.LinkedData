@@ -1,3 +1,6 @@
 .\Debug\Web.config
+.\Debug\App_Config\Sitecore.config
+.\Debug\App_Config\AppSettings.config
+.\Debug\App_Config\Log4Net.config
 .\Debug\bin\Sitecore.LinkedData.Website.dll
 .\Debug\bin\Sitecore.LinkedData.Website.pdb

@@ -7,8 +7,8 @@
     <ProjectGuid>{07FE4A8B-33CD-46A9-85A4-D171D24989BC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sitecore.LinkedData</RootNamespace>
-    <AssemblyName>Sitecore.LinkedData</AssemblyName>
+    <RootNamespace>LinkedData</RootNamespace>
+    <AssemblyName>LinkedData</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

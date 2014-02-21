@@ -1,0 +1,9 @@
+.\Debug\layouts\Sample layout.aspx
+.\Debug\LinkedData\LinkedDataControl.ascx
+.\Debug\Web.config
+.\Debug\App_Config\Sitecore.config
+.\Debug\App_Config\AppSettings.config
+.\Debug\App_Config\Log4Net.config
+.\Debug\bin\LinkedData.Website.dll
+.\Debug\bin\LinkedData.Website.pdb
+.\Debug\bin\Sitecore.Kernel.dll

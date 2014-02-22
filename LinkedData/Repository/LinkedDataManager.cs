@@ -39,7 +39,7 @@ namespace LinkedData.Repository
             //ItemUri itemUri = (ItemUri) ((SitecoreItemUniqueId) item);
 
             //var str = itemUriConverter.ConvertFrom(item);
-            return item.Uri.ToString();
+            return item.Uri != null ? item.Uri.ToString() : string.Empty;
         }
 
         public static Item UriToItem(string uri)

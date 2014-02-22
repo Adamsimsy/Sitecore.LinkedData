@@ -4,7 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using LinkedData.Repository;
 using VDS.RDF;
+using VDS.RDF.Parsing;
 using VDS.RDF.Writing;
 
 namespace LinkedData.Website.LinkedData
@@ -24,22 +26,30 @@ namespace LinkedData.Website.LinkedData
             g.Assert(new Triple(dotNetRDF, says, helloWorld));
             g.Assert(new Triple(dotNetRDF, says, bonjourMonde));
 
+            IUriNode dotNetRDF2 = g.CreateUriNode(UriFactory.Create("http://www.dotnetrdf2.org"));
+            ILiteralNode helloWorld2 = g.CreateLiteralNode("Hello World2");
+            g.Assert(new Triple(dotNetRDF2, says, helloWorld2));
+
             foreach (Triple t in g.Triples)
             {
                 Console.WriteLine(t.ToString());
             }
 
-            NTriplesWriter ntwriter = new NTriplesWriter();
+            //NTriplesWriter ntwriter = new NTriplesWriter();
             //ntwriter.Save(g, "HelloWorld.nt");
+
+            //LinkedDataManager.WriteGraph(g);
+            //LinkedDataManager
 
             RdfXmlWriter rdfxmlwriter = new RdfXmlWriter();
             rdfxmlwriter.Save(g, Server.MapPath("~/HelloWorld.rdf"));
 
-            System.IO.StringWriter sw = new System.IO.StringWriter();
+            IGraph g2 = new Graph();
+            FileLoader.Load(g2, Server.MapPath("~/HelloWorld.rdf"));
 
             //Call the Save() method to write to the StringWriter
-            rdfxmlwriter.Save(g, sw);
-
+            System.IO.StringWriter sw = new System.IO.StringWriter();
+            rdfxmlwriter.Save(g2, sw);
             litRdf.Text = HttpUtility.HtmlEncode(sw.ToString());
         }
     }

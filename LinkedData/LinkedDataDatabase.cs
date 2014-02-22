@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LinkedData.Repository;
 using Sitecore;
 using Sitecore.Collections;
 using Sitecore.Configuration;
@@ -71,6 +72,9 @@ namespace LinkedData
     public override int GetReferenceCount(Item item)
     {
       Assert.ArgumentNotNull((object) item, "item");
+
+        var graph = LinkedDataManager.ReadGraph();
+
       using (DataProviderReader reader = this.DataApi.CreateReader(" SELECT COUNT(*)\r\n                      FROM {0}Links{1}\r\n                      WHERE {0}SourceItemID{1} = {2}itemID{3}\r\n                      AND {0}SourceDatabase{1} = {2}database{3}", (object) "database", (object) item.Database.Name, (object) "itemID", (object) item.ID.ToGuid()))
       {
         LinkCounters.DataRead.Increment();

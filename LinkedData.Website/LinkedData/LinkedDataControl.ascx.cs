@@ -17,6 +17,7 @@ namespace LinkedData.Website.LinkedData
         {
             //Fill in the code shown on this page here to build your hello world application
             Graph g = new Graph();
+            g.NamespaceMap.AddNamespace("sitecore", new Uri("http://some/namespace/"));
 
             IUriNode dotNetRDF = g.CreateUriNode(UriFactory.Create("http://www.dotnetrdf.org"));
             IUriNode says = g.CreateUriNode(UriFactory.Create("http://example.org/says"));
@@ -44,8 +45,18 @@ namespace LinkedData.Website.LinkedData
             //Call the Save() method to write to the StringWriter
             var sw = new System.IO.StringWriter();
             var rdfxmlwriter = new RdfXmlWriter();
-            rdfxmlwriter.Save(g2, sw);
-            litRdf.Text = HttpUtility.HtmlEncode(sw.ToString());
+
+            var triples = g2.GetTriplesWithSubject(dotNetRDF);
+
+            LinkedDataManager.ItemToUri(Sitecore.Context.Item);
+
+            foreach (var triple in triples)
+            {
+                litRdf.Text += triple.ToString();
+            }
+
+            //rdfxmlwriter.Save(g2, sw);
+            //litRdf.Text = HttpUtility.HtmlEncode(sw.ToString());
         }
     }
 }

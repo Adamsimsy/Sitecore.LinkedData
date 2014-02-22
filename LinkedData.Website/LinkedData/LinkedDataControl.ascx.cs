@@ -38,17 +38,12 @@ namespace LinkedData.Website.LinkedData
             //NTriplesWriter ntwriter = new NTriplesWriter();
             //ntwriter.Save(g, "HelloWorld.nt");
 
-            //LinkedDataManager.WriteGraph(g);
-            //LinkedDataManager
-
-            RdfXmlWriter rdfxmlwriter = new RdfXmlWriter();
-            rdfxmlwriter.Save(g, Server.MapPath("~/HelloWorld.rdf"));
-
-            IGraph g2 = new Graph();
-            FileLoader.Load(g2, Server.MapPath("~/HelloWorld.rdf"));
+            LinkedDataManager.WriteGraph(g);
+            var g2 = LinkedDataManager.ReadGraph();
 
             //Call the Save() method to write to the StringWriter
-            System.IO.StringWriter sw = new System.IO.StringWriter();
+            var sw = new System.IO.StringWriter();
+            var rdfxmlwriter = new RdfXmlWriter();
             rdfxmlwriter.Save(g2, sw);
             litRdf.Text = HttpUtility.HtmlEncode(sw.ToString());
         }

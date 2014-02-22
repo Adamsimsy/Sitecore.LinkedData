@@ -58,23 +58,16 @@ namespace LinkedData
         List<ItemLink> list = new List<ItemLink>();
         lock (this.locks.GetLock((object)item.ID))
         {
-            using (DataProviderReader resource_0 = this.DataApi.CreateReader(sql, parameters))
+            var g = LinkedDataManager.ReadGraph();
+
+            var items = g.GetTriplesWithSubject(g.CreateUriNode(LinkedDataManager.ItemToUri(item)));
+
+            foreach (var triple in items)
             {
-                while (resource_0.Read())
-                {
-                    string local_2 = resource_0.InnerReader.GetString(0);
-                    ID local_3 = ID.Parse(resource_0.InnerReader.GetGuid(1));
-                    Language local_4 = Language.Parse(resource_0.InnerReader.GetString(2));
-                    Sitecore.Data.Version local_5 = Sitecore.Data.Version.Parse(resource_0.InnerReader.GetInt32(3));
-                    ID local_6 = ID.Parse(resource_0.InnerReader.GetGuid(4));
-                    string local_7 = resource_0.InnerReader.GetString(5);
-                    ID local_8 = ID.Parse(resource_0.InnerReader.GetGuid(6));
-                    Language local_9 = Language.Parse(resource_0.InnerReader.GetString(7));
-                    Sitecore.Data.Version local_10 = Sitecore.Data.Version.Parse(resource_0.InnerReader.GetInt32(8));
-                    string local_11 = resource_0.InnerReader.GetString(9);
-                    list.Add(new ItemLink(local_2, local_3, local_4, local_5, local_6, local_7, local_8, local_9, local_10, local_11));
-                    LinkCounters.DataRead.Increment();
-                }
+                var sourceItem = LinkedDataManager.UriToItem(triple.Subject.ToString());
+                var targetItem = LinkedDataManager.UriToItem(triple.Object.ToString());
+                //TODO: Need to hold somewhere in the triple the fieldId
+                list.Add(new ItemLink(sourceItem.Database.Name, sourceItem.ID, new ID("{A60ACD61-A6DB-4182-8329-C957982CEC74}"), targetItem.Database.Name, targetItem.ID, targetItem.Paths.FullPath));
             }
         }
         return list.ToArray();

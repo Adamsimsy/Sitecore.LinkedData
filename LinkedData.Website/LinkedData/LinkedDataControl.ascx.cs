@@ -17,7 +17,7 @@ namespace LinkedData.Website.LinkedData
         {
             //Fill in the code shown on this page here to build your hello world application
             Graph g = new Graph();
-            g.NamespaceMap.AddNamespace("sitecore", new Uri("http://some/namespace/"));
+            g.NamespaceMap.AddNamespace("sitecore", new Uri("sitecore:"));
 
             IUriNode dotNetRDF = g.CreateUriNode(UriFactory.Create("http://www.dotnetrdf.org"));
             IUriNode says = g.CreateUriNode(UriFactory.Create("http://example.org/says"));
@@ -39,7 +39,7 @@ namespace LinkedData.Website.LinkedData
             //NTriplesWriter ntwriter = new NTriplesWriter();
             //ntwriter.Save(g, "HelloWorld.nt");
 
-            LinkedDataManager.WriteGraph(g);
+            //LinkedDataManager.WriteGraph(g);
             var g2 = LinkedDataManager.ReadGraph();
 
             //Call the Save() method to write to the StringWriter

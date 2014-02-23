@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI;
+using Sitecore.Collections;
 using Sitecore.ContentSearch;
 using Sitecore.ContentSearch.Converters;
 using Sitecore.Data;
@@ -18,18 +19,25 @@ namespace LinkedData.Repository
     public static class LinkedDataManager
     {
         private static readonly string RdfFilePath = System.Web.HttpContext.Current.Server.MapPath("~/HelloWorld.rdf");
+        private static readonly LockSet Locks = new LockSet();
 
         public static void WriteGraph(IGraph graph)
         {
-            var rdfxmlwriter = new RdfXmlWriter();
-            rdfxmlwriter.Save(graph, RdfFilePath);
+            lock (Locks.GetLock((object) "rdflock"))
+            {
+                var rdfxmlwriter = new RdfXmlWriter();
+                rdfxmlwriter.Save(graph, RdfFilePath);
+            }
         }
 
         public static IGraph ReadGraph()
         {
-            var graph = new Graph();
-            FileLoader.Load(graph, RdfFilePath);
-            return graph;
+            lock (Locks.GetLock((object) "rdflock"))
+            {
+                var graph = new Graph();
+                FileLoader.Load(graph, RdfFilePath);
+                return graph;
+            }
         }
 
         public static string ItemToUri(Item item)

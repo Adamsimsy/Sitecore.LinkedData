@@ -17,56 +17,30 @@ using Sitecore.Globalization;
 using Sitecore.Jobs;
 using Sitecore.Links;
 using Sitecore.SecurityModel;
+using VDS.RDF.Nodes;
 
 namespace LinkedData
 {
-    class LinkedDataDatabase : LinkDatabase
+    public class LinkedDataDatabase : LinkDatabase
     {
         private readonly LockSet locks = new LockSet();
-        [Obsolete("Deprecated - Use protected DataApi property instead. Field is going to be made private.")]
-        protected readonly SqlDataApi _dataApi;
 
-        protected SqlDataApi DataApi
+        public LinkedDataDatabase(string connectionString)
         {
-            get
-            {
-                return this._dataApi;
-            }
-        }
-
-        public LinkedDataDatabase(SqlDataApi dataApi)
-        {
-            Assert.ArgumentNotNull((object)dataApi, "dataApi");
-            this._dataApi = dataApi;
+                
         }
 
         public override void Compact(Database database)
         {
             Assert.ArgumentNotNull((object)database, "database");
-            string sql1 = " SELECT {0}ID{1}, {0}SourceItemID{1}, {0}SourceLanguage{1}, {0}SourceVersion{1}\r\n                      FROM {0}Links{1}\r\n                      WHERE {0}SourceDatabase{1} = {2}database{3}";
-            string sql2 = " DELETE FROM {0}Links{1} \r\n                            WHERE {0}ID{1} = {2}id{3}";
-            using (DataProviderReader reader = this.DataApi.CreateReader(sql1, (object)"database", (object)database.Name))
-            {
-                while (reader.Read())
-                {
-                    LinkCounters.DataRead.Increment();
-                    Guid guid = reader.InnerReader.GetGuid(0);
-                    if (!this.ItemExists(ID.Parse(reader.InnerReader.GetGuid(1)), (string)null, Language.Parse(reader.InnerReader.GetString(2)), Sitecore.Data.Version.Parse(reader.InnerReader.GetInt32(3)), database))
-                        this.DataApi.Execute(sql2, (object)"id", (object)guid);
-                }
-            }
         }
 
         public override ItemLink[] GetBrokenLinks(Database database)
         {
             Assert.ArgumentNotNull((object)database, "database");
-            using (DataProviderReader reader = this.DataApi.CreateReader(" SELECT {0}SourceItemID{1}, {0}SourceLanguage{1}, {0}SourceVersion{1}, {0}SourceFieldID{1}, {0}TargetDatabase{1}, {0}TargetItemID{1}, {0}TargetLanguage{1}, {0}TargetVersion{1}, {0}TargetPath{1}\r\n                      FROM {0}Links{1}\r\n                      WHERE {0}SourceDatabase{1} = {2}database{3}\r\n                      ORDER BY {0}SourceItemID{1}, {0}SourceFieldID{1}", (object)"database", (object)database.Name))
-            {
-                LinkCounters.DataRead.Increment();
+
                 List<ItemLink> links = new List<ItemLink>();
-                this.AddBrokenLinks(reader.InnerReader, links, database);
                 return links.ToArray();
-            }
         }
 
         public override int GetReferenceCount(Item item)
@@ -130,7 +104,7 @@ namespace LinkedData
             {
                 var g = LinkedDataManager.ReadGraph();
 
-                var items = g.GetTriplesWithObject(g.CreateUriNode(LinkedDataManager.ItemToUri(item)));
+                var items = g.GetTriplesWithObject(g.GetLiteralNode(LinkedDataManager.ItemToUri(item)));
 
                 foreach (var triple in items)
                 {
@@ -273,48 +247,13 @@ namespace LinkedData
         {
             Assert.ArgumentNotNull((object)item, "item");
             Assert.ArgumentNotNull((object)links, "links");
-            lock (this.locks.GetLock((object)item.ID))
-                Factory.GetRetryer().ExecuteNoResult((Action)(() =>
-                {
-                    using (DataProviderTransaction resource_0 = this.DataApi.CreateTransaction())
-                    {
-                        this.RemoveLinks(item);
-                        for (int local_1 = 0; local_1 < links.Length; ++local_1)
-                        {
-                            ItemLink local_2 = links[local_1];
-                            if (!local_2.SourceItemID.IsNull)
-                            {
-                                this.AddLink(item, local_2);
-                                LinkCounters.DataUpdated.Increment();
-                            }
-                        }
-                        resource_0.Complete();
-                    }
-                }));
         }
 
         protected override void UpdateItemVersionLinks(Item item, ItemLink[] links)
         {
             Assert.ArgumentNotNull((object)item, "item");
             Assert.ArgumentNotNull((object)links, "links");
-            lock (this.locks.GetLock((object)item.ID))
-                Factory.GetRetryer().ExecuteNoResult((Action)(() =>
-                {
-                    using (DataProviderTransaction resource_0 = this.DataApi.CreateTransaction())
-                    {
-                        this.RemoveItemVersionLinks(item);
-                        for (int local_1 = 0; local_1 < links.Length; ++local_1)
-                        {
-                            ItemLink local_2 = links[local_1];
-                            if (!local_2.SourceItemID.IsNull && (local_2.SourceItemLanguage == Language.Invariant && local_2.SourceItemVersion == Sitecore.Data.Version.Latest || local_2.SourceItemLanguage == item.Language && local_2.SourceItemVersion == Sitecore.Data.Version.Latest || local_2.SourceItemLanguage == item.Language && local_2.SourceItemVersion == item.Version))
-                            {
-                                this.AddLink(item, local_2);
-                                LinkCounters.DataUpdated.Increment();
-                            }
-                        }
-                        resource_0.Complete();
-                    }
-                }));
+           
         }
 
         private void AddBrokenLinks(IDataReader reader, List<ItemLink> links, Database database)

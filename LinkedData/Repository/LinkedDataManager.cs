@@ -5,8 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI;
 using Sitecore.Collections;
-using Sitecore.ContentSearch;
-using Sitecore.ContentSearch.Converters;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Links;

@@ -39,7 +39,7 @@ namespace LinkedData.Website.LinkedData
             //NTriplesWriter ntwriter = new NTriplesWriter();
             //ntwriter.Save(g, "HelloWorld.nt");
 
-            //LinkedDataManager.WriteGraph(g);
+            LinkedDataManager.WriteGraph(g);
             var g2 = LinkedDataManager.ReadGraph();
 
             //Call the Save() method to write to the StringWriter

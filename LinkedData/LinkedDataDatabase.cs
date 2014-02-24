@@ -104,14 +104,19 @@ namespace LinkedData
             {
                 var g = LinkedDataManager.ReadGraph();
 
-                var items = g.GetTriplesWithObject(g.GetLiteralNode(LinkedDataManager.ItemToUri(item)));
+                var literalNode = g.GetLiteralNode(LinkedDataManager.ItemToUri(item));
 
-                foreach (var triple in items)
+                if (literalNode != null)
                 {
-                    var sourceItem = LinkedDataManager.UriToItem(triple.Subject.ToString());
-                    var targetItem = LinkedDataManager.UriToItem(triple.Object.ToString());
-                    //TODO: Need to hold somewhere in the triple the fieldId
-                    list.Add(new ItemLink(sourceItem.Database.Name, sourceItem.ID, new ID("{A60ACD61-A6DB-4182-8329-C957982CEC74}"), targetItem.Database.Name, targetItem.ID, targetItem.Paths.FullPath));
+                    var items = g.GetTriplesWithObject(literalNode);
+
+                    foreach (var triple in items)
+                    {
+                        var sourceItem = LinkedDataManager.UriToItem(triple.Subject.ToString());
+                        var targetItem = LinkedDataManager.UriToItem(triple.Object.ToString());
+                        //TODO: Need to hold somewhere in the triple the fieldId
+                        list.Add(new ItemLink(sourceItem.Database.Name, sourceItem.ID, new ID("{A60ACD61-A6DB-4182-8329-C957982CEC74}"), targetItem.Database.Name, targetItem.ID, targetItem.Paths.FullPath));
+                    }
                 }
             }
             return list.ToArray();

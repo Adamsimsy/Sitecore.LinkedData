@@ -76,6 +76,7 @@
   <ItemGroup>
     <Content Include="layouts\Sample layout.aspx" />
     <Content Include="LinkedData\LinkedDataControl.ascx" />
+    <Content Include="LinkedData\RDF_Layout.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +86,13 @@
     </Compile>
     <Compile Include="LinkedData\LinkedDataControl.ascx.designer.cs">
       <DependentUpon>LinkedDataControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="LinkedData\RDF_Layout.aspx.cs">
+      <DependentUpon>RDF_Layout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LinkedData\RDF_Layout.aspx.designer.cs">
+      <DependentUpon>RDF_Layout.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

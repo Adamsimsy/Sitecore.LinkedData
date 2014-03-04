@@ -88,11 +88,15 @@ namespace LinkedData.Repository
 
         public static Item UriToItem(string uri)
         {
-            var itemUri = new ItemUri(uri);
+            if (uri != null)
+            {
+                var itemUri = new ItemUri(uri);
 
-            var database = Sitecore.Configuration.Factory.GetDatabase(itemUri.DatabaseName);
+                var database = Sitecore.Configuration.Factory.GetDatabase(itemUri.DatabaseName);
 
-            return database.GetItem(itemUri.ItemID, itemUri.Language, itemUri.Version);
+                return database.GetItem(itemUri.ItemID, itemUri.Language, itemUri.Version);
+            }
+            return null;
         }
 
         public static void WriteTriple(IGraph g, Triple triple)

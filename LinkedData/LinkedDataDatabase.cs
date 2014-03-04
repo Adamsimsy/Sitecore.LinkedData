@@ -27,7 +27,7 @@ namespace LinkedData
 
         public LinkedDataDatabase(string connectionString)
         {
-                
+
         }
 
         public override void Compact(Database database)
@@ -39,8 +39,8 @@ namespace LinkedData
         {
             Assert.ArgumentNotNull((object)database, "database");
 
-                List<ItemLink> links = new List<ItemLink>();
-                return links.ToArray();
+            List<ItemLink> links = new List<ItemLink>();
+            return links.ToArray();
         }
 
         public override int GetReferenceCount(Item item)
@@ -281,7 +281,7 @@ namespace LinkedData
 
             foreach (var removeLink in removeLinks)
             {
-                LinkedDataManager.RemoveLinksForItem(item,removeLink);
+                LinkedDataManager.RemoveLinksForItem(item, removeLink);
             }
         }
 
@@ -320,79 +320,8 @@ namespace LinkedData
         private ItemLink[] GetHTMLReferersDeep(Item item)
         {
             Assert.ArgumentNotNull((object)item, "item");
-            string str = "/sitecore/content";
-            return this.GetLinks(" SELECT {0}SourceDatabase{1}, {0}SourceItemID{1}, {0}SourceLanguage{1}, {0}SourceVersion{1}, {0}SourceFieldID{1}, {0}TargetDatabase{1}, {0}TargetItemID{1}, {0}TargetLanguage{1}, {0}TargetVersion{1}, {0}TargetPath{1} FROM {0}Links{1} WHERE {0}TargetDatabase{1} = {2}database{3} AND ({0}TargetPath{1} LIKE '" + StringUtil.Mid(item.Paths.Path, str.Length + 1) + "{5}')", item);
-        }
 
-        private ItemLink[] GetLinks(string sql, Item item)
-        {
-            return this.GetLinks(sql, item, new object[4]
-      {
-        (object) "database",
-        (object) item.Database.Name,
-        (object) "itemID",
-        (object) item.ID.ToGuid()
-      });
-        }
-
-        private ItemLink[] GetLinks(string sql, Item item, ID sourceFieldId)
-        {
-            Assert.ArgumentNotNull((object)sql, "sql");
-            Assert.ArgumentNotNull((object)item, "item");
-            Assert.ArgumentNotNull((object)sourceFieldId, "sourceFieldId");
-            return this.GetLinks(sql, item, new object[6]
-      {
-        (object) "database",
-        (object) item.Database.Name,
-        (object) "itemID",
-        (object) item.ID.ToGuid(),
-        (object) "sourceFieldID",
-        (object) sourceFieldId.ToGuid()
-      });
-        }
-
-        private ItemLink[] GetLinks(string sql, Item item, object[] parameters)
-        {
-            var list = new List<ItemLink>();
-            lock (this.locks.GetLock((object)item.ID))
-            {
-                var g = LinkedDataManager.ReadGraph();
-
-                var items = g.GetTriplesWithSubject(g.CreateUriNode(LinkedDataManager.ItemToUri(item)));
-
-                foreach (var triple in items)
-                {
-                    var sourceItem = LinkedDataManager.UriToItem(triple.Subject.ToString());
-                    var targetItem = LinkedDataManager.UriToItem(triple.Object.ToString());
-                    //TODO: Need to hold somewhere in the triple the fieldId
-                    list.Add(new ItemLink(sourceItem.Database.Name, sourceItem.ID, new ID("{A60ACD61-A6DB-4182-8329-C957982CEC74}"), targetItem.Database.Name, targetItem.ID, targetItem.Paths.FullPath));
-                }
-            }
-            return list.ToArray();
-
-            //List<ItemLink> list = new List<ItemLink>();
-            //lock (this.locks.GetLock((object) item.ID))
-            //{
-            //  using (DataProviderReader resource_0 = this.DataApi.CreateReader(sql, parameters))
-            //  {
-            //    while (resource_0.Read())
-            //    {
-            //      string local_2 = resource_0.InnerReader.GetString(0);
-            //      ID local_3 = ID.Parse(resource_0.InnerReader.GetGuid(1));
-            //      Language local_4 = Language.Parse(resource_0.InnerReader.GetString(2));
-            //      Sitecore.Data.Version local_5 = Sitecore.Data.Version.Parse(resource_0.InnerReader.GetInt32(3));
-            //      ID local_6 = ID.Parse(resource_0.InnerReader.GetGuid(4));
-            //      string local_7 = resource_0.InnerReader.GetString(5);
-            //      ID local_8 = ID.Parse(resource_0.InnerReader.GetGuid(6));
-            //      Language local_9 = Language.Parse(resource_0.InnerReader.GetString(7));
-            //      Sitecore.Data.Version local_10 = Sitecore.Data.Version.Parse(resource_0.InnerReader.GetInt32(8));
-            //      string local_11 = resource_0.InnerReader.GetString(9);
-            //      list.Add(new ItemLink(local_2, local_3, local_4, local_5, local_6, local_7, local_8, local_9, local_10, local_11));
-            //      LinkCounters.DataRead.Increment();
-            //    }
-            //  }
-            //}
-            //return list.ToArray();
+            return GetReferrers(item);
         }
     }
 }

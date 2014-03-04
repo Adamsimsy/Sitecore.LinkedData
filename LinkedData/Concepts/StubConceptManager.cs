@@ -22,9 +22,18 @@ namespace LinkedData.Concepts
 
         public List<Concept> GetMatchingConcepts(Item sourceItem, Item targetItem)
         {
+            if (sourceItem != null && targetItem != null)
+            {
+                
+            
             return GetConcepts().Where(x =>
                 x.Subject.TemplateName.ToLower().Equals(sourceItem.TemplateName.ToLower())
                 && x.Object.TemplateName.ToLower().Equals(targetItem.TemplateName.ToLower())).ToList();
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

@@ -21,6 +21,15 @@ namespace LinkedData.Repository
         private static readonly string RdfFilePath = System.Web.HttpContext.Current.Server.MapPath("~/HelloWorld.rdf");
         private static readonly LockSet Locks = new LockSet();
 
+        public static IEnumerable<Triple> GetItemTriples(Item item)
+        {
+            var g = LinkedDataManager.ReadGraph();
+
+            var items = g.GetTriplesWithSubject(g.CreateUriNode(LinkedDataManager.ItemToUri(item)));
+
+            return items;
+        }
+
         public static void AddLink(Item item, ItemLink link)
         {
             var g = LinkedDataManager.ReadGraph();

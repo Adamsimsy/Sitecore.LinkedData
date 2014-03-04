@@ -15,6 +15,18 @@ namespace LinkedData.Website.LinkedData
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            var triples = LinkedDataManager.GetItemTriples(Sitecore.Context.Item);
+
+            foreach (var triple in triples)
+            {
+                litRdf.Text += triple.ToString();
+            }
+
+            //SetupNewRdfFile();
+        }
+
+        public void SetupNewRdfFile()
+        {
             //Fill in the code shown on this page here to build your hello world application
             Graph g = new Graph();
             g.NamespaceMap.AddNamespace("sitecore", new Uri("sitecore:"));

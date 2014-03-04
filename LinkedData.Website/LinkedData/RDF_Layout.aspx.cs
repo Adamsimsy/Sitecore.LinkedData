@@ -17,7 +17,7 @@ namespace LinkedData.Website.LinkedData
         {
             var graph = LinkedDataManager.ReadGraph();
 
-            var itemTriples = graph.GetTriplesWithSubject(graph.CreateUriNode(LinkedDataManager.ItemToUri(Sitecore.Context.Item)));
+            var itemTriples = LinkedDataManager.GetItemTriples(Sitecore.Context.Item);
 
             var rdfxmlwriter = new RdfXmlWriter();
             var sw = new System.IO.StringWriter();

@@ -62,6 +62,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Concepts\Concept.cs" />
+    <Compile Include="Concepts\ConceptNode.cs" />
+    <Compile Include="Concepts\IConceptManager.cs" />
+    <Compile Include="Concepts\StubConceptManager.cs" />
     <Compile Include="LinkedDataDatabase.cs" />
     <Compile Include="LinkedDataLinkDatabase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

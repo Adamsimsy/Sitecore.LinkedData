@@ -200,9 +200,7 @@ namespace LinkedData
 
             lock (this.locks.GetLock((object)"rdflock"))
             {
-                var g = LinkedDataManager.ReadGraph();
-
-                LinkedDataManager.WriteTriple(g, LinkedDataManager.ToTriple(g, item, link));
+                LinkedDataManager.AddLink(item, link);
             }
         }
 
@@ -252,13 +250,22 @@ namespace LinkedData
         {
             Assert.ArgumentNotNull((object)item, "item");
             Assert.ArgumentNotNull((object)links, "links");
+
+            foreach (var itemLink in links)
+            {
+                LinkedDataManager.AddLink(item, itemLink);
+            }
         }
 
         protected override void UpdateItemVersionLinks(Item item, ItemLink[] links)
         {
             Assert.ArgumentNotNull((object)item, "item");
             Assert.ArgumentNotNull((object)links, "links");
-           
+
+            foreach (var itemLink in links)
+            {
+                LinkedDataManager.AddLink(item, itemLink);
+            }
         }
 
         private void AddBrokenLinks(IDataReader reader, List<ItemLink> links, Database database)

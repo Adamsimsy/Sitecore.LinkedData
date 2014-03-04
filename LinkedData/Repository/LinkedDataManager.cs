@@ -8,6 +8,7 @@ using Sitecore.Collections;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Links;
+using Sitecore.Shell.Applications.ContentEditor;
 using VDS.RDF;
 using VDS.RDF.Parsing;
 using VDS.RDF.Writing;
@@ -18,6 +19,13 @@ namespace LinkedData.Repository
     {
         private static readonly string RdfFilePath = System.Web.HttpContext.Current.Server.MapPath("~/HelloWorld.rdf");
         private static readonly LockSet Locks = new LockSet();
+
+        public static void AddLink(Item item, ItemLink link)
+        {
+            var g = LinkedDataManager.ReadGraph();
+
+            LinkedDataManager.WriteTriple(g, LinkedDataManager.ToTriple(g, item, link));
+        }
 
         public static void WriteGraph(IGraph graph)
         {

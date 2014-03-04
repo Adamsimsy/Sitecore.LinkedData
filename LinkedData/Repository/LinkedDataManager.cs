@@ -88,7 +88,7 @@ namespace LinkedData.Repository
 
         public static Item UriToItem(string uri)
         {
-            if (uri != null)
+            if (uri != null && !string.IsNullOrEmpty(uri))
             {
                 var itemUri = new ItemUri(uri);
 

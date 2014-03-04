@@ -27,6 +27,21 @@ namespace LinkedData.Repository
             LinkedDataManager.WriteTriple(g, LinkedDataManager.ToTriple(g, item, link));
         }
 
+        public static void RemoveLinksForItem(Item item, ItemLink link)
+        {
+            var g = LinkedDataManager.ReadGraph();
+
+            var items = g.GetTriplesWithSubjectObject(
+                g.CreateUriNode(LinkedDataManager.ItemToUri(item)),
+                g.CreateLiteralNode(LinkedDataManager.ItemToUri(link.GetTargetItem())));
+
+            if (items != null && items.Any())
+            {
+                g.Retract(items.First());
+                WriteGraph(g);
+            }
+        }
+
         public static void WriteGraph(IGraph graph)
         {
             lock (Locks.GetLock((object) "rdflock"))

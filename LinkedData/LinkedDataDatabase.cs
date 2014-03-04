@@ -266,6 +266,23 @@ namespace LinkedData
             {
                 LinkedDataManager.AddLink(item, itemLink);
             }
+
+            //Now remove removed links
+            var oldLinks = GetReferences(item);
+            var removeLinks = new List<ItemLink>();
+
+            foreach (var link in oldLinks)
+            {
+                if (!links.ToList().Where(x => x.TargetItemID.Guid == link.TargetItemID.Guid).Any())
+                {
+                    removeLinks.Add(link);
+                }
+            }
+
+            foreach (var removeLink in removeLinks)
+            {
+                LinkedDataManager.RemoveLinksForItem(item,removeLink);
+            }
         }
 
         private void AddBrokenLinks(IDataReader reader, List<ItemLink> links, Database database)

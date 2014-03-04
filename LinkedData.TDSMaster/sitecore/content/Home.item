@@ -6,8 +6,8 @@ path: /sitecore/content/Home
 parent: {0DE95AE4-41AB-4D01-9EB0-67441B7C2450}
 name: Home
 master: {00000000-0000-0000-0000-000000000000}
-template: {76036F5E-CBCE-46D1-AF0A-4143F9B557AA}
-templatekey: Sample Item
+template: {22884730-7400-4FE6-B5B9-06FF46AD3C6D}
+templatekey: Home
 
 ----field----
 field: {B0A67B2A-8B07-4E0B-8809-69F751709806}
@@ -316,15 +316,15 @@ sitecore\admin
 ----version----
 language: en
 version: 1
-revision: 00794e04-3a9a-49ec-b9f0-28ffd27dd786
+revision: 28c6966d-ddd1-449b-bb69-0bbd678b2b35
 
 ----field----
 field: {75577384-3C97-45DA-A847-81B00500E250}
 name: Title
 key: title
-content-length: 9
+content-length: 15
 
-Sitecore 
+Sitecore       
 ----field----
 field: {A60ACD61-A6DB-4182-8329-C957982CEC74}
 name: Text
@@ -332,7 +332,7 @@ key: text
 content-length: 136
 
 <p>Welcome to Sitecore</p>
-<p>Link to<a href="~/link.aspx?_id=2E9C51E4BB8A47F197CCB93447477F8C&amp;_z=z"> item 1</a>.</p>
+<p>Link to <a href="~/link.aspx?_id=2E9C51E4BB8A47F197CCB93447477F8C&amp;_z=z">item 1</a>.</p>
 <p><br />
 </p>
 ----field----
@@ -397,14 +397,14 @@ name: __Revision
 key: __revision
 content-length: 36
 
-00794e04-3a9a-49ec-b9f0-28ffd27dd786
+28c6966d-ddd1-449b-bb69-0bbd678b2b35
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
 content-length: 34
 
-20140225T222538:635289639383802789
+20140304T211542:635295645421281019
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by

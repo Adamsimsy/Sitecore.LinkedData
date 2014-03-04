@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Sitecore.Data.Items;
 using VDS.RDF.Storage.Virtualisation;
 
 namespace LinkedData.Concepts
@@ -17,6 +18,13 @@ namespace LinkedData.Concepts
             concepts.Add(new Concept() { Subject = new ConceptNode("sample item"), Predicate = new Uri("http://example.org/sampleitem-to-home"), Object = new ConceptNode("home") });
 
             return concepts;
+        }
+
+        public List<Concept> GetMatchingConcepts(Item sourceItem, Item targetItem)
+        {
+            return GetConcepts().Where(x =>
+                x.Subject.TemplateName.ToLower().Equals(sourceItem.TemplateName.ToLower())
+                && x.Object.TemplateName.ToLower().Equals(targetItem.TemplateName.ToLower())).ToList();
         }
     }
 }

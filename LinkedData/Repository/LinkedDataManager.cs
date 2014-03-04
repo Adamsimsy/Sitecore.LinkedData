@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI;
+using LinkedData.Concepts;
 using Sitecore.Collections;
 using Sitecore.Data;
 using Sitecore.Data.Items;
@@ -95,10 +96,25 @@ namespace LinkedData.Repository
         public static Triple ToTriple(IGraph g, Item item, ItemLink itemLink)
         {
             IUriNode sub = g.CreateUriNode(ItemToUri(item));
-            IUriNode says = g.CreateUriNode(UriFactory.Create("http://example.org/says"));
+
+            IConceptManager conceptManager = new StubConceptManager();
+
+            var matchingConcepts = conceptManager.GetMatchingConcepts(item, itemLink.GetTargetItem());
+
+            IUriNode predicate;
+
+            if (matchingConcepts != null && matchingConcepts.Any())
+            {
+                predicate = g.CreateUriNode(matchingConcepts.First().Predicate);
+            }
+            else
+            {
+                predicate = g.CreateUriNode(UriFactory.Create("http://example.org/says"));
+            }
+
             ILiteralNode obj = g.CreateLiteralNode(ItemToUri(itemLink.GetTargetItem()));
 
-            return new Triple(sub, says, obj);
+            return new Triple(sub, predicate, obj);
         }
     }
 }

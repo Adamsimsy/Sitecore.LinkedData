@@ -97,6 +97,7 @@
     <SitecoreItem Include="sitecore\templates\User Defined\Home.item">
       <Icon>/temp/IconCache/Applications/16x16/form_blue.png</Icon>
       <ItemDeployment>AlwaysUpdate</ItemDeployment>
+      <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
     </SitecoreItem>
   </ItemGroup>
   <ItemGroup>

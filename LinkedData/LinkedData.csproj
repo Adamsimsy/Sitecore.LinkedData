@@ -66,6 +66,16 @@
     <Compile Include="Concepts\IConceptManager.cs" />
     <Compile Include="Concepts\StubConceptManager.cs" />
     <Compile Include="LinkedDataDatabase.cs" />
+    <Compile Include="New\BaseConcept.cs" />
+    <Compile Include="New\LinkedDataDatabaseNew.cs" />
+    <Compile Include="New\SitecoreConceptManager.cs" />
+    <Compile Include="New\IConceptManager.cs" />
+    <Compile Include="New\IConceptProvider.cs" />
+    <Compile Include="New\ITripleFormatter.cs" />
+    <Compile Include="New\LinkedDataManager.cs" />
+    <Compile Include="New\SitecoreTemplateConcept.cs" />
+    <Compile Include="New\SitecoreTripleHelper.cs" />
+    <Compile Include="New\SitecoreConceptProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\LinkedDataManager.cs" />
   </ItemGroup>

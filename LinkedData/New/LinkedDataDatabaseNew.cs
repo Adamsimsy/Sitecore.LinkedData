@@ -29,8 +29,8 @@ namespace LinkedData.New
 
         public LinkedDataDatabaseNew(string connectionString)
         {
-            //IQueryableStorage storage = new SesameHttpProtocolVersion6Connector("http://localhost:8080/openrdf-sesame/", "in-mem-sesame");
-            IQueryableStorage storage = new InMemoryManager();
+            IQueryableStorage storage = new SesameHttpProtocolVersion6Connector("http://localhost:8080/openrdf-sesame/", "in-mem-sesame");
+            //IQueryableStorage storage = new InMemoryManager();
 
 
             _manager = new LinkedDataManager(null, null, storage, new SitecoreConceptManager(new SitecoreConceptProvider()));

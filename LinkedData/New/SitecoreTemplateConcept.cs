@@ -13,7 +13,7 @@ namespace LinkedData.New
 
         public override bool IsMatch(string objectCompareValue, string subjectCompareValue)
         {
-            return objectCompareValue.Equals(ObjectTemplateName) && subjectCompareValue.Equals(SubjectTemplateName);
+            return objectCompareValue.ToLower().Equals(ObjectTemplateName.ToLower()) && subjectCompareValue.ToLower().Equals(SubjectTemplateName.ToLower());
         }
     }
 }

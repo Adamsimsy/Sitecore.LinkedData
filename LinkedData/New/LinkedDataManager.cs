@@ -11,6 +11,7 @@ using Sitecore.Web.UI.HtmlControls;
 using VDS.RDF;
 using VDS.RDF.Parsing;
 using VDS.RDF.Query;
+using VDS.RDF.Query.Datasets;
 using VDS.RDF.Storage;
 
 namespace LinkedData.New
@@ -29,15 +30,15 @@ namespace LinkedData.New
             _outFormatters = outFormatters;
             _store = store;
             _conceptManager = conceptManager;
-            _graphUri = string.Empty;
+            _graphUri = "http://examplegraph.com";
         }
 
         public IEnumerable<Triple> GetItemTriplesByObject(Item item)
         {
             var itemUri = SitecoreTripleHelper.ItemToUri(item);
 
-            var query = SitecoreTripleHelper.StringToSparqlQuery("CONSTRUCT { ?s ?p ?o } WHERE { ?s ?p <" + itemUri + "> }");
-            //var query = SitecoreTripleHelper.StringToSparqlQuery("CONSTRUCT { ?s ?p ?o } WHERE { ?s ?p ?o }");
+            itemUri = itemUri.Replace("{", "%7B").Replace("}", "%7D");
+            var query = SitecoreTripleHelper.StringToSparqlQuery("CONSTRUCT { ?s ?p <" + itemUri + "> } WHERE { ?s ?p <" + itemUri + "> }");
 
             return GetTriples(query);
         }
@@ -46,9 +47,8 @@ namespace LinkedData.New
         {
             var itemUri = SitecoreTripleHelper.ItemToUri(item);
 
-            //var query = SitecoreTripleHelper.StringToSparqlQuery("CONSTRUCT { ?s ?p ?o } WHERE { <" + itemUri.Replace("{", "%7B").Replace("}", "%7D") + "> ?p ?o }");
-            var query = SitecoreTripleHelper.StringToSparqlQuery("CONSTRUCT { ?s ?p ?o } WHERE { <" + itemUri + "> ?p ?o }");
-            //var query = SitecoreTripleHelper.StringToSparqlQuery("CONSTRUCT { ?s ?p ?o } WHERE { ?s ?p ?o }");
+            itemUri = itemUri.Replace("{", "%7B").Replace("}", "%7D");
+            var query = "CONSTRUCT { <" + itemUri + "> ?p ?o } WHERE { <" + itemUri + "> ?p ?o }";
 
             return GetTriples(query);
         }
@@ -64,19 +64,25 @@ namespace LinkedData.New
         {
             var parser = new SparqlQueryParser();
 
-            var subjectUri = SitecoreTripleHelper.ItemToUri(item);
-            var objectUri = SitecoreTripleHelper.ItemToUri(link.GetTargetItem());
+            var subjectUri = SitecoreTripleHelper.ItemToUri(item).Replace("{", "%7B").Replace("}", "%7D");
+            var objectUri = SitecoreTripleHelper.ItemToUri(link.GetTargetItem()).Replace("{", "%7B").Replace("}", "%7D");
 
-            var query = parser.ParseFromString("CONSTRUCT { ?s ?p ?o } WHERE {" + subjectUri + " ?p " + objectUri + "}");
+            var query = parser.ParseFromString("CONSTRUCT { <" + subjectUri + "> ?p <" + objectUri + "> } WHERE { <" + subjectUri + "> ?p <" + objectUri + "> }");
 
             var triplesToDelete = GetTriples(query);
 
             DeleteTriples(triplesToDelete);
         }
 
-        public IEnumerable<Triple> GetTriples(SparqlQuery query)
+        public IEnumerable<Triple> GetTriples(string query)
         {
-            Object results = _store.Query(query.ToString());
+
+            //var r1 = (IGraph)_store.Query("CONSTRUCT { ?s ?p ?o } WHERE { ?s ?p ?o }");
+
+            //ISparqlQueryProcessor processor = new ExplainQueryProcessor(new InMemoryDataset(r1), ExplanationLevel.Full);
+
+            //Object results = processor.ProcessQuery(new SparqlQueryParser().ParseFromString(query));
+            Object results = _store.Query(query);
 
             if (results is SparqlResultSet)
             {
@@ -99,6 +105,11 @@ namespace LinkedData.New
             }
 
             return new List<Triple>();
+        }
+
+        public IEnumerable<Triple> GetTriples(SparqlQuery query)
+        {
+            return GetTriples(query.ToString());
         }
 
         public void WriteTriple(Triple triple)

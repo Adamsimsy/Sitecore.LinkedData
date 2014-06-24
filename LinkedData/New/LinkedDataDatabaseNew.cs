@@ -29,7 +29,9 @@ namespace LinkedData.New
 
         public LinkedDataDatabaseNew(string connectionString)
         {
+            //IQueryableStorage storage = new SesameHttpProtocolVersion6Connector("http://localhost:8080/openrdf-sesame/", "in-mem-sesame");
             IQueryableStorage storage = new InMemoryManager();
+
 
             _manager = new LinkedDataManager(null, null, storage, new SitecoreConceptManager(new SitecoreConceptProvider()));
         }
@@ -112,7 +114,12 @@ namespace LinkedData.New
                     var sourceItem = SitecoreTripleHelper.UriToItem(triple.Subject.ToString());
                     var targetItem = SitecoreTripleHelper.UriToItem(triple.Object.ToString());
                     //TODO: Need to hold somewhere in the triple the fieldId
-                    list.Add(new ItemLink(sourceItem.Database.Name, sourceItem.ID, new ID("{A60ACD61-A6DB-4182-8329-C957982CEC74}"), targetItem.Database.Name, targetItem.ID, targetItem.Paths.FullPath));
+                    if (targetItem != null && sourceItem != null)
+                    {
+                        list.Add(new ItemLink(sourceItem.Database.Name, sourceItem.ID,
+                            new ID("{A60ACD61-A6DB-4182-8329-C957982CEC74}"), targetItem.Database.Name, targetItem.ID,
+                            targetItem.Paths.FullPath));
+                    }
                 }
             }
             return list.ToArray();

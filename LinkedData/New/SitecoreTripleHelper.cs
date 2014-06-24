@@ -33,7 +33,7 @@ namespace LinkedData.New
         {
             if (item != null && item.Uri != null)
             {
-                return item.Uri.ToString();
+                return item.Uri.ToString().Replace("{", "%7B").Replace("}", "%7D");
             }
             return string.Empty;
         }

@@ -40,7 +40,7 @@ namespace LinkedData.New
 
         public static Item UriToItem(string uri)
         {
-            if (uri != null && !string.IsNullOrEmpty(uri))
+            if (uri != null && !string.IsNullOrEmpty(uri) && uri.StartsWith("sitecore:"))
             {
                 var itemUri = new ItemUri(uri.Replace("%7B", "{").Replace("%7D", "}"));
 

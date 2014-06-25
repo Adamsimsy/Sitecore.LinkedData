@@ -39,12 +39,17 @@ namespace LinkedData.New
                 var sourceItem = SitecoreTripleHelper.UriToItem(subUri);
                 var targetItem = SitecoreTripleHelper.UriToItem(objUri);
 
-                var sourceTemplateName = sourceItem.TemplateName;
-                var targetTemplateName = targetItem.TemplateName;
-
-                if (baseConcept.IsMatch(sourceTemplateName, targetTemplateName))
+                
+                if (sourceItem!= null &&
+                    targetItem != null)
                 {
-                    predicate = g.CreateUriNode(baseConcept.ConceptUri);
+                    var targetTemplateName = targetItem.TemplateName;
+                    var sourceTemplateName = sourceItem.TemplateName;
+
+                    if (baseConcept.IsMatch(sourceTemplateName, targetTemplateName))
+                    {
+                        predicate = g.CreateUriNode(baseConcept.ConceptUri);
+                    }
                 }
             }
 

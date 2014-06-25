@@ -24,9 +24,9 @@ namespace LinkedData.New
         private readonly IConceptManager _conceptManager;
         private readonly string _graphUri;
 
-        private readonly string _triplesByObjectFormat = "CONSTRUCT {{ ?s ?p <{0}> }} WHERE {{ ?s ?p <{0}> }}";
-        private readonly string _triplesBySubjectFormat = "CONSTRUCT {{ <{0}> ?p ?o }} WHERE { <{0}> ?p ?o }}";
-        private readonly string _triplesBySubjectObjectFormat = "CONSTRUCT {{ <{0}> ?p <{1}> }} WHERE {{ <{0}> ?p <{1}> }}";
+        private const string TriplesByObjectFormat = @"CONSTRUCT {{ ?s ?p <{0}> }} WHERE {{ ?s ?p <{0}> }}";
+        private const string TriplesBySubjectFormat = @"CONSTRUCT {{ <{0}> ?p ?o }} WHERE {{ <{0}> ?p ?o }}";
+        private const string TriplesBySubjectObjectFormat = @"CONSTRUCT {{ <{0}> ?p <{1}> }} WHERE {{ <{0}> ?p <{1}> }}";
 
         public LinkedDataManager(List<ITripleFormatter> inFormatters, List<ITripleFormatter> outFormatters, IQueryableStorage store, IConceptManager conceptManager)
         {
@@ -34,14 +34,15 @@ namespace LinkedData.New
             _outFormatters = outFormatters;
             _store = store;
             _conceptManager = conceptManager;
-            _graphUri = "http://examplegraph.com";
+            //_graphUri = "http://examplegraph.com"; //could use this as different graphs per database
+            _graphUri = string.Empty;
         }
 
         public IEnumerable<Triple> GetItemTriplesByObject(Item item)
         {
             var itemUri = SitecoreTripleHelper.ItemToUri(item);
 
-            var query = SitecoreTripleHelper.StringToSparqlQuery(String.Format(_triplesByObjectFormat, itemUri));
+            var query = SitecoreTripleHelper.StringToSparqlQuery(String.Format(TriplesByObjectFormat, itemUri));
 
             return GetTriples(query);
         }
@@ -50,7 +51,7 @@ namespace LinkedData.New
         {
             var itemUri = SitecoreTripleHelper.ItemToUri(item);
 
-            var query = SitecoreTripleHelper.StringToSparqlQuery(String.Format(_triplesBySubjectFormat, itemUri));
+            var query = SitecoreTripleHelper.StringToSparqlQuery(String.Format(TriplesBySubjectFormat, itemUri));
 
             return GetTriples(query);
         }
@@ -69,7 +70,7 @@ namespace LinkedData.New
             var subjectUri = SitecoreTripleHelper.ItemToUri(item);
             var objectUri = SitecoreTripleHelper.ItemToUri(link.GetTargetItem());
 
-            var query = SitecoreTripleHelper.StringToSparqlQuery(String.Format(_triplesBySubjectObjectFormat, subjectUri, objectUri));
+            var query = SitecoreTripleHelper.StringToSparqlQuery(String.Format(TriplesBySubjectObjectFormat, subjectUri, objectUri));
 
             var triplesToDelete = GetTriples(query);
 

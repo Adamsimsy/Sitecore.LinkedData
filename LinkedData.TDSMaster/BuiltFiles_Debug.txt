@@ -6,6 +6,7 @@
 .\Debug\App_Config\AppSettings.config
 .\Debug\App_Config\Log4Net.config
 .\Debug\packages.config
+.\Debug\App_Config\Include\SitecoreLinkedData.config
 .\Debug\bin\dotNetRDF.dll
 .\Debug\bin\dotNetRDF.xml
 .\Debug\bin\HtmlAgilityPack.dll

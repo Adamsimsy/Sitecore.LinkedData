@@ -101,6 +101,7 @@
     <Content Include="App_Config\AppSettings.config" />
     <Content Include="App_Config\Log4Net.config" />
     <Content Include="packages.config" />
+    <Content Include="App_Config\Include\SitecoreLinkedData.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

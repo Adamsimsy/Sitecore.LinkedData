@@ -1,102 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-using Sitecore.Common;
+using LinkedData.Concepts;
+using LinkedData.Formatters;
+using LinkedData.Helpers;
 using Sitecore.Data.Items;
 using Sitecore.Links;
-using Sitecore.Web.UI.HtmlControls;
 using VDS.RDF;
 using VDS.RDF.Parsing;
 using VDS.RDF.Query;
-using VDS.RDF.Query.Datasets;
 using VDS.RDF.Storage;
 
-namespace LinkedData.New
+namespace LinkedData.DataManagers
 {
     public class LinkedDataManager
     {
         private readonly List<ITripleFormatter> _inFormatters;
         private readonly List<ITripleFormatter> _outFormatters;
         private readonly IQueryableStorage _store;
-        private readonly IConceptManager _conceptManager;
+        protected readonly IConceptManager ConceptManager;
         private readonly string _graphUri;
-
-        private const string TriplesByObjectFormat = @"CONSTRUCT {{ ?s ?p <{0}> }} WHERE {{ ?s ?p <{0}> }}";
-        private const string TriplesBySubjectFormat = @"CONSTRUCT {{ <{0}> ?p ?o }} WHERE {{ <{0}> ?p ?o }}";
-        private const string TriplesBySubjectObjectFormat = @"CONSTRUCT {{ <{0}> ?p <{1}> }} WHERE {{ <{0}> ?p <{1}> }}";
 
         public LinkedDataManager(List<ITripleFormatter> inFormatters, List<ITripleFormatter> outFormatters, IQueryableStorage store, IConceptManager conceptManager)
         {
             _inFormatters = inFormatters;
             _outFormatters = outFormatters;
             _store = store;
-            _conceptManager = conceptManager;
+            ConceptManager = conceptManager;
             //_graphUri = "http://examplegraph.com"; //could use this as different graphs per database
             _graphUri = string.Empty;
         }
 
-        public IEnumerable<Triple> GetItemTriplesByObject(Item item)
-        {
-            var itemUri = SitecoreTripleHelper.ItemToUri(item);
-
-            var query = SitecoreTripleHelper.StringToSparqlQuery(String.Format(TriplesByObjectFormat, itemUri));
-
-            return GetTriples(query);
-        }
-
-        public IEnumerable<Triple> GetItemTriplesBySubject(Item item)
-        {
-            var itemUri = SitecoreTripleHelper.ItemToUri(item);
-
-            var query = SitecoreTripleHelper.StringToSparqlQuery(String.Format(TriplesBySubjectFormat, itemUri));
-
-            return GetTriples(query);
-        }
-
-        public void AddLink(Item item, ItemLink link)
-        {
-            var triple = SitecoreTripleHelper.ToTriple(_conceptManager, item, link);
-
-            WriteTriple(triple);
-        }
-
-        public void RemoveLinksForItem(Item item, ItemLink link)
-        {
-            var parser = new SparqlQueryParser();
-
-            var subjectUri = SitecoreTripleHelper.ItemToUri(item);
-            var objectUri = SitecoreTripleHelper.ItemToUri(link.GetTargetItem());
-
-            var query = SitecoreTripleHelper.StringToSparqlQuery(String.Format(TriplesBySubjectObjectFormat, subjectUri, objectUri));
-
-            var triplesToDelete = GetTriples(query);
-
-            DeleteTriples(triplesToDelete);
-        }
-
         public IEnumerable<Triple> GetTriples(string query)
         {
-
-            //var r1 = (IGraph)_store.Query("CONSTRUCT { ?s ?p ?o } WHERE { ?s ?p ?o }");
-
-            //ISparqlQueryProcessor processor = new ExplainQueryProcessor(new InMemoryDataset(r1), ExplanationLevel.Full);
-
-            //Object results = processor.ProcessQuery(new SparqlQueryParser().ParseFromString(query));
             Object results = _store.Query(query);
 
-            if (results is SparqlResultSet)
-            {
-                //Print the results
-                var resultSet = (SparqlResultSet)results;
-                foreach (var result in resultSet)
-                {
-                    Console.WriteLine(result.ToString());
-                }
-            }
-            else if (results is IGraph)
+            if (results is IGraph)
             {
                 var g = (IGraph)results;
 

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LinkedData.Concepts;
+﻿using System.Collections.Generic;
+using LinkedData.Helpers;
 using VDS.RDF;
 
-namespace LinkedData.New
+namespace LinkedData.Concepts
 {
     public class SitecoreConceptManager : IConceptManager
     {

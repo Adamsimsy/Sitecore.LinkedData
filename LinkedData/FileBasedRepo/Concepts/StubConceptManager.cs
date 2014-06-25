@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Sitecore.Data.Items;
-using VDS.RDF.Storage.Virtualisation;
 
-namespace LinkedData.Concepts
+namespace LinkedData.FileBasedRepo.Concepts
 {
     public class StubConceptManager : IConceptManager
     {

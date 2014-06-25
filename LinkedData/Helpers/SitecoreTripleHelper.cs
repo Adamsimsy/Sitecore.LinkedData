@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
 using LinkedData.Concepts;
 using Sitecore.Data;
 using Sitecore.Data.Items;
@@ -12,7 +7,7 @@ using VDS.RDF;
 using VDS.RDF.Parsing;
 using VDS.RDF.Query;
 
-namespace LinkedData.New
+namespace LinkedData.Helpers
 {
     public static class SitecoreTripleHelper
     {

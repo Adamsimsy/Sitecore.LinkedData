@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LinkedData.Repository;
+using LinkedData.Concepts;
+using LinkedData.DataManagers;
+using LinkedData.Helpers;
 using Sitecore;
 using Sitecore.Collections;
 using Sitecore.Configuration;
 using Sitecore.Data;
-using Sitecore.Data.DataProviders.Sql;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Diagnostics.PerformanceCounters;
@@ -17,17 +16,21 @@ using Sitecore.Globalization;
 using Sitecore.Jobs;
 using Sitecore.Links;
 using Sitecore.SecurityModel;
-using VDS.RDF.Nodes;
+using VDS.RDF.Storage;
 
 namespace LinkedData
 {
-    public class LinkedDataDatabase : LinkDatabase
+    public class SitecoreLinkDatabase : LinkDatabase
     {
         private readonly LockSet locks = new LockSet();
+        private readonly SitecoreLinkedDataManager _manager;
 
-        public LinkedDataDatabase(string connectionString)
+        public SitecoreLinkDatabase(string connectionString)
         {
+            //IQueryableStorage storage = new SesameHttpProtocolVersion6Connector("http://localhost:8080/openrdf-sesame/", "in-mem-sesame");
+            IQueryableStorage storage = new InMemoryManager();
 
+            _manager = new SitecoreLinkedDataManager(null, null, storage, new SitecoreConceptManager(new SitecoreConceptProvider()));
         }
 
         public override void Compact(Database database)
@@ -47,9 +50,7 @@ namespace LinkedData
         {
             Assert.ArgumentNotNull((object)item, "item");
 
-            var g = LinkedDataManager.ReadGraph();
-
-            var items = g.GetTriplesWithSubject(g.CreateUriNode(LinkedDataManager.ItemToUri(item)));
+            var items = _manager.GetItemTriplesBySubject(item);
 
             if (items != null)
             {
@@ -65,14 +66,12 @@ namespace LinkedData
             var list = new List<ItemLink>();
             lock (this.locks.GetLock((object)item.ID))
             {
-                var g = LinkedDataManager.ReadGraph();
-
-                var items = g.GetTriplesWithSubject(g.CreateUriNode(LinkedDataManager.ItemToUri(item)));
+                var items = _manager.GetItemTriplesBySubject(item);
 
                 foreach (var triple in items)
                 {
-                    var sourceItem = LinkedDataManager.UriToItem(triple.Subject.ToString());
-                    var targetItem = LinkedDataManager.UriToItem(triple.Object.ToString());
+                    var sourceItem = SitecoreTripleHelper.UriToItem(triple.Subject.ToString());
+                    var targetItem = SitecoreTripleHelper.UriToItem(triple.Object.ToString());
                     //TODO: Need to hold somewhere in the triple the fieldId
                     if (sourceItem != null && targetItem != null)
                     {
@@ -89,9 +88,7 @@ namespace LinkedData
         {
             Assert.ArgumentNotNull((object)item, "item");
 
-            var g = LinkedDataManager.ReadGraph();
-
-            var items = g.GetTriplesWithObject(g.CreateUriNode(LinkedDataManager.ItemToUri(item)));
+            var items = _manager.GetItemTriplesByObject(item);
 
             if (items != null)
             {
@@ -107,20 +104,18 @@ namespace LinkedData
             var list = new List<ItemLink>();
             lock (this.locks.GetLock((object)item.ID))
             {
-                var g = LinkedDataManager.ReadGraph();
+                var items = _manager.GetItemTriplesBySubject(item);
 
-                var literalNode = g.GetLiteralNode(LinkedDataManager.ItemToUri(item));
-
-                if (literalNode != null)
+                foreach (var triple in items)
                 {
-                    var items = g.GetTriplesWithObject(literalNode);
-
-                    foreach (var triple in items)
+                    var sourceItem = SitecoreTripleHelper.UriToItem(triple.Subject.ToString());
+                    var targetItem = SitecoreTripleHelper.UriToItem(triple.Object.ToString());
+                    //TODO: Need to hold somewhere in the triple the fieldId
+                    if (targetItem != null && sourceItem != null)
                     {
-                        var sourceItem = LinkedDataManager.UriToItem(triple.Subject.ToString());
-                        var targetItem = LinkedDataManager.UriToItem(triple.Object.ToString());
-                        //TODO: Need to hold somewhere in the triple the fieldId
-                        list.Add(new ItemLink(sourceItem.Database.Name, sourceItem.ID, new ID("{A60ACD61-A6DB-4182-8329-C957982CEC74}"), targetItem.Database.Name, targetItem.ID, targetItem.Paths.FullPath));
+                        list.Add(new ItemLink(sourceItem.Database.Name, sourceItem.ID,
+                            new ID("{A60ACD61-A6DB-4182-8329-C957982CEC74}"), targetItem.Database.Name, targetItem.ID,
+                            targetItem.Paths.FullPath));
                     }
                 }
             }
@@ -135,14 +130,12 @@ namespace LinkedData
             var list = new List<ItemLink>();
             lock (this.locks.GetLock((object)item.ID))
             {
-                var g = LinkedDataManager.ReadGraph();
-
-                var items = g.GetTriplesWithObject(g.CreateUriNode(LinkedDataManager.ItemToUri(item)));
+                var items = _manager.GetItemTriplesByObject(item);
 
                 foreach (var triple in items)
                 {
-                    var sourceItem = LinkedDataManager.UriToItem(triple.Subject.ToString());
-                    var targetItem = LinkedDataManager.UriToItem(triple.Object.ToString());
+                    var sourceItem = SitecoreTripleHelper.UriToItem(triple.Subject.ToString());
+                    var targetItem = SitecoreTripleHelper.UriToItem(triple.Object.ToString());
                     //TODO: Need to hold somewhere in the triple the fieldId
                     list.Add(new ItemLink(sourceItem.Database.Name, sourceItem.ID, new ID("{A60ACD61-A6DB-4182-8329-C957982CEC74}"), targetItem.Database.Name, targetItem.ID, targetItem.Paths.FullPath));
                 }
@@ -156,14 +149,12 @@ namespace LinkedData
             var list = new List<ItemLink>();
             lock (this.locks.GetLock((object)version.ID))
             {
-                var g = LinkedDataManager.ReadGraph();
-
-                var items = g.GetTriplesWithObject(g.CreateUriNode(LinkedDataManager.ItemToUri(version)));
+                var items = _manager.GetItemTriplesByObject(version);
 
                 foreach (var triple in items)
                 {
-                    var sourceItem = LinkedDataManager.UriToItem(triple.Subject.ToString());
-                    var targetItem = LinkedDataManager.UriToItem(triple.Object.ToString());
+                    var sourceItem = SitecoreTripleHelper.UriToItem(triple.Subject.ToString());
+                    var targetItem = SitecoreTripleHelper.UriToItem(triple.Object.ToString());
                     //TODO: Need to hold somewhere in the triple the fieldId
                     list.Add(new ItemLink(sourceItem.Database.Name, sourceItem.ID, new ID("{A60ACD61-A6DB-4182-8329-C957982CEC74}"), targetItem.Database.Name, targetItem.ID, targetItem.Paths.FullPath));
                 }
@@ -185,15 +176,9 @@ namespace LinkedData
         {
             Assert.ArgumentNotNull((object)item, "item");
 
-            var g = LinkedDataManager.ReadGraph();
+            var items = _manager.GetItemTriplesByObject(item);
 
-            var items = g.GetTriplesWithObject(g.CreateUriNode(LinkedDataManager.ItemToUri(item)));
-
-            foreach (var triple in items)
-            {
-                g.Retract(triple);
-            }
-            LinkedDataManager.WriteGraph(g);
+            _manager.DeleteTriples(items);
 
             LinkCounters.DataUpdated.Increment();
         }
@@ -205,7 +190,7 @@ namespace LinkedData
 
             lock (this.locks.GetLock((object)"rdflock"))
             {
-                LinkedDataManager.AddLink(item, link);
+                _manager.AddLink(item, link);
             }
         }
 
@@ -225,30 +210,18 @@ namespace LinkedData
         {
             Assert.ArgumentNotNull((object)item, "item");
 
-            var g = LinkedDataManager.ReadGraph();
+            var items = _manager.GetItemTriplesBySubject(item);
 
-            var items = g.GetTriplesWithSubject(g.CreateUriNode(LinkedDataManager.ItemToUri(item)));
-
-            foreach (var triple in items)
-            {
-                g.Retract(triple);
-            }
-            LinkedDataManager.WriteGraph(g);
+            _manager.DeleteTriples(items);
         }
 
         protected virtual void RemoveItemVersionLinks(Item item)
         {
             Assert.ArgumentNotNull((object)item, "item");
 
-            var g = LinkedDataManager.ReadGraph();
+            var items = _manager.GetItemTriplesBySubject(item);
 
-            var items = g.GetTriplesWithSubject(g.CreateUriNode(LinkedDataManager.ItemToUri(item)));
-
-            foreach (var triple in items)
-            {
-                g.Retract(triple);
-            }
-            LinkedDataManager.WriteGraph(g);
+            _manager.DeleteTriples(items);
         }
 
         protected override void UpdateLinks(Item item, ItemLink[] links)
@@ -258,7 +231,7 @@ namespace LinkedData
 
             foreach (var itemLink in links)
             {
-                LinkedDataManager.AddLink(item, itemLink);
+                _manager.AddLink(item, itemLink);
             }
         }
 
@@ -269,7 +242,7 @@ namespace LinkedData
 
             foreach (var itemLink in links)
             {
-                LinkedDataManager.AddLink(item, itemLink);
+                _manager.AddLink(item, itemLink);
             }
 
             //Now remove removed links
@@ -286,7 +259,7 @@ namespace LinkedData
 
             foreach (var removeLink in removeLinks)
             {
-                LinkedDataManager.RemoveLinksForItem(item, removeLink);
+                _manager.RemoveLinksForItem(item, removeLink);
             }
         }
 

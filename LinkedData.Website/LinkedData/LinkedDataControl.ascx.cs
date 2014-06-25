@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using LinkedData.Repository;
+using LinkedData.FileBasedRepo;
 using VDS.RDF;
 using VDS.RDF.Parsing;
 using VDS.RDF.Writing;

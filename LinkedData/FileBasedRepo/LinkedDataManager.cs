@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.UI;
-using LinkedData.Concepts;
+using LinkedData.FileBasedRepo.Concepts;
 using Sitecore.Collections;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Links;
-using Sitecore.Shell.Applications.ContentEditor;
 using VDS.RDF;
 using VDS.RDF.Parsing;
 using VDS.RDF.Writing;
 
-namespace LinkedData.Repository
+namespace LinkedData.FileBasedRepo
 {
     public static class LinkedDataManager
     {

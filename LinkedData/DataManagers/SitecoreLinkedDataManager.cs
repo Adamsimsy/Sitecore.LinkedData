@@ -17,7 +17,7 @@ namespace LinkedData.DataManagers
 {
     public class SitecoreLinkedDataManager : LinkedDataManager
     {
-        private const string TriplesByObjectFormat = @"CONSTRUCT {{ ?s ?p <{0}> }} WHERE {{ ?s ?p <{0}> }}";
+        private const string TriplesByObjectFormat = @"CONSTRUCT {{ ?s ?p '{0}' }} WHERE {{ ?s ?p '{0}' }}";
         private const string TriplesBySubjectFormat = @"CONSTRUCT {{ <{0}> ?p ?o }} WHERE {{ <{0}> ?p ?o }}";
         private const string TriplesBySubjectObjectFormat = @"CONSTRUCT {{ <{0}> ?p <{1}> }} WHERE {{ <{0}> ?p <{1}> }}";
 

@@ -72,11 +72,11 @@ namespace LinkedData
                 {
                     var sourceItem = SitecoreTripleHelper.UriToItem(triple.Subject.ToString());
                     var targetItem = SitecoreTripleHelper.UriToItem(triple.Object.ToString());
-                    //TODO: Need to hold somewhere in the triple the fieldId
+                    
                     if (sourceItem != null && targetItem != null)
                     {
                         list.Add(new ItemLink(sourceItem.Database.Name, sourceItem.ID,
-                            new ID("{A60ACD61-A6DB-4182-8329-C957982CEC74}"), targetItem.Database.Name, targetItem.ID,
+                            new ID(SitecoreTripleHelper.GetFieldIdFromPredicate(triple.Predicate.ToString())), targetItem.Database.Name, targetItem.ID,
                             targetItem.Paths.FullPath));
                     }
                 }
@@ -114,8 +114,8 @@ namespace LinkedData
                     if (targetItem != null && sourceItem != null)
                     {
                         list.Add(new ItemLink(sourceItem.Database.Name, sourceItem.ID,
-                            new ID("{A60ACD61-A6DB-4182-8329-C957982CEC74}"), targetItem.Database.Name, targetItem.ID,
-                            targetItem.Paths.FullPath));
+                                                    new ID(SitecoreTripleHelper.GetFieldIdFromPredicate(triple.Predicate.ToString())), targetItem.Database.Name, targetItem.ID,
+                                                    targetItem.Paths.FullPath));
                     }
                 }
             }
@@ -136,8 +136,10 @@ namespace LinkedData
                 {
                     var sourceItem = SitecoreTripleHelper.UriToItem(triple.Subject.ToString());
                     var targetItem = SitecoreTripleHelper.UriToItem(triple.Object.ToString());
-                    //TODO: Need to hold somewhere in the triple the fieldId
-                    list.Add(new ItemLink(sourceItem.Database.Name, sourceItem.ID, new ID("{A60ACD61-A6DB-4182-8329-C957982CEC74}"), targetItem.Database.Name, targetItem.ID, targetItem.Paths.FullPath));
+
+                    list.Add(new ItemLink(sourceItem.Database.Name, sourceItem.ID,
+                            new ID(SitecoreTripleHelper.GetFieldIdFromPredicate(triple.Predicate.ToString())), targetItem.Database.Name, targetItem.ID,
+                            targetItem.Paths.FullPath));
                 }
             }
             return list.ToArray();
@@ -155,8 +157,10 @@ namespace LinkedData
                 {
                     var sourceItem = SitecoreTripleHelper.UriToItem(triple.Subject.ToString());
                     var targetItem = SitecoreTripleHelper.UriToItem(triple.Object.ToString());
-                    //TODO: Need to hold somewhere in the triple the fieldId
-                    list.Add(new ItemLink(sourceItem.Database.Name, sourceItem.ID, new ID("{A60ACD61-A6DB-4182-8329-C957982CEC74}"), targetItem.Database.Name, targetItem.ID, targetItem.Paths.FullPath));
+
+                    list.Add(new ItemLink(sourceItem.Database.Name, sourceItem.ID,
+                            new ID(SitecoreTripleHelper.GetFieldIdFromPredicate(triple.Predicate.ToString())), targetItem.Database.Name, targetItem.ID,
+                            targetItem.Paths.FullPath));
                 }
             }
             return list.ToArray();

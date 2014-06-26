@@ -62,24 +62,13 @@ namespace LinkedData
         public override ItemLink[] GetReferences(Item item)
         {
             Assert.ArgumentNotNull((object)item, "item");
+            List<ItemLink> list;
 
-            var list = new List<ItemLink>();
             lock (this.locks.GetLock((object)item.ID))
             {
                 var items = _manager.GetItemTriplesBySubject(item);
 
-                foreach (var triple in items)
-                {
-                    var sourceItem = SitecoreTripleHelper.UriToItem(triple.Subject.ToString());
-                    var targetItem = SitecoreTripleHelper.UriToItem(triple.Object.ToString());
-                    
-                    if (sourceItem != null && targetItem != null)
-                    {
-                        list.Add(new ItemLink(sourceItem.Database.Name, sourceItem.ID,
-                            new ID(SitecoreTripleHelper.GetFieldIdFromPredicate(triple.Predicate.ToString())), targetItem.Database.Name, targetItem.ID,
-                            targetItem.Paths.FullPath));
-                    }
-                }
+                list = SitecoreTripleHelper.TriplesToItemLinks(items);
             }
             return list.ToArray();
         }
@@ -100,24 +89,12 @@ namespace LinkedData
         public override ItemLink[] GetReferrers(Item item)
         {
             Assert.ArgumentNotNull((object)item, "item");
-
-            var list = new List<ItemLink>();
+            List<ItemLink> list;
             lock (this.locks.GetLock((object)item.ID))
             {
                 var items = _manager.GetItemTriplesByObject(item);
 
-                foreach (var triple in items)
-                {
-                    var sourceItem = SitecoreTripleHelper.UriToItem(triple.Subject.ToString());
-                    var targetItem = SitecoreTripleHelper.UriToItem(triple.Object.ToString());
-                    //TODO: Need to hold somewhere in the triple the fieldId
-                    if (targetItem != null && sourceItem != null)
-                    {
-                        list.Add(new ItemLink(sourceItem.Database.Name, sourceItem.ID,
-                                                    new ID(SitecoreTripleHelper.GetFieldIdFromPredicate(triple.Predicate.ToString())), targetItem.Database.Name, targetItem.ID,
-                                                    targetItem.Paths.FullPath));
-                    }
-                }
+                list = SitecoreTripleHelper.TriplesToItemLinks(items);
             }
             return list.ToArray();
         }
@@ -126,21 +103,12 @@ namespace LinkedData
         {
             Assert.ArgumentNotNull((object)item, "item");
             Assert.ArgumentNotNull((object)sourceFieldId, "sourceFieldId");
-
-            var list = new List<ItemLink>();
+            List<ItemLink> list;
             lock (this.locks.GetLock((object)item.ID))
             {
                 var items = _manager.GetItemTriplesByObject(item);
 
-                foreach (var triple in items)
-                {
-                    var sourceItem = SitecoreTripleHelper.UriToItem(triple.Subject.ToString());
-                    var targetItem = SitecoreTripleHelper.UriToItem(triple.Object.ToString());
-
-                    list.Add(new ItemLink(sourceItem.Database.Name, sourceItem.ID,
-                            new ID(SitecoreTripleHelper.GetFieldIdFromPredicate(triple.Predicate.ToString())), targetItem.Database.Name, targetItem.ID,
-                            targetItem.Paths.FullPath));
-                }
+                list = SitecoreTripleHelper.TriplesToItemLinks(items);
             }
             return list.ToArray();
         }
@@ -148,20 +116,12 @@ namespace LinkedData
         public override ItemLink[] GetItemVersionReferrers(Item version)
         {
             Assert.ArgumentNotNull((object)version, "version");
-            var list = new List<ItemLink>();
+            List<ItemLink> list;
             lock (this.locks.GetLock((object)version.ID))
             {
                 var items = _manager.GetItemTriplesByObject(version);
 
-                foreach (var triple in items)
-                {
-                    var sourceItem = SitecoreTripleHelper.UriToItem(triple.Subject.ToString());
-                    var targetItem = SitecoreTripleHelper.UriToItem(triple.Object.ToString());
-
-                    list.Add(new ItemLink(sourceItem.Database.Name, sourceItem.ID,
-                            new ID(SitecoreTripleHelper.GetFieldIdFromPredicate(triple.Predicate.ToString())), targetItem.Database.Name, targetItem.ID,
-                            targetItem.Paths.FullPath));
-                }
+                list = SitecoreTripleHelper.TriplesToItemLinks(items);
             }
             return list.ToArray();
         }

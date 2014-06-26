@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Policy;
 using LinkedData.Concepts;
@@ -13,6 +14,23 @@ namespace LinkedData.Helpers
 {
     public static class SitecoreTripleHelper
     {
+        public static List<ItemLink> TriplesToItemLinks(IEnumerable<Triple> triples)
+        {
+            var list = new List<ItemLink>();
+
+            foreach (var triple in triples)
+            {
+                var sourceItem = SitecoreTripleHelper.UriToItem(triple.Subject.ToString());
+                var targetItem = SitecoreTripleHelper.UriToItem(triple.Object.ToString());
+
+                list.Add(new ItemLink(sourceItem.Database.Name, sourceItem.ID,
+                        new ID(SitecoreTripleHelper.GetFieldIdFromPredicate(triple.Predicate.ToString())), targetItem.Database.Name, targetItem.ID,
+                        targetItem.Paths.FullPath));
+            }
+
+            return list;
+        }
+
         public static Triple ToTriple(IConceptManager conceptManager, Item item, ItemLink itemLink)
         {
             var g = new Graph();

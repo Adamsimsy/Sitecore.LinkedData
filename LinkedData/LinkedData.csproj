@@ -35,6 +35,12 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
+    </Reference>
     <Reference Include="dotNetRDF">
       <HintPath>..\packages\dotNetRDF.1.0.3\lib\net40\dotNetRDF.dll</HintPath>
     </Reference>
@@ -62,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataManagers\SitecoreLinkedDataManager.cs" />
+    <Compile Include="DependencyResolver.cs" />
     <Compile Include="FileBasedRepo\Concepts\Concept.cs" />
     <Compile Include="FileBasedRepo\Concepts\ConceptNode.cs" />
     <Compile Include="FileBasedRepo\Concepts\IConceptManager.cs" />

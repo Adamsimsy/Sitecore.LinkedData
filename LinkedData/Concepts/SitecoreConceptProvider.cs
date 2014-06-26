@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace LinkedData.Concepts
 {
-    class SitecoreConceptProvider : IConceptProvider
+    public class SitecoreConceptProvider : IConceptProvider
     {
         public List<BaseConcept> GetConcepts()
         {

@@ -21,6 +21,11 @@ namespace LinkedData.DataManagers
         private const string TriplesBySubjectFormat = @"CONSTRUCT {{ <{0}> ?p ?o }} WHERE {{ <{0}> ?p ?o }}";
         private const string TriplesBySubjectObjectFormat = @"CONSTRUCT {{ <{0}> ?p <{1}> }} WHERE {{ <{0}> ?p <{1}> }}";
 
+        public SitecoreLinkedDataManager(IQueryableStorage store, IConceptManager conceptManager)
+            : base(store, conceptManager)
+        {
+        }
+
         public SitecoreLinkedDataManager(List<ITripleFormatter> inFormatters, List<ITripleFormatter> outFormatters, IQueryableStorage store, IConceptManager conceptManager) : base(inFormatters, outFormatters, store, conceptManager)
         {
         }

@@ -7,6 +7,10 @@
 .\Debug\App_Config\Log4Net.config
 .\Debug\packages.config
 .\Debug\App_Config\Include\SitecoreLinkedData.config
+.\Debug\bin\Castle.Core.dll
+.\Debug\bin\Castle.Core.xml
+.\Debug\bin\Castle.Windsor.dll
+.\Debug\bin\Castle.Windsor.xml
 .\Debug\bin\dotNetRDF.dll
 .\Debug\bin\dotNetRDF.xml
 .\Debug\bin\HtmlAgilityPack.dll
@@ -16,9 +20,11 @@
 .\Debug\bin\LinkedData.pdb
 .\Debug\bin\LinkedData.Website.dll
 .\Debug\bin\LinkedData.Website.pdb
+.\Debug\bin\Microsoft.Web.Infrastructure.dll
 .\Debug\bin\Newtonsoft.Json.dll
 .\Debug\bin\Newtonsoft.Json.xml
 .\Debug\bin\Sitecore.Kernel.dll
 .\Debug\bin\VDS.Common.dll
 .\Debug\bin\VDS.Common.pdb
 .\Debug\bin\VDS.Common.xml
+.\Debug\bin\WebActivatorEx.dll

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using LinkedData.Concepts;
 using LinkedData.DataManagers;
@@ -27,10 +29,10 @@ namespace LinkedData
 
         public SitecoreLinkDatabase(string connectionString)
         {
-            //IQueryableStorage storage = new SesameHttpProtocolVersion6Connector("http://localhost:8080/openrdf-sesame/", "in-mem-sesame");
-            IQueryableStorage storage = new InMemoryManager();
+            IQueryableStorage storage = new SesameHttpProtocolVersion6Connector("http://localhost:8080/openrdf-sesame/", "in-mem-sesame");
+            //IQueryableStorage storage = new InMemoryManager();
 
-            _manager = new SitecoreLinkedDataManager(null, null, storage, new SitecoreConceptManager(new SitecoreConceptProvider()));
+            _manager = DependencyResolver.Instance.Resolve<SitecoreLinkedDataManager>();
         }
 
         public override void Compact(Database database)

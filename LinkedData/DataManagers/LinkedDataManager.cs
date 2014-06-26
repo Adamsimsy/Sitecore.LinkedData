@@ -21,6 +21,16 @@ namespace LinkedData.DataManagers
         protected readonly IConceptManager ConceptManager;
         private readonly string _graphUri;
 
+        public LinkedDataManager(IQueryableStorage store, IConceptManager conceptManager)
+        {
+            _inFormatters = null;
+            _outFormatters = null;
+            _store = store;
+            ConceptManager = conceptManager;
+            //_graphUri = "http://examplegraph.com"; //could use this as different graphs per database
+            _graphUri = string.Empty;
+        }
+
         public LinkedDataManager(List<ITripleFormatter> inFormatters, List<ITripleFormatter> outFormatters, IQueryableStorage store, IConceptManager conceptManager)
         {
             _inFormatters = inFormatters;

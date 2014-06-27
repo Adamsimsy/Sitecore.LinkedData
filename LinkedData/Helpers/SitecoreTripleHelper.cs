@@ -23,9 +23,13 @@ namespace LinkedData.Helpers
                 var sourceItem = SitecoreTripleHelper.UriToItem(triple.Subject.ToString());
                 var targetItem = SitecoreTripleHelper.UriToItem(triple.Object.ToString());
 
-                list.Add(new ItemLink(sourceItem.Database.Name, sourceItem.ID,
-                        new ID(SitecoreTripleHelper.GetFieldIdFromPredicate(triple.Predicate.ToString())), targetItem.Database.Name, targetItem.ID,
+                if (sourceItem != null && targetItem != null)
+                {
+                    list.Add(new ItemLink(sourceItem.Database.Name, sourceItem.ID,
+                        new ID(SitecoreTripleHelper.GetFieldIdFromPredicate(triple.Predicate.ToString())),
+                        targetItem.Database.Name, targetItem.ID,
                         targetItem.Paths.FullPath));
+                }
             }
 
             return list;

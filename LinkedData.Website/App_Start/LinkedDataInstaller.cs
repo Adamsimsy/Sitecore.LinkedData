@@ -6,15 +6,16 @@ using Castle.Windsor;
 using LinkedData.Concepts;
 using LinkedData.DataManagers;
 using LinkedData.Formatters;
+using LinkedData.Installers;
 using LinkedData.Website.App_Start;
 using Sitecore.ApplicationCenter.Applications;
 using VDS.RDF.Storage;
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(SitecoreLinkedDataInstaller), "Start")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(LinkedDataInstaller), "Start")]
 
 namespace LinkedData.Website.App_Start
 {
-    public static class SitecoreLinkedDataInstaller
+    public static class LinkedDataInstaller
     {
         public static void Start()
         {
@@ -24,11 +25,8 @@ namespace LinkedData.Website.App_Start
             //    .DependsOn(Dependency.OnValue("baseUri", "http://localhost:8080/openrdf-sesame/"), Dependency.OnValue("storeID", "in-mem-sesame")));
 
             container.Register(Component.For<IQueryableStorage>().ImplementedBy<InMemoryManager>().LifestyleSingleton());
-            container.Register(Component.For<IConceptManager>().ImplementedBy<SitecoreConceptManager>().LifestyleSingleton());
-            container.Register(Component.For<IConceptProvider>().ImplementedBy<SitecoreConceptProvider>().LifestyleSingleton());
-            container.Register(Component.For<SitecoreLinkedDataManager>().ImplementedBy<SitecoreLinkedDataManager>().LifestyleSingleton());
 
-            DependencyResolver.Instance = container;
+            container.Install(new LinkedDataInstallerSitecore());
         }
     }
 }

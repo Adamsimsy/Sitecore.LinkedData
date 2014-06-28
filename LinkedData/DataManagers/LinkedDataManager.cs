@@ -49,7 +49,9 @@ namespace LinkedData.DataManagers
             {
                 var g = (IGraph)results;
 
-                return g.Triples;
+                var triples = g.Triples;
+
+                return ApplyFormatters(_outFormatters, triples);
             }
             else
             {
@@ -94,18 +96,27 @@ namespace LinkedData.DataManagers
             }
         }
 
-        private void ApplyFormatters(IEnumerable<ITripleFormatter> formatters, IEnumerable<Triple> triples)
+        private IEnumerable<Triple> ApplyFormatters(IEnumerable<ITripleFormatter> formatters, IEnumerable<Triple> triples)
         {
             if (formatters != null && triples != null)
             {
+                var formattedTriples = new List<Triple>();
+
                 foreach (var formatter in formatters)
                 {
+                    var innerFormattedTriples = new List<Triple>();
+
                     foreach (var triple in triples.ToList())
                     {
-                        formatter.FormatTriple(triple);
+                        innerFormattedTriples.Add(formatter.FormatTriple(triple));
                     }
+
+                    formattedTriples = innerFormattedTriples;
                 }
+
+                return formattedTriples;
             }
+            return triples;
         }
     }
 }

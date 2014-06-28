@@ -36,6 +36,19 @@ namespace LinkedData.Website.LinkedData
                                + " Predicate: <a href=\"" + triple.Predicate.ToString() + "\">" + triple.Predicate.ToString() + "</a>" +
                                " Object: <a href=\"" + triple.Object.ToString() + "\">" + triple.Object.ToString() + "</a><br/>";
             }
+
+            var pred = "http://example.org/home-to-sampleitem";
+            var pred2 = "http://example.org/home-to-sampleitem";
+
+            var triples2 = manager.GetItemTriplesBySubjectPredicate(Sitecore.Context.Item, pred2);
+
+            foreach (var triple in triples2)
+            {
+                //litRdf.Text += triple.ToString();
+                litRdf2.Text += "Subject: <a href=\"" + triple.Subject.ToString() + "\">" + triple.Subject.ToString() + "</a>"
+                               + " Predicate: <a href=\"" + triple.Predicate.ToString() + "\">" + triple.Predicate.ToString() + "</a>" +
+                               " Object: <a href=\"" + triple.Object.ToString() + "\">" + triple.Object.ToString() + "</a><br/>";
+            }
         }
     }
 }

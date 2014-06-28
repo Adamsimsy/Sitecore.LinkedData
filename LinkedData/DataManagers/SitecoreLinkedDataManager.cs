@@ -21,6 +21,7 @@ namespace LinkedData.DataManagers
         private const string TriplesByObjectFormat = @"CONSTRUCT {{ ?s ?p '{0}' }} WHERE {{ ?s ?p '{0}' }}";
         private const string TriplesBySubjectFormat = @"CONSTRUCT {{ <{0}> ?p ?o }} WHERE {{ <{0}> ?p ?o }}";
         private const string TriplesBySubjectObjectFormat = @"CONSTRUCT {{ <{0}> ?p <{1}> }} WHERE {{ <{0}> ?p <{1}> }}";
+        private const string TriplesBySubjectPredicateFormat = @"CONSTRUCT {{ <{0}> ?p ?o }} WHERE {{ <{0}> ?p ?o FILTER(STRSTARTS(STR(?p), ""{1}"")) }}";
 
         public SitecoreLinkedDataManager(IQueryableStorage store, IConceptManager conceptManager)
             : base(store, conceptManager)
@@ -45,6 +46,15 @@ namespace LinkedData.DataManagers
             var itemUri = SitecoreTripleHelper.ItemToUri(item);
 
             var query = SitecoreTripleHelper.StringToSparqlQuery(String.Format(TriplesBySubjectFormat, itemUri));
+
+            return GetTriples(query);
+        }
+
+        public IEnumerable<Triple> GetItemTriplesBySubjectPredicate(Item item, string predicate)
+        {
+            var itemUri = SitecoreTripleHelper.ItemToUri(item);
+
+            var query = SitecoreTripleHelper.StringToSparqlQuery(String.Format(TriplesBySubjectPredicateFormat, itemUri, predicate));
 
             return GetTriples(query);
         }

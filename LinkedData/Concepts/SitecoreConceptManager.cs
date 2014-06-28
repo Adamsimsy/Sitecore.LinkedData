@@ -39,8 +39,8 @@ namespace LinkedData.Concepts
                 if (sourceItem!= null &&
                     targetItem != null)
                 {
-                    var targetTemplateName = targetItem.TemplateName;
                     var sourceTemplateName = sourceItem.TemplateName;
+                    var targetTemplateName = targetItem.TemplateName;
 
                     if (baseConcept.IsMatch(sourceTemplateName, targetTemplateName))
                     {

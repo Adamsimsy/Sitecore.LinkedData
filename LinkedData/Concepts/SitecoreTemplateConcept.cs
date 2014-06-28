@@ -2,12 +2,12 @@
 {
     public class SitecoreTemplateConcept : BaseConcept
     {
-        public string ObjectTemplateName { get; set; }
         public string SubjectTemplateName { get; set; }
+        public string ObjectTemplateName { get; set; }
 
-        public override bool IsMatch(string objectCompareValue, string subjectCompareValue)
+        public override bool IsMatch(string subjectCompareValue, string objectCompareValue)
         {
-            return objectCompareValue.ToLower().Equals(ObjectTemplateName.ToLower()) && subjectCompareValue.ToLower().Equals(SubjectTemplateName.ToLower());
+            return subjectCompareValue.ToLower().Equals(SubjectTemplateName.ToLower()) && objectCompareValue.ToLower().Equals(ObjectTemplateName.ToLower());
         }
     }
 }

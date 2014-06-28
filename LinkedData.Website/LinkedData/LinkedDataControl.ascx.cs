@@ -37,7 +37,7 @@ namespace LinkedData.Website.LinkedData
                                " Object: <a href=\"" + triple.Object.ToString() + "\">" + triple.Object.ToString() + "</a><br/>";
             }
 
-            var pred = "http://example.org/home-to-sampleitem";
+            var pred = "http://example.org/sampleitem-to-home";
             var pred2 = "http://example.org/home-to-sampleitem";
 
             var triples2 = manager.GetItemTriplesBySubjectPredicate(Sitecore.Context.Item, pred2);

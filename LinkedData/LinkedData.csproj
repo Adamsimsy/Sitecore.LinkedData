@@ -76,6 +76,8 @@
     <Compile Include="FileBasedRepo\Concepts\StubConceptManager.cs" />
     <Compile Include="FileBasedRepo\LinkedDataDatabase.cs" />
     <Compile Include="Concepts\BaseConcept.cs" />
+    <Compile Include="Filters\FilterSitecoreSystemFolders.cs" />
+    <Compile Include="Filters\IFilter.cs" />
     <Compile Include="Formatters\UriToDynamicUrlFormatter.cs" />
     <Compile Include="Installers\LinkedDataInstallerSitecore.cs" />
     <Compile Include="SitecoreLinkDatabase.cs" />

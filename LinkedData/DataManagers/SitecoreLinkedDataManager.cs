@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LinkedData.Concepts;
 using LinkedData.FileBasedRepo;
+using LinkedData.Filters;
 using LinkedData.Formatters;
 using LinkedData.Helpers;
 using Sitecore.Data.Items;
@@ -26,7 +27,7 @@ namespace LinkedData.DataManagers
         {
         }
 
-        public SitecoreLinkedDataManager(List<ITripleFormatter> inFormatters, List<ITripleFormatter> outFormatters, IQueryableStorage store, IConceptManager conceptManager) : base(inFormatters, outFormatters, store, conceptManager)
+        public SitecoreLinkedDataManager(List<ITripleFormatter> inFormatters, List<ITripleFormatter> outFormatters, List<IFilter> outFilters, IQueryableStorage store, IConceptManager conceptManager) : base(inFormatters, outFormatters, outFilters, store, conceptManager)
         {
         }
 

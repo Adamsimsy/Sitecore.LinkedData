@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using LinkedData.Concepts;
 using LinkedData.DataManagers;
+using LinkedData.Filters;
 using LinkedData.Formatters;
 using VDS.RDF;
 using VDS.RDF.Parsing;
@@ -22,6 +23,7 @@ namespace LinkedData.Website.LinkedData
             //var manager = DependencyResolver.Instance.Resolve<SitecoreLinkedDataManager>();
             var manager = new SitecoreLinkedDataManager(null,
                 new List<ITripleFormatter>() {new UriToDynamicUrlFormatter()},
+                new List<IFilter>() { new FilterSitecoreSystemFolders()}, 
                 DependencyResolver.Instance.Resolve<IQueryableStorage>(),
                 DependencyResolver.Instance.Resolve<IConceptManager>());
 

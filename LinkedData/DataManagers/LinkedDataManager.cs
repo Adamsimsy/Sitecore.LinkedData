@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using LinkedData.Concepts;
+using LinkedData.Filters;
 using LinkedData.Formatters;
 using LinkedData.Helpers;
 using Sitecore.Data.Items;
@@ -17,6 +18,7 @@ namespace LinkedData.DataManagers
     {
         private readonly List<ITripleFormatter> _inFormatters;
         private readonly List<ITripleFormatter> _outFormatters;
+        private readonly List<IFilter> _outFilters;
         private readonly IQueryableStorage _store;
         protected readonly IConceptManager ConceptManager;
         private readonly string _graphUri;
@@ -31,10 +33,11 @@ namespace LinkedData.DataManagers
             _graphUri = string.Empty;
         }
 
-        public LinkedDataManager(List<ITripleFormatter> inFormatters, List<ITripleFormatter> outFormatters, IQueryableStorage store, IConceptManager conceptManager)
+        public LinkedDataManager(List<ITripleFormatter> inFormatters, List<ITripleFormatter> outFormatters, List<IFilter> outFilters, IQueryableStorage store, IConceptManager conceptManager)
         {
             _inFormatters = inFormatters;
             _outFormatters = outFormatters;
+            _outFilters = outFilters;
             _store = store;
             ConceptManager = conceptManager;
             //_graphUri = "http://examplegraph.com"; //could use this as different graphs per database
@@ -51,7 +54,7 @@ namespace LinkedData.DataManagers
 
                 var triples = g.Triples;
 
-                return ApplyFormatters(_outFormatters, triples);
+                return ApplyFormatters(_outFormatters, ApplyFilters(_outFilters, triples));
             }
             else
             {
@@ -115,6 +118,32 @@ namespace LinkedData.DataManagers
                 }
 
                 return formattedTriples;
+            }
+            return triples;
+        }
+
+        private IEnumerable<Triple> ApplyFilters(IEnumerable<IFilter> filters, IEnumerable<Triple> triples)
+        {
+            if (filters != null && triples != null)
+            {
+                var FilteredTriples = new List<Triple>();
+
+                foreach (var filter in filters)
+                {
+                    var innerFilteredTriples = new List<Triple>();
+
+                    foreach (var triple in triples.ToList())
+                    {
+                        if (!filter.ShouldFilter(triple))
+                        {
+                            innerFilteredTriples.Add(triple);
+                        }          
+                    }
+
+                    FilteredTriples = innerFilteredTriples;
+                }
+
+                return FilteredTriples;
             }
             return triples;
         }

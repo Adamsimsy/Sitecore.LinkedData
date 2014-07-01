@@ -43,7 +43,7 @@ namespace LinkedData.Helpers
             //g.NamespaceMap.AddNamespace("http", new Uri("http:"));
 
             IUriNode sub = g.CreateUriNode(ItemToUri(item));
-            ILiteralNode obj = g.CreateLiteralNode(ItemToUri(itemLink.GetTargetItem()));
+            IUriNode obj = g.CreateUriNode(ItemToUri(itemLink.GetTargetItem()));
 
             IUriNode predicate = conceptManager.GetPredicate(sub, obj);
 

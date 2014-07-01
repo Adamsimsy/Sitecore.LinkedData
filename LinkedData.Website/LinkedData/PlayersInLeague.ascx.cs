@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using LinkedData.DataManagers;
+using LinkedData.Helpers;
 
 namespace LinkedData.Website.LinkedData
 {
@@ -14,7 +15,10 @@ namespace LinkedData.Website.LinkedData
         {
             var manager = DependencyResolver.Instance.Resolve<SitecoreLinkedDataManager>("web");
 
-            var triples = manager.GetItemTriplesBySubject(Sitecore.Context.Item);
+            //var triples = manager.GetItemTriplesBySubject(Sitecore.Context.Item);
+            var playersInLeaguesFormat = @"CONSTRUCT {{ <{0}> ?p2 ?o2 }} WHERE {{ <{0}> ?p ?o . ?o ?p2 ?o2 .}}";
+
+            var triples = manager.GetTriples(String.Format(playersInLeaguesFormat, SitecoreTripleHelper.ItemToUri(Sitecore.Context.Item)));
 
             foreach (var triple in triples)
             {

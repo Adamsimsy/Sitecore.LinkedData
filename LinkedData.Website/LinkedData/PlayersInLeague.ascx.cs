@@ -12,7 +12,7 @@ namespace LinkedData.Website.LinkedData
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            var manager = DependencyResolver.Instance.Resolve<SitecoreLinkedDataManager>();
+            var manager = DependencyResolver.Instance.Resolve<SitecoreLinkedDataManager>("web");
 
             var triples = manager.GetItemTriplesBySubject(Sitecore.Context.Item);
 

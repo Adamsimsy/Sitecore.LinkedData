@@ -32,7 +32,7 @@ namespace LinkedData
             IQueryableStorage storage = new SesameHttpProtocolVersion6Connector("http://localhost:8080/openrdf-sesame/", "in-mem-sesame");
             //IQueryableStorage storage = new InMemoryManager();
 
-            _manager = DependencyResolver.Instance.Resolve<SitecoreLinkedDataManager>();
+            _manager = DependencyResolver.Instance.Resolve<SitecoreLinkedDataManager>("cms");
         }
 
         public override void Compact(Database database)

@@ -11,6 +11,8 @@ namespace LinkedData.Website.LinkedData
 {
     public partial class PlayersInLeague : System.Web.UI.UserControl
     {
+        public List<SitecoreTriple> SitecoreTriples { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             var manager = DependencyResolver.Instance.Resolve<SitecoreLinkedDataManager>("web");
@@ -20,12 +22,23 @@ namespace LinkedData.Website.LinkedData
 
             var triples = manager.GetTriples(String.Format(playersInLeaguesFormat, SitecoreTripleHelper.ItemToUri(Sitecore.Context.Item)));
 
-            foreach (var triple in triples)
-            {
-                litRdf.Text += "Subject: <a href=\"" + triple.Subject.ToString() + "\">" + triple.Subject.ToString() + "</a>"
-                               + " Predicate: <a href=\"" + triple.Predicate.ToString() + "\">" + triple.Predicate.ToString() + "</a>" +
-                               " Object: <a href=\"" + triple.Object.ToString() + "\">" + triple.Object.ToString() + "</a><br/>";
-            }
+            SitecoreTriples = triples.ToSitecoreTriples();
+
+            //foreach (var triple in triples)
+            //{
+            //    var sitecoreTriple = triple.ToSitecoreTriple();
+
+            //    litRdf.Text += "Subject: <a href=\"" + triple.Subject.ToString() + "\">" + sitecoreTriple.SubjectItem.Name + "</a>"
+            //                   + " Predicate: <a href=\"" + triple.Predicate.ToString() + "\">" + sitecoreTriple.PredicateNode.ToString() + "</a>" +
+            //                   " Object: <a href=\"" + triple.Object.ToString() + "\">" + sitecoreTriple.ObjectItem.Name + "</a><br/>";
+            //}
+
+            //foreach (var triple in triples)
+            //{
+            //    litRdf.Text += "Subject: <a href=\"" + triple.Subject.ToString() + "\">" + triple.Subject.ToString() + "</a>"
+            //                   + " Predicate: <a href=\"" + triple.Predicate.ToString() + "\">" + triple.Predicate.ToString() + "</a>" +
+            //                   " Object: <a href=\"" + triple.Object.ToString() + "\">" + triple.Object.ToString() + "</a><br/>";
+            //}
         }
     }
 }

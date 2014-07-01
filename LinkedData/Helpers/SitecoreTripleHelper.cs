@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Policy;
+using Castle.Core.Internal;
 using LinkedData.Concepts;
 using Sitecore.Data;
 using Sitecore.Data.Items;
@@ -14,6 +15,21 @@ namespace LinkedData.Helpers
 {
     public static class SitecoreTripleHelper
     {
+
+        public static List<SitecoreTriple> ToSitecoreTriples(this IEnumerable<Triple> triples)
+        {
+            var sitecoreTriples = new List<SitecoreTriple>();
+
+            triples.ForEach(triple => sitecoreTriples.Add(new SitecoreTriple(triple)));
+
+            return sitecoreTriples;
+        }
+
+        public static SitecoreTriple ToSitecoreTriple(this Triple triple)
+        {
+            return new SitecoreTriple(triple);
+        }
+
         public static List<ItemLink> TriplesToItemLinks(IEnumerable<Triple> triples)
         {
             var list = new List<ItemLink>();

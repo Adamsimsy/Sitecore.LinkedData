@@ -91,6 +91,7 @@
     <Compile Include="Concepts\SitecoreConceptProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FileBasedRepo\LinkedDataManager.cs" />
+    <Compile Include="SitecoreTriple.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

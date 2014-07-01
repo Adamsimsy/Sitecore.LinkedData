@@ -33,7 +33,8 @@ namespace LinkedData.Installers
 
             //register for web context
             var managerWeb = new SitecoreLinkedDataManager(null,
-                new List<ITripleFormatter>() { new UriToDynamicUrlFormatter() },
+                //new List<ITripleFormatter>() { new UriToDynamicUrlFormatter() },
+                null,
                 new List<IFilter>() { new FilterSitecoreSystemFolders() },
                 DependencyResolver.Instance.Resolve<IQueryableStorage>(),
                 DependencyResolver.Instance.Resolve<IConceptManager>());

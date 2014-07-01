@@ -92,6 +92,7 @@
   <ItemGroup>
     <Content Include="layouts\Sample layout.aspx" />
     <Content Include="LinkedData\LinkedDataControl.ascx" />
+    <Content Include="LinkedData\PlayersInLeague.ascx" />
     <Content Include="LinkedData\RDF_Layout.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -103,6 +104,13 @@
     </Compile>
     <Compile Include="LinkedData\LinkedDataControl.ascx.designer.cs">
       <DependentUpon>LinkedDataControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="LinkedData\PlayersInLeague.ascx.cs">
+      <DependentUpon>PlayersInLeague.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LinkedData\PlayersInLeague.ascx.designer.cs">
+      <DependentUpon>PlayersInLeague.ascx</DependentUpon>
     </Compile>
     <Compile Include="LinkedData\RDF_Layout.aspx.cs">
       <DependentUpon>RDF_Layout.aspx</DependentUpon>

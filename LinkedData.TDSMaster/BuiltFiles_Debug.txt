@@ -1,5 +1,6 @@
 .\Debug\layouts\Sample layout.aspx
 .\Debug\LinkedData\LinkedDataControl.ascx
+.\Debug\LinkedData\PlayersInLeague.ascx
 .\Debug\LinkedData\RDF_Layout.aspx
 .\Debug\Web.config
 .\Debug\App_Config\Sitecore.config

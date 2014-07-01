@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Web;
 using Castle.MicroKernel.Registration;
@@ -25,6 +27,13 @@ namespace LinkedData.Website.App_Start
                 .DependsOn(Dependency.OnValue("baseUri", "http://localhost:8080/openrdf-sesame/"), Dependency.OnValue("storeID", "in-mem-sesame")));
 
             //container.Register(Component.For<IQueryableStorage>().ImplementedBy<InMemoryManager>().LifestyleSingleton());
+
+            var concepts = new List<BaseConcept>();
+
+            concepts.Add(new SitecoreTemplateConcept() { SubjectTemplateName = "league", ConceptUri = new Uri("http://football.com/league-to-team"), ObjectTemplateName = "team" });
+            concepts.Add(new SitecoreTemplateConcept() { SubjectTemplateName = "team", ConceptUri = new Uri("http://football.com/team-to-player"), ObjectTemplateName = "player" });
+   
+            container.Register(Component.For<IConceptProvider>().Instance(new SitecoreConceptProvider(concepts)).LifestyleSingleton());
 
             container.Install(new LinkedDataInstallerSitecore());
         }

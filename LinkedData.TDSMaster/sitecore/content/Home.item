@@ -316,15 +316,15 @@ sitecore\admin
 ----version----
 language: en
 version: 1
-revision: 28c6966d-ddd1-449b-bb69-0bbd678b2b35
+revision: d0aa818c-7530-48bf-836a-5001ff6b2ac8
 
 ----field----
 field: {75577384-3C97-45DA-A847-81B00500E250}
 name: Title
 key: title
-content-length: 15
+content-length: 9
 
-Sitecore       
+Sitecore 
 ----field----
 field: {A60ACD61-A6DB-4182-8329-C957982CEC74}
 name: Text
@@ -335,6 +335,13 @@ content-length: 136
 <p>Link to <a href="~/link.aspx?_id=2E9C51E4BB8A47F197CCB93447477F8C&amp;_z=z">item 1</a>.</p>
 <p><br />
 </p>
+----field----
+field: {E447EE74-4F8F-4454-AA62-E47B885015A5}
+name: Text2
+key: text2
+content-length: 101
+
+<p>Another link to <a href="~/link.aspx?_id=2E9C51E4BB8A47F197CCB93447477F8C&amp;_z=z">item 1</a></p>
 ----field----
 field: {B5E02AD9-D56F-4C41-A065-A133DB87BDEB}
 name: __Display name
@@ -397,14 +404,14 @@ name: __Revision
 key: __revision
 content-length: 36
 
-28c6966d-ddd1-449b-bb69-0bbd678b2b35
+d0aa818c-7530-48bf-836a-5001ff6b2ac8
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
 content-length: 34
 
-20140304T211542:635295645421281019
+20140628T025016:635395206166830707
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by

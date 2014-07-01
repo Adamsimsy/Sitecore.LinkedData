@@ -1,0 +1,51 @@
+----item----
+version: 1
+id: {4CCB3CC2-D748-4C2A-8F7A-F929188E66DF}
+database: master
+path: /sitecore/content/Home/Players/2014/07/01/17/18/Neymar Jr
+parent: {6744D0AE-A799-41EC-B6C8-D82591990033}
+name: Neymar Jr
+master: {00000000-0000-0000-0000-000000000000}
+template: {4F6AA550-4920-420E-A7A1-2669A43FD8E1}
+templatekey: Player
+
+----version----
+language: en
+version: 1
+revision: 346d0c63-d60f-4fa2-a2c9-3542fc2dec85
+
+----field----
+field: {13440EA4-5C57-4C5E-AC53-5850686DC4A5}
+name: Title
+key: title
+content-length: 9
+
+Neymar Jr
+----field----
+field: {25BED78C-4957-4165-998A-CA1B52F67497}
+name: __Created
+key: __created
+content-length: 15
+
+20140701T171837
+----field----
+field: {8CDC337E-A112-42FB-BBB4-4143751E123F}
+name: __Revision
+key: __revision
+content-length: 36
+
+346d0c63-d60f-4fa2-a2c9-3542fc2dec85
+----field----
+field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
+name: __Updated
+key: __updated
+content-length: 34
+
+20140701T171837:635398319178085287
+----field----
+field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
+name: __Updated by
+key: __updated by
+content-length: 14
+
+sitecore\admin

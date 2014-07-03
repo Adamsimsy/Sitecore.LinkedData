@@ -21,7 +21,7 @@ namespace LinkedData.Installers
         {
             DependencyResolver.Instance = container;
 
-            var coreDatabaseContext = new DatabaseContext.DatabaseContext()
+            var coreDatabaseContext = new DatabaseContext.DatabaseGraphContext()
             {
                 DatabaseName = "core", GraphConfigurations = 
                 new List<GraphConfiguration>()
@@ -35,7 +35,7 @@ namespace LinkedData.Installers
                 }
             };
 
-            var masterDatabaseContext = new DatabaseContext.DatabaseContext()
+            var masterDatabaseContext = new DatabaseContext.DatabaseGraphContext()
             {
                 DatabaseName = "master",
                 GraphConfigurations =
@@ -56,7 +56,7 @@ namespace LinkedData.Installers
                 }
             };
 
-            var webDatabaseContext = new DatabaseContext.DatabaseContext()
+            var webDatabaseContext = new DatabaseContext.DatabaseGraphContext()
             {
                 DatabaseName = "web",
                 GraphConfigurations =
@@ -77,9 +77,9 @@ namespace LinkedData.Installers
                 }
             };
 
-            container.Register(Component.For<DatabaseContext.DatabaseContext>().Instance(coreDatabaseContext).LifestyleSingleton().Named("core"));
-            container.Register(Component.For<DatabaseContext.DatabaseContext>().Instance(masterDatabaseContext).LifestyleSingleton().Named("master"));
-            container.Register(Component.For<DatabaseContext.DatabaseContext>().Instance(webDatabaseContext).LifestyleSingleton().Named("web2"));
+            container.Register(Component.For<DatabaseContext.DatabaseGraphContext>().Instance(coreDatabaseContext).LifestyleSingleton().Named("core"));
+            container.Register(Component.For<DatabaseContext.DatabaseGraphContext>().Instance(masterDatabaseContext).LifestyleSingleton().Named("master"));
+            container.Register(Component.For<DatabaseContext.DatabaseGraphContext>().Instance(webDatabaseContext).LifestyleSingleton().Named("web2"));
 
             container.Register(Component.For<IConceptManager>().ImplementedBy<SitecoreConceptManager>().LifestyleSingleton());
             

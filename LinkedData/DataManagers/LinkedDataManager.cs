@@ -21,7 +21,7 @@ namespace LinkedData.DataManagers
         private readonly List<IFilter> _outFilters;
         private readonly IQueryableStorage _store;
         protected readonly IConceptManager ConceptManager;
-        private readonly string _graphUri;
+        private readonly Uri _graphUri;
 
         public LinkedDataManager(IQueryableStorage store, IConceptManager conceptManager)
         {
@@ -29,8 +29,8 @@ namespace LinkedData.DataManagers
             _outFormatters = null;
             _store = store;
             ConceptManager = conceptManager;
-            //_graphUri = "http://examplegraph.com"; //could use this as different graphs per database
-            _graphUri = string.Empty;
+            _graphUri = new Uri("http://examplegraph.com"); //could use this as different graphs per database
+            //_graphUri = string.Empty;
         }
 
         public LinkedDataManager(List<ITripleFormatter> inFormatters, List<ITripleFormatter> outFormatters, List<IFilter> outFilters, IQueryableStorage store, IConceptManager conceptManager)
@@ -40,13 +40,17 @@ namespace LinkedData.DataManagers
             _outFilters = outFilters;
             _store = store;
             ConceptManager = conceptManager;
-            //_graphUri = "http://examplegraph.com"; //could use this as different graphs per database
-            _graphUri = string.Empty;
+            _graphUri = new Uri("http://examplegraph.com"); //could use this as different graphs per database
+            //_graphUri = string.Empty;
         }
 
         public IEnumerable<Triple> GetTriples(string query)
         {
-            Object results = _store.Query(query);
+            var sqp = new SparqlQueryParser();
+            var sparqlQuery = sqp.ParseFromString(query);
+            sparqlQuery.AddDefaultGraph(_graphUri);
+
+            Object results = _store.Query(sparqlQuery.ToString());
 
             if (results is IGraph)
             {

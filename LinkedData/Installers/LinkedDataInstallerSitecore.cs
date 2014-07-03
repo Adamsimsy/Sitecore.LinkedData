@@ -7,6 +7,7 @@ using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using LinkedData.Concepts;
+using LinkedData.DatabaseContext;
 using LinkedData.DataManagers;
 using LinkedData.Filters;
 using LinkedData.Formatters;
@@ -19,6 +20,66 @@ namespace LinkedData.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             DependencyResolver.Instance = container;
+
+            var coreDatabaseContext = new DatabaseContext.DatabaseContext()
+            {
+                DatabaseName = "core", GraphConfigurations = 
+                new List<GraphConfiguration>()
+                {
+                    new GraphConfiguration()
+                    {
+                        GraphUri = "http://sitecore.net/core-link-graph",
+                        InFormatters = null,
+                        OutFormatters = null
+                    }
+                }
+            };
+
+            var masterDatabaseContext = new DatabaseContext.DatabaseContext()
+            {
+                DatabaseName = "master",
+                GraphConfigurations =
+                    new List<GraphConfiguration>()
+                {
+                    new GraphConfiguration()
+                    {
+                        GraphUri = "http://sitecore.net/master-link-graph",
+                        InFormatters = null,
+                        OutFormatters = null
+                    },
+                    new GraphConfiguration()
+                    {
+                        GraphUri = "http://sitecore.net/master-graph",
+                        InFormatters = null,
+                        OutFormatters = null
+                    }
+                }
+            };
+
+            var webDatabaseContext = new DatabaseContext.DatabaseContext()
+            {
+                DatabaseName = "web",
+                GraphConfigurations =
+                    new List<GraphConfiguration>()
+                {
+                    new GraphConfiguration()
+                    {
+                        GraphUri = "http://sitecore.net/web-link-graph",
+                        InFormatters = null,
+                        OutFormatters = null
+                    },
+                    new GraphConfiguration()
+                    {
+                        GraphUri = "http://sitecore.net/web-graph",
+                        InFormatters = null,
+                        OutFormatters = null
+                    }
+                }
+            };
+
+            container.Register(Component.For<DatabaseContext.DatabaseContext>().Instance(coreDatabaseContext).LifestyleSingleton().Named("core"));
+            container.Register(Component.For<DatabaseContext.DatabaseContext>().Instance(masterDatabaseContext).LifestyleSingleton().Named("master"));
+            container.Register(Component.For<DatabaseContext.DatabaseContext>().Instance(webDatabaseContext).LifestyleSingleton().Named("web2"));
 
             container.Register(Component.For<IConceptManager>().ImplementedBy<SitecoreConceptManager>().LifestyleSingleton());
             

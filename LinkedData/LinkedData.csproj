@@ -67,6 +67,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseContext\DatabaseContext.cs" />
+    <Compile Include="DatabaseContext\GraphConfiguration.cs" />
     <Compile Include="DataManagers\SitecoreLinkedDataContext.cs" />
     <Compile Include="DataManagers\SitecoreLinkedDataManager.cs" />
     <Compile Include="DependencyResolver.cs" />

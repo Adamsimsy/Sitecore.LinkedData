@@ -15,7 +15,8 @@ namespace LinkedData.Website.LinkedData
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            var manager = DependencyResolver.Instance.Resolve<SitecoreLinkedDataManager>("web");
+            var factory = DependencyResolver.Instance.Resolve<SitecoreManagerFactory>();
+            var manager = factory.GetContextWebDatabaseDataManager();
 
             //var triples = manager.GetItemTriplesBySubject(Sitecore.Context.Item);
             var playersInLeaguesFormat = @"CONSTRUCT {{ <{0}> ?p2 ?o2 }} WHERE {{ <{0}> ?p ?o . ?o ?p2 ?o2 .}}";

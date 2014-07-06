@@ -21,89 +21,61 @@ namespace LinkedData.Installers
         {
             DependencyResolver.Instance = container;
 
-            var coreDatabaseContext = new DatabaseContext.DatabaseGraphContext()
-            {
-                DatabaseName = "core", GraphConfigurations = 
-                new List<GraphConfiguration>()
-                {
-                    new GraphConfiguration()
-                    {
-                        GraphUri = "http://sitecore.net/core-link-graph",
-                        InFormatters = null,
-                        OutFormatters = null
-                    }
-                }
-            };
-
-            var masterDatabaseContext = new DatabaseContext.DatabaseGraphContext()
-            {
-                DatabaseName = "master",
-                GraphConfigurations =
-                    new List<GraphConfiguration>()
-                {
-                    new GraphConfiguration()
-                    {
-                        GraphUri = "http://sitecore.net/master-link-graph",
-                        InFormatters = null,
-                        OutFormatters = null
-                    },
-                    new GraphConfiguration()
-                    {
-                        GraphUri = "http://sitecore.net/master-graph",
-                        InFormatters = null,
-                        OutFormatters = null
-                    }
-                }
-            };
-
-            var webDatabaseContext = new DatabaseContext.DatabaseGraphContext()
-            {
-                DatabaseName = "web",
-                GraphConfigurations =
-                    new List<GraphConfiguration>()
-                {
-                    new GraphConfiguration()
-                    {
-                        GraphUri = "http://sitecore.net/web-link-graph",
-                        InFormatters = null,
-                        OutFormatters = null
-                    },
-                    new GraphConfiguration()
-                    {
-                        GraphUri = "http://sitecore.net/web-graph",
-                        InFormatters = null,
-                        OutFormatters = null
-                    }
-                }
-            };
-
-            container.Register(Component.For<DatabaseContext.DatabaseGraphContext>().Instance(coreDatabaseContext).LifestyleSingleton().Named("core"));
-            container.Register(Component.For<DatabaseContext.DatabaseGraphContext>().Instance(masterDatabaseContext).LifestyleSingleton().Named("master"));
-            container.Register(Component.For<DatabaseContext.DatabaseGraphContext>().Instance(webDatabaseContext).LifestyleSingleton().Named("web2"));
-
             container.Register(Component.For<IConceptManager>().ImplementedBy<SitecoreConceptManager>().LifestyleSingleton());
-            
-            //register for cms context
-            var managerCms = new SitecoreLinkedDataManager(null,
-                null,
-                null,
-                DependencyResolver.Instance.Resolve<IQueryableStorage>(),
-                DependencyResolver.Instance.Resolve<IConceptManager>());
 
-            container.Register(Component.For<SitecoreLinkedDataManager>().Instance(managerCms).LifestyleSingleton().Named("cms"));
+            var coreDatabaseConfigurations = new List<GraphConfiguration>()
+                {
+                    new GraphConfiguration()
+                    {
+                        
+                        GraphUri = new Uri("http://sitecore.net/core-link-graph"),
+                        InFormatters = null,
+                        OutFormatters = null
+                    }
+                };
 
-            //register for web context
-            var managerWeb = new SitecoreLinkedDataManager(null,
-                //new List<ITripleFormatter>() { new UriToDynamicUrlFormatter() },
-                null,
-                new List<IFilter>() { new FilterSitecoreSystemFolders() },
-                DependencyResolver.Instance.Resolve<IQueryableStorage>(),
-                DependencyResolver.Instance.Resolve<IConceptManager>());
+            var masterDatabaseConfigurations = new List<GraphConfiguration>()
+                {
+                    new GraphConfiguration()
+                    {
+                        
+                        GraphUri = new Uri("http://sitecore.net/master-link-graph"),
+                        InFormatters = null,
+                        OutFormatters = null
+                    },
+                    new GraphConfiguration()
+                    {
+                        GraphUri = new Uri("http://sitecore.net/master-graph"),
+                        InFormatters = new List<ITripleFormatter>() { new StripLinkFieldFormatter()},
+                        OutFormatters = null
+                    }
+                };
 
-            container.Register(Component.For<SitecoreLinkedDataManager>().Instance(managerWeb).LifestyleSingleton().Named("web"));
+            var webDatabaseConfigurations = new List<GraphConfiguration>()
+                {
+                    new GraphConfiguration()
+                    {                  
+                        GraphUri = new Uri("http://sitecore.net/web-link-graph"),
+                        InFormatters = null,
+                        OutFormatters = null
+                    },
+                    new GraphConfiguration()
+                    {
+                        GraphUri = new Uri("http://sitecore.net/web-graph"),
+                        InFormatters = new List<ITripleFormatter>() { new StripLinkFieldFormatter()},
+                        OutFormatters = null
+                    }
+                };
 
-            //container.Register(Component.For<IConceptProvider>().ImplementedBy<SitecoreConceptProvider>().LifestyleSingleton());
-            //container.Register(Component.For<SitecoreLinkedDataManager>().ImplementedBy<SitecoreLinkedDataManager>().LifestyleSingleton());
+            var contexts = new List<SitecoreLinkedDataContext>();
+
+            contexts.Add(new SitecoreLinkedDataContext(coreDatabaseConfigurations, "core"));
+            contexts.Add(new SitecoreLinkedDataContext(masterDatabaseConfigurations, "master"));
+            contexts.Add(new SitecoreLinkedDataContext(webDatabaseConfigurations, "web"));
+
+            var factory = new SitecoreManagerFactory(contexts);
+
+            container.Register(Component.For<SitecoreManagerFactory>().Instance(factory).LifestyleSingleton());
         }
     }
 }

@@ -25,14 +25,11 @@ namespace LinkedData
     public class SitecoreLinkDatabase : LinkDatabase
     {
         private readonly LockSet locks = new LockSet();
-        private readonly SitecoreLinkedDataManager _manager;
+        private readonly SitecoreManagerFactory _factory;
 
         public SitecoreLinkDatabase(string connectionString)
         {
-            IQueryableStorage storage = new SesameHttpProtocolVersion6Connector("http://localhost:8080/openrdf-sesame/", "in-mem-sesame");
-            //IQueryableStorage storage = new InMemoryManager();
-
-            _manager = DependencyResolver.Instance.Resolve<SitecoreLinkedDataManager>("cms");
+            _factory = DependencyResolver.Instance.Resolve<SitecoreManagerFactory>();
         }
 
         public override void Compact(Database database)
@@ -52,7 +49,7 @@ namespace LinkedData
         {
             Assert.ArgumentNotNull((object)item, "item");
 
-            var items = _manager.GetItemTriplesBySubject(item);
+            var items = _factory.GetContextLinkDatabaseDataManager(item).GetItemTriplesBySubject(item);
 
             if (items != null)
             {
@@ -68,7 +65,7 @@ namespace LinkedData
 
             lock (this.locks.GetLock((object)item.ID))
             {
-                var items = _manager.GetItemTriplesBySubject(item);
+                var items = _factory.GetContextLinkDatabaseDataManager(item).GetItemTriplesBySubject(item);
 
                 list = SitecoreTripleHelper.TriplesToItemLinks(items);
             }
@@ -79,7 +76,7 @@ namespace LinkedData
         {
             Assert.ArgumentNotNull((object)item, "item");
 
-            var items = _manager.GetItemTriplesByObject(item);
+            var items = _factory.GetContextLinkDatabaseDataManager(item).GetItemTriplesByObject(item);
 
             if (items != null)
             {
@@ -94,7 +91,7 @@ namespace LinkedData
             List<ItemLink> list;
             lock (this.locks.GetLock((object)item.ID))
             {
-                var items = _manager.GetItemTriplesByObject(item);
+                var items = _factory.GetContextLinkDatabaseDataManager(item).GetItemTriplesByObject(item);
 
                 list = SitecoreTripleHelper.TriplesToItemLinks(items);
             }
@@ -108,7 +105,7 @@ namespace LinkedData
             List<ItemLink> list;
             lock (this.locks.GetLock((object)item.ID))
             {
-                var items = _manager.GetItemTriplesByObject(item);
+                var items = _factory.GetContextLinkDatabaseDataManager(item).GetItemTriplesByObject(item);
 
                 list = SitecoreTripleHelper.TriplesToItemLinks(items);
             }
@@ -121,7 +118,7 @@ namespace LinkedData
             List<ItemLink> list;
             lock (this.locks.GetLock((object)version.ID))
             {
-                var items = _manager.GetItemTriplesByObject(version);
+                var items = _factory.GetContextLinkDatabaseDataManager(version).GetItemTriplesByObject(version);
 
                 list = SitecoreTripleHelper.TriplesToItemLinks(items);
             }
@@ -142,9 +139,12 @@ namespace LinkedData
         {
             Assert.ArgumentNotNull((object)item, "item");
 
-            var items = _manager.GetItemTriplesByObject(item);
+            foreach (var manager in _factory.GetContextSitecoreLinkedDataManagers(item))
+            {
+                var items = manager.GetItemTriplesByObject(item);
 
-            _manager.DeleteTriples(items);
+                manager.DeleteTriples(items);
+            }
 
             LinkCounters.DataUpdated.Increment();
         }
@@ -156,7 +156,10 @@ namespace LinkedData
 
             lock (this.locks.GetLock((object)"rdflock"))
             {
-                _manager.AddLink(item, link);
+                foreach (var manager in _factory.GetContextSitecoreLinkedDataManagers(item))
+                {
+                    manager.AddLink(item, link);
+                }
             }
         }
 
@@ -176,18 +179,24 @@ namespace LinkedData
         {
             Assert.ArgumentNotNull((object)item, "item");
 
-            var items = _manager.GetItemTriplesBySubject(item);
+            foreach (var manager in _factory.GetContextSitecoreLinkedDataManagers(item))
+            {
+                var items = manager.GetItemTriplesBySubject(item);
 
-            _manager.DeleteTriples(items);
+                manager.DeleteTriples(items);
+            }
         }
 
         protected virtual void RemoveItemVersionLinks(Item item)
         {
             Assert.ArgumentNotNull((object)item, "item");
 
-            var items = _manager.GetItemTriplesBySubject(item);
+            foreach (var manager in _factory.GetContextSitecoreLinkedDataManagers(item))
+            {
+                var items = manager.GetItemTriplesBySubject(item);
 
-            _manager.DeleteTriples(items);
+                manager.DeleteTriples(items);
+            }
         }
 
         protected override void UpdateLinks(Item item, ItemLink[] links)
@@ -195,9 +204,12 @@ namespace LinkedData
             Assert.ArgumentNotNull((object)item, "item");
             Assert.ArgumentNotNull((object)links, "links");
 
-            foreach (var itemLink in links)
+            foreach (var manager in _factory.GetContextSitecoreLinkedDataManagers(item))
             {
-                _manager.AddLink(item, itemLink);
+                foreach (var itemLink in links)
+                {
+                    manager.AddLink(item, itemLink);
+                }
             }
         }
 
@@ -206,26 +218,29 @@ namespace LinkedData
             Assert.ArgumentNotNull((object)item, "item");
             Assert.ArgumentNotNull((object)links, "links");
 
-            foreach (var itemLink in links)
+            foreach (var manager in _factory.GetContextSitecoreLinkedDataManagers(item))
             {
-                _manager.AddLink(item, itemLink);
-            }
-
-            //Now remove removed links
-            var oldLinks = GetReferences(item);
-            var removeLinks = new List<ItemLink>();
-
-            foreach (var link in oldLinks)
-            {
-                if (!links.ToList().Where(x => x.TargetItemID.Guid == link.TargetItemID.Guid).Any())
+                foreach (var itemLink in links)
                 {
-                    removeLinks.Add(link);
+                    manager.AddLink(item, itemLink);
                 }
-            }
 
-            foreach (var removeLink in removeLinks)
-            {
-                _manager.RemoveLinksForItem(item, removeLink);
+                //Now remove removed links
+                var oldLinks = GetReferences(item);
+                var removeLinks = new List<ItemLink>();
+
+                foreach (var link in oldLinks)
+                {
+                    if (!links.ToList().Where(x => x.TargetItemID.Guid == link.TargetItemID.Guid).Any())
+                    {
+                        removeLinks.Add(link);
+                    }
+                }
+
+                foreach (var removeLink in removeLinks)
+                {
+                    manager.RemoveLinksForItem(item, removeLink);
+                }
             }
         }
 

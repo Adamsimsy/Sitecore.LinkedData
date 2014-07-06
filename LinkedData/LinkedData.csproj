@@ -67,7 +67,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DatabaseContext\DatabaseGraphContext.cs" />
     <Compile Include="DatabaseContext\GraphConfiguration.cs" />
     <Compile Include="DataManagers\SitecoreLinkedDataContext.cs" />
     <Compile Include="DataManagers\SitecoreLinkedDataManager.cs" />
@@ -81,6 +80,7 @@
     <Compile Include="Concepts\BaseConcept.cs" />
     <Compile Include="Filters\FilterSitecoreSystemFolders.cs" />
     <Compile Include="Filters\IFilter.cs" />
+    <Compile Include="Formatters\StripLinkFieldFormatter.cs" />
     <Compile Include="Formatters\UriToDynamicUrlFormatter.cs" />
     <Compile Include="Installers\LinkedDataInstallerSitecore.cs" />
     <Compile Include="SitecoreLinkDatabase.cs" />

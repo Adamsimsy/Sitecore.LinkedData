@@ -23,25 +23,23 @@ namespace LinkedData.DataManagers
         protected readonly IConceptManager ConceptManager;
         private readonly Uri _graphUri;
 
-        public LinkedDataManager(IQueryableStorage store, IConceptManager conceptManager)
+        public LinkedDataManager(IQueryableStorage store, IConceptManager conceptManager, Uri graphUri)
         {
             _inFormatters = null;
             _outFormatters = null;
             _store = store;
             ConceptManager = conceptManager;
-            _graphUri = new Uri("http://examplegraph.com"); //could use this as different graphs per database
-            //_graphUri = string.Empty;
+            _graphUri = graphUri;
         }
 
-        public LinkedDataManager(List<ITripleFormatter> inFormatters, List<ITripleFormatter> outFormatters, List<IFilter> outFilters, IQueryableStorage store, IConceptManager conceptManager)
+        public LinkedDataManager(List<ITripleFormatter> inFormatters, List<ITripleFormatter> outFormatters, List<IFilter> outFilters, IQueryableStorage store, IConceptManager conceptManager, Uri graphUri)
         {
             _inFormatters = inFormatters;
             _outFormatters = outFormatters;
             _outFilters = outFilters;
             _store = store;
             ConceptManager = conceptManager;
-            _graphUri = new Uri("http://examplegraph.com"); //could use this as different graphs per database
-            //_graphUri = string.Empty;
+            _graphUri = graphUri;
         }
 
         public IEnumerable<Triple> GetTriples(string query)

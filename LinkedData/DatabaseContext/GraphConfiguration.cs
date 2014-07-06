@@ -1,12 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using LinkedData.DataManagers;
+using LinkedData.Filters;
 using LinkedData.Formatters;
 
 namespace LinkedData.DatabaseContext
 {
     public class GraphConfiguration
     {
-        public string GraphUri { get; set; }
-        public IEnumerable<ITripleFormatter> InFormatters { get; set; }
-        public IEnumerable<ITripleFormatter> OutFormatters { get; set; } 
+        public Uri GraphUri { get; set; }
+        public List<ITripleFormatter> InFormatters { get; set; }
+        public List<ITripleFormatter> OutFormatters { get; set; } 
+        public List<IFilter> OutFilters { get; set; } 
+        public SitecoreLinkedDataManager Manager { get; set; }
     }
 }

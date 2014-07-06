@@ -20,7 +20,8 @@ namespace LinkedData.Website.LinkedData
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            var manager = DependencyResolver.Instance.Resolve<SitecoreLinkedDataManager>("cms");
+            var factory = DependencyResolver.Instance.Resolve<SitecoreManagerFactory>();
+            var manager = factory.GetContextWebDatabaseDataManager();
 
             var triples = manager.GetItemTriplesBySubject(Sitecore.Context.Item);
 

@@ -16,6 +16,11 @@ namespace LinkedData.Formatters
             var subjectItem = SitecoreTripleHelper.UriToItem(triple.Subject.ToString());
             var objectItem = SitecoreTripleHelper.UriToItem(triple.Object.ToString());
 
+            if (subjectItem == null || objectItem == null)
+            {
+                return triple;
+            }
+
             var urlOptions = new UrlOptions() {AlwaysIncludeServerUrl = true, AddAspxExtension = false, LowercaseUrls = true, LanguageEmbedding = LanguageEmbedding.Never};
 
             var subjectUrl = LinkManager.GetItemUrl(subjectItem, urlOptions);

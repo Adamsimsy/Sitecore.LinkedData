@@ -33,7 +33,7 @@ namespace LinkedData.DataManagers
         {
             var graphConfigurations = _contexts.Single(x => x.DatabaseName.ToLower() == item.Database.Name.ToLower()).GraphConfigurations;
 
-            var configuration = graphConfigurations.Single(x => x.GraphUri.ToString().Contains("link"));
+            var configuration = graphConfigurations.Single(x => x.GraphType.Equals(GraphType.Links));
 
             return configuration.Manager;
         }
@@ -42,7 +42,7 @@ namespace LinkedData.DataManagers
         {
             var graphConfigurations = _contexts.Single(x => x.DatabaseName.ToLower() == item.Database.Name.ToLower()).GraphConfigurations;
 
-            var configuration = graphConfigurations.Single(x => !x.GraphUri.ToString().Contains("link"));
+            var configuration = graphConfigurations.Single(x => x.GraphType.Equals(GraphType.Website));
 
             return configuration.Manager;
         }

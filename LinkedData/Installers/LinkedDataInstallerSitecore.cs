@@ -28,7 +28,8 @@ namespace LinkedData.Installers
                     new GraphConfiguration()
                     {
                         
-                        GraphUri = new Uri("http://sitecore.net/core-link-graph"),
+                        GraphUri = new Uri("http://sitecore.net/graph-core-links"),
+                        GraphType = GraphType.Links,
                         InFormatters = null,
                         OutFormatters = null
                     }
@@ -37,16 +38,24 @@ namespace LinkedData.Installers
             var masterDatabaseConfigurations = new List<GraphConfiguration>()
                 {
                     new GraphConfiguration()
-                    {
-                        
-                        GraphUri = new Uri("http://sitecore.net/master-link-graph"),
+                    {                     
+                        GraphUri = new Uri("http://sitecore.net/graph-master-links"),
+                        GraphType = GraphType.Links,
                         InFormatters = null,
                         OutFormatters = null
                     },
                     new GraphConfiguration()
                     {
-                        GraphUri = new Uri("http://sitecore.net/master-graph"),
+                        GraphUri = new Uri("http://sitecore.net/graph-master-website"),
+                        GraphType = GraphType.Website,
                         InFormatters = new List<ITripleFormatter>() { new StripLinkFieldFormatter()},
+                        OutFormatters = null
+                    },
+                    new GraphConfiguration()
+                    {
+                        GraphUri = new Uri("http://sitecore.net/graph-master-public"),
+                        GraphType = GraphType.Other,
+                        InFormatters = new List<ITripleFormatter>() { new UriToDynamicUrlFormatter()},
                         OutFormatters = null
                     }
                 };
@@ -55,14 +64,23 @@ namespace LinkedData.Installers
                 {
                     new GraphConfiguration()
                     {                  
-                        GraphUri = new Uri("http://sitecore.net/web-link-graph"),
+                        GraphUri = new Uri("http://sitecore.net/graph-web-links"),
+                        GraphType = GraphType.Links,
                         InFormatters = null,
                         OutFormatters = null
                     },
                     new GraphConfiguration()
                     {
-                        GraphUri = new Uri("http://sitecore.net/web-graph"),
+                        GraphUri = new Uri("http://sitecore.net/graph-web-website"),
+                        GraphType = GraphType.Website,
                         InFormatters = new List<ITripleFormatter>() { new StripLinkFieldFormatter()},
+                        OutFormatters = null
+                    },
+                    new GraphConfiguration()
+                    {
+                        GraphUri = new Uri("http://sitecore.net/graph-web-public"),
+                        GraphType = GraphType.Other,
+                        InFormatters = new List<ITripleFormatter>() { new UriToDynamicUrlFormatter()},
                         OutFormatters = null
                     }
                 };

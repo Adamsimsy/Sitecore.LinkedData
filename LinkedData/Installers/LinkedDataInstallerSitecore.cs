@@ -26,12 +26,9 @@ namespace LinkedData.Installers
             var coreDatabaseConfigurations = new List<GraphConfiguration>()
                 {
                     new GraphConfiguration()
-                    {
-                        
+                    {                    
                         GraphUri = new Uri("http://sitecore.net/graph-core-links"),
-                        GraphType = GraphType.Links,
-                        InFormatters = null,
-                        OutFormatters = null
+                        GraphType = GraphType.Links
                     }
                 };
 
@@ -40,16 +37,13 @@ namespace LinkedData.Installers
                     new GraphConfiguration()
                     {                     
                         GraphUri = new Uri("http://sitecore.net/graph-master-links"),
-                        GraphType = GraphType.Links,
-                        InFormatters = null,
-                        OutFormatters = null
+                        GraphType = GraphType.Links
                     },
                     new GraphConfiguration()
                     {
                         GraphUri = new Uri("http://sitecore.net/graph-master-website"),
                         GraphType = GraphType.Website,
                         InFormatters = new List<ITripleFormatter>() { new StripLinkFieldFormatter()},
-                        OutFormatters = null,
                         InFilters = new List<IFilter>() { new FilterSitecoreSystemFolders() }
                     },
                     new GraphConfiguration()
@@ -57,7 +51,6 @@ namespace LinkedData.Installers
                         GraphUri = new Uri("http://sitecore.net/graph-master-public"),
                         GraphType = GraphType.Other,
                         InFormatters = new List<ITripleFormatter>() { new UriToDynamicUrlFormatter()},
-                        OutFormatters = null,
                         InFilters = new List<IFilter>() { new FilterSitecoreSystemFolders() }
                     }
                 };
@@ -67,23 +60,19 @@ namespace LinkedData.Installers
                     new GraphConfiguration()
                     {                  
                         GraphUri = new Uri("http://sitecore.net/graph-web-links"),
-                        GraphType = GraphType.Links,
-                        InFormatters = null,
-                        OutFormatters = null
+                        GraphType = GraphType.Links
                     },
                     new GraphConfiguration()
                     {
                         GraphUri = new Uri("http://sitecore.net/graph-web-website"),
                         GraphType = GraphType.Website,
-                        InFormatters = new List<ITripleFormatter>() { new StripLinkFieldFormatter()},
-                        OutFormatters = null
+                        InFormatters = new List<ITripleFormatter>() { new StripLinkFieldFormatter()}
                     },
                     new GraphConfiguration()
                     {
                         GraphUri = new Uri("http://sitecore.net/graph-web-public"),
                         GraphType = GraphType.Other,
-                        InFormatters = new List<ITripleFormatter>() { new UriToDynamicUrlFormatter()},
-                        OutFormatters = null
+                        InFormatters = new List<ITripleFormatter>() { new UriToDynamicUrlFormatter()}
                     }
                 };
 

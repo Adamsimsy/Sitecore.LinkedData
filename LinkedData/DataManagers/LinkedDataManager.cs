@@ -78,7 +78,7 @@ namespace LinkedData.DataManagers
 
         public void WriteTriples(IEnumerable<Triple> triples)
         {
-            ApplyFormatters(_inFormatters, triples);
+            triples = ApplyFormatters(_inFormatters, triples);
 
             if (_store.UpdateSupported)
             {

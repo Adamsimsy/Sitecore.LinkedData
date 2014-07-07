@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LinkedData.DatabaseContext;
+using Sitecore.Data;
 using Sitecore.Data.Items;
 
 namespace LinkedData.DataManagers
@@ -29,13 +30,18 @@ namespace LinkedData.DataManagers
             return graphConfigurations.Select(x => x.Manager).ToList();
         }
 
-        public SitecoreLinkedDataManager GetContextLinkDatabaseDataManager(Item item)
+        public SitecoreLinkedDataManager GetContextLinkDatabaseDataManager(Database db)
         {
-            var graphConfigurations = _contexts.Single(x => x.DatabaseName.ToLower() == item.Database.Name.ToLower()).GraphConfigurations;
+            var graphConfigurations = _contexts.Single(x => x.DatabaseName.ToLower() == db.Name.ToLower()).GraphConfigurations;
 
             var configuration = graphConfigurations.Single(x => x.GraphType.Equals(GraphType.Links));
 
             return configuration.Manager;
+        }
+
+        public SitecoreLinkedDataManager GetContextLinkDatabaseDataManager(Item item)
+        {
+            return GetContextLinkDatabaseDataManager(item.Database);
         }
 
         public SitecoreLinkedDataManager GetContextWebDatabaseDataManager(Item item)

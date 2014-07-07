@@ -17,7 +17,7 @@ namespace LinkedData.Formatters
 
             IUriNode sub = g.CreateUriNode(new Uri(triple.Subject.ToString()));
             IUriNode pred = g.CreateUriNode(new Uri(triple.Predicate.ToString().Split('#')[0]));
-            IUriNode obj = g.CreateUriNode(new Uri(triple.Subject.ToString()));
+            IUriNode obj = g.CreateUriNode(new Uri(triple.Object.ToString()));
 
             triple = new Triple(sub, pred, obj);
 

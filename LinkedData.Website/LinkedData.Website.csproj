@@ -94,6 +94,7 @@
     <Content Include="LinkedData\LinkedDataControl.ascx" />
     <Content Include="LinkedData\PlayersInLeague.ascx" />
     <Content Include="LinkedData\RDF_Layout.aspx" />
+    <Content Include="sitecore\shell\Applications\Content Manager\Galleries\Links\Gallery Links.xml" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

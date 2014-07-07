@@ -2,6 +2,7 @@
 .\Debug\LinkedData\LinkedDataControl.ascx
 .\Debug\LinkedData\PlayersInLeague.ascx
 .\Debug\LinkedData\RDF_Layout.aspx
+.\Debug\sitecore\shell\Applications\Content Manager\Galleries\Links\Gallery Links.xml
 .\Debug\Web.config
 .\Debug\App_Config\Sitecore.config
 .\Debug\App_Config\AppSettings.config
@@ -24,6 +25,7 @@
 .\Debug\bin\Microsoft.Web.Infrastructure.dll
 .\Debug\bin\Newtonsoft.Json.dll
 .\Debug\bin\Newtonsoft.Json.xml
+.\Debug\bin\Sitecore.Client.dll
 .\Debug\bin\Sitecore.Kernel.dll
 .\Debug\bin\VDS.Common.dll
 .\Debug\bin\VDS.Common.pdb

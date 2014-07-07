@@ -41,7 +41,33 @@ namespace LinkedData
         {
             Assert.ArgumentNotNull((object)database, "database");
 
-            List<ItemLink> links = new List<ItemLink>();
+            var manager = _factory.GetContextLinkDatabaseDataManager(database);
+
+            var query = @"CONSTRUCT {{ ?s ?p <{0}> }} WHERE {{ ?s ?p <{0}> }}";
+
+            query = String.Format(query, SitecoreTripleHelper.BrokenLinkUri.ToString());
+
+            var triples = manager.GetTriples(query);
+
+            var links = new List<ItemLink>();
+
+            foreach (var triple in triples)
+            {
+                var sourceItem = SitecoreTripleHelper.UriToItem(triple.Subject.ToString());
+
+                if (sourceItem != null)
+                {
+                    links.Add(new ItemLink(sourceItem.Database.Name, sourceItem.ID, sourceItem.Language, sourceItem.Version, new ID(SitecoreTripleHelper.GetFieldIdFromPredicate(triple.Predicate.ToString())), sourceItem.Database.Name, new ID(Guid.Empty), sourceItem.Language, sourceItem.Version, string.Empty));
+                }
+
+                Job job = Context.Job;
+                if (job != null && job.Category == "GetBrokenLinks")
+                    ++job.Status.Processed;
+                LinkCounters.DataRead.Increment();
+                DataCounters.PhysicalReads.Increment();
+            }
+
+            
             return links.ToArray();
         }
 

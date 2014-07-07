@@ -15,6 +15,7 @@ namespace LinkedData.Helpers
 {
     public static class SitecoreTripleHelper
     {
+        public static Uri BrokenLinkUri = new Uri("sitecore://broken-link");
 
         public static List<SitecoreTriple> ToSitecoreTriples(this IEnumerable<Triple> triples)
         {
@@ -59,7 +60,18 @@ namespace LinkedData.Helpers
             //g.NamespaceMap.AddNamespace("http", new Uri("http:"));
 
             IUriNode sub = g.CreateUriNode(ItemToUri(item));
-            IUriNode obj = g.CreateUriNode(ItemToUri(itemLink.GetTargetItem()));
+
+            IUriNode obj;
+
+            if (itemLink.GetTargetItem() == null)
+            {
+                //Broken link creation
+                obj = g.CreateUriNode(BrokenLinkUri);
+            }
+            else
+            {
+                obj = g.CreateUriNode(ItemToUri(itemLink.GetTargetItem()));
+            }
 
             IUriNode predicate = conceptManager.GetPredicate(sub, obj);
 
@@ -92,7 +104,9 @@ namespace LinkedData.Helpers
 
         public static Item UriToItem(string uri)
         {
-            if (uri != null && !string.IsNullOrEmpty(uri) && uri.StartsWith("sitecore:"))
+            if (uri != null && !string.IsNullOrEmpty(uri) 
+                && uri.StartsWith("sitecore:")
+                && !new Uri(uri).Equals(BrokenLinkUri))
             {
                 var itemUri = new ItemUri(uri.Replace("%7B", "{").Replace("%7D", "}"));
 

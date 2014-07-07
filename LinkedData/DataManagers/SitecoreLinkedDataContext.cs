@@ -27,7 +27,7 @@ namespace LinkedData.DataManagers
                 var manager = new SitecoreLinkedDataManager(
                     graphConfiguration.InFormatters,
                     graphConfiguration.OutFormatters,
-                    graphConfiguration.OutFilters,
+                    graphConfiguration.InFilters,
                     DependencyResolver.Instance.Resolve<IQueryableStorage>(),
                     DependencyResolver.Instance.Resolve<IConceptManager>(),
                     graphConfiguration.GraphUri);

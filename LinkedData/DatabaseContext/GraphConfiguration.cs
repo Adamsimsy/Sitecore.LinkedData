@@ -12,7 +12,7 @@ namespace LinkedData.DatabaseContext
         public GraphType GraphType { get; set; }
         public List<ITripleFormatter> InFormatters { get; set; }
         public List<ITripleFormatter> OutFormatters { get; set; } 
-        public List<IFilter> OutFilters { get; set; } 
+        public List<IFilter> InFilters { get; set; } 
         public SitecoreLinkedDataManager Manager { get; set; }
     }
 

@@ -18,7 +18,7 @@ namespace LinkedData.DataManagers
     {
         private readonly List<ITripleFormatter> _inFormatters;
         private readonly List<ITripleFormatter> _outFormatters;
-        private readonly List<IFilter> _outFilters;
+        private readonly List<IFilter> _inFilters;
         private readonly IQueryableStorage _store;
         protected readonly IConceptManager ConceptManager;
         private readonly Uri _graphUri;
@@ -32,11 +32,11 @@ namespace LinkedData.DataManagers
             _graphUri = graphUri;
         }
 
-        public LinkedDataManager(List<ITripleFormatter> inFormatters, List<ITripleFormatter> outFormatters, List<IFilter> outFilters, IQueryableStorage store, IConceptManager conceptManager, Uri graphUri)
+        public LinkedDataManager(List<ITripleFormatter> inFormatters, List<ITripleFormatter> outFormatters, List<IFilter> inFilters, IQueryableStorage store, IConceptManager conceptManager, Uri graphUri)
         {
             _inFormatters = inFormatters;
             _outFormatters = outFormatters;
-            _outFilters = outFilters;
+            _inFilters = inFilters;
             _store = store;
             ConceptManager = conceptManager;
             _graphUri = graphUri;
@@ -56,7 +56,7 @@ namespace LinkedData.DataManagers
 
                 var triples = g.Triples;
 
-                return ApplyFormatters(_outFormatters, ApplyFilters(_outFilters, triples));
+                return ApplyFormatters(_outFormatters, triples);
             }
             else
             {
@@ -78,6 +78,8 @@ namespace LinkedData.DataManagers
 
         public void WriteTriples(IEnumerable<Triple> triples)
         {
+            triples = ApplyFilters(_inFilters, triples);
+
             triples = ApplyFormatters(_inFormatters, triples);
 
             if (_store.UpdateSupported)

@@ -28,8 +28,8 @@ namespace LinkedData.DataManagers
         {
         }
 
-        public SitecoreLinkedDataManager(List<ITripleFormatter> inFormatters, List<ITripleFormatter> outFormatters, List<IFilter> outFilters, IQueryableStorage store, IConceptManager conceptManager, Uri graphUri)
-            : base(inFormatters, outFormatters, outFilters, store, conceptManager, graphUri)
+        public SitecoreLinkedDataManager(List<ITripleFormatter> inFormatters, List<ITripleFormatter> outFormatters, List<IFilter> inFilters, IQueryableStorage store, IConceptManager conceptManager, Uri graphUri)
+            : base(inFormatters, outFormatters, inFilters, store, conceptManager, graphUri)
         {
         }
 

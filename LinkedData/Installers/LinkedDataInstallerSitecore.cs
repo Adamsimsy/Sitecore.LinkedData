@@ -49,14 +49,16 @@ namespace LinkedData.Installers
                         GraphUri = new Uri("http://sitecore.net/graph-master-website"),
                         GraphType = GraphType.Website,
                         InFormatters = new List<ITripleFormatter>() { new StripLinkFieldFormatter()},
-                        OutFormatters = null
+                        OutFormatters = null,
+                        InFilters = new List<IFilter>() { new FilterSitecoreSystemFolders() }
                     },
                     new GraphConfiguration()
                     {
                         GraphUri = new Uri("http://sitecore.net/graph-master-public"),
                         GraphType = GraphType.Other,
                         InFormatters = new List<ITripleFormatter>() { new UriToDynamicUrlFormatter()},
-                        OutFormatters = null
+                        OutFormatters = null,
+                        InFilters = new List<IFilter>() { new FilterSitecoreSystemFolders() }
                     }
                 };
 

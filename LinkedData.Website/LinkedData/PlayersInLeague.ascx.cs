@@ -18,28 +18,15 @@ namespace LinkedData.Website.LinkedData
             var factory = DependencyResolver.Instance.Resolve<SitecoreManagerFactory>();
             var manager = factory.GetContextWebDatabaseDataManager();
 
-            //var triples = manager.GetItemTriplesBySubject(Sitecore.Context.Item);
-            var playersInLeaguesFormat = @"CONSTRUCT {{ <{0}> ?p2 ?o2 }} WHERE {{ <{0}> ?p ?o . ?o ?p2 ?o2 .}}";
+            var playersInLeaguesQuery = @"CONSTRUCT {{ <{0}> ?p2 ?o2 }} WHERE {{ <{0}> ?p ?o . ?o ?p2 ?o2 .}}";
+            
+            //Format the query
+            var formattedQuery = String.Format(playersInLeaguesQuery,
+                SitecoreTripleHelper.ItemToUri(Sitecore.Context.Item));
 
-            var triples = manager.GetTriples(String.Format(playersInLeaguesFormat, SitecoreTripleHelper.ItemToUri(Sitecore.Context.Item)));
+            var triples = manager.GetTriples(formattedQuery);
 
             SitecoreTriples = triples.ToSitecoreTriples();
-
-            //foreach (var triple in triples)
-            //{
-            //    var sitecoreTriple = triple.ToSitecoreTriple();
-
-            //    litRdf.Text += "Subject: <a href=\"" + triple.Subject.ToString() + "\">" + sitecoreTriple.SubjectItem.Name + "</a>"
-            //                   + " Predicate: <a href=\"" + triple.Predicate.ToString() + "\">" + sitecoreTriple.PredicateNode.ToString() + "</a>" +
-            //                   " Object: <a href=\"" + triple.Object.ToString() + "\">" + sitecoreTriple.ObjectItem.Name + "</a><br/>";
-            //}
-
-            //foreach (var triple in triples)
-            //{
-            //    litRdf.Text += "Subject: <a href=\"" + triple.Subject.ToString() + "\">" + triple.Subject.ToString() + "</a>"
-            //                   + " Predicate: <a href=\"" + triple.Predicate.ToString() + "\">" + triple.Predicate.ToString() + "</a>" +
-            //                   " Object: <a href=\"" + triple.Object.ToString() + "\">" + triple.Object.ToString() + "</a><br/>";
-            //}
         }
     }
 }

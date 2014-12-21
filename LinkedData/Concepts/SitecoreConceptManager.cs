@@ -28,7 +28,7 @@ namespace LinkedData.Concepts
         {
             var g = new Graph();
 
-            var predicate = g.CreateUriNode(UriFactory.Create("http://example.org/linkedto"));
+            var predicate = g.CreateUriNode(UriFactory.Create("http://sitecore.net/linkedto"));
 
             foreach (var baseConcept in _concepts)
             {

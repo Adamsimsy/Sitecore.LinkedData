@@ -1,0 +1,44 @@
+----item----
+version: 1
+id: {4D345EA5-7A94-4B92-BEAC-6C4C364E4516}
+database: master
+path: /sitecore/content/Home/News/2014/12
+parent: {1C1A1E57-8786-4CFF-BF7E-09D80BDB358A}
+name: 12
+master: {00000000-0000-0000-0000-000000000000}
+template: {ADB6CA4F-03EF-4F47-B9AC-9CE2BA53FF97}
+templatekey: Bucket
+
+----version----
+language: en
+version: 1
+revision: f5b9ab70-0719-4139-9116-2180751f9cca
+
+----field----
+field: {25BED78C-4957-4165-998A-CA1B52F67497}
+name: __Created
+key: __created
+content-length: 16
+
+20141221T154312Z
+----field----
+field: {8CDC337E-A112-42FB-BBB4-4143751E123F}
+name: __Revision
+key: __revision
+content-length: 36
+
+f5b9ab70-0719-4139-9116-2180751f9cca
+----field----
+field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
+name: __Updated
+key: __updated
+content-length: 35
+
+20141221T154312:635547733929308901Z
+----field----
+field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
+name: __Updated by
+key: __updated by
+content-length: 14
+
+sitecore\admin

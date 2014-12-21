@@ -20,15 +20,19 @@
     <Name>LinkedData.TDSMaster</Name>
     <RootNamespace>Sitecore.LinkedData.TDSMaster</RootNamespace>
     <SitecoreDatabase>master</SitecoreDatabase>
+    <EnableCodeGeneration>false</EnableCodeGeneration>
+    <ManageRoles>False</ManageRoles>
+    <AssemblyStatus>Exclude</AssemblyStatus>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>.\Debug\</OutputPath>
     <RecursiveDeployAction>Ignore</RecursiveDeployAction>
-    <SitecoreDeployFolder>C:\Sitecore\Instances\SitecoreLinkedData\Website</SitecoreDeployFolder>
+    <SitecoreDeployFolder>D:\Sitecore\Instances\SitecoreLinkedData\Website</SitecoreDeployFolder>
     <SitecoreWebUrl>http://sitecorelinkeddata/</SitecoreWebUrl>
     <SitecoreAccessGuid>bdaf8596-affb-4ddb-892b-bc71975087e9</SitecoreAccessGuid>
     <InstallSitecoreConnector>True</InstallSitecoreConnector>
+    <DisableFileDeployment>False</DisableFileDeployment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DebugSymbols>false</DebugSymbols>
@@ -366,13 +370,13 @@
     </SitecoreItem>
   </ItemGroup>
   <ItemGroup>
-    <ExcludedAssemblies Include="Sitecore.%2a.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\LinkedData.Website\LinkedData.Website.csproj">
       <Project>{0def6416-1668-4759-ba49-62e1d41b349c}</Project>
       <Name>LinkedData.Website</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ExcludedAssemblies Include="Sitecore.%2a.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\HedgehogDevelopment\SitecoreProject\v9.0\HedgehogDevelopment.SitecoreProject.targets" />
 </Project>

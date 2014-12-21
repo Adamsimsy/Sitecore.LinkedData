@@ -18,27 +18,23 @@ namespace LinkedData.Website.LinkedData
 {
     public partial class LinkedDataControl : System.Web.UI.UserControl
     {
-        public List<SitecoreTriple> SitecoreTriples { get; set; }
+        public List<SitecoreTriple> SitecoreReferredTriples { get; set; }
+        public List<SitecoreTriple> SitecoreReferringTriples { get; set; }
+        public List<SitecoreTriple> SitecorePredicateTriples { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             var factory = DependencyResolver.Instance.Resolve<SitecoreManagerFactory>();
             var manager = factory.GetContextWebDatabaseDataManager();
 
-            SitecoreTriples = manager.GetItemTriplesBySubject(Sitecore.Context.Item).ToSitecoreTriples();
+            SitecoreReferredTriples = manager.GetItemTriplesBySubject(Sitecore.Context.Item).ToSitecoreTriples();
+
+            SitecoreReferringTriples = manager.GetItemTriplesByObject(Sitecore.Context.Item).ToSitecoreTriples();
 
             //var pred = "http://example.org/sampleitem-to-home";
-            var pred2 = "http://example.org/home-to-sampleitem";
+            var pred = "http://example.org/home-to-sampleitem";
 
-            var triples2 = manager.GetItemTriplesBySubjectPredicate(Sitecore.Context.Item, pred2);
-
-            foreach (var triple in triples2)
-            {
-                //litRdf.Text += triple.ToString();
-                litRdf2.Text += "Subject: <a href=\"" + triple.Subject.ToString() + "\">" + triple.Subject.ToString() + "</a>"
-                               + " Predicate: <a href=\"" + triple.Predicate.ToString() + "\">" + triple.Predicate.ToString() + "</a>" +
-                               " Object: <a href=\"" + triple.Object.ToString() + "\">" + triple.Object.ToString() + "</a><br/>";
-            }
+            SitecorePredicateTriples = manager.GetItemTriplesBySubjectPredicate(Sitecore.Context.Item, pred).ToSitecoreTriples(); ;
         }
     }
 }

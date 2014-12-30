@@ -16,12 +16,17 @@ namespace LinkedData.Filters
         {
             var subjectItem = SitecoreTripleHelper.UriToItem(triple.Subject.ToString());
 
+            bool shouldFilter = false;
+
             if (subjectItem != null)
             {
                 var subjectPath = subjectItem.Paths.FullPath.ToLower();
 
-                return _systemFolderPaths.Any(subjectPath.StartsWith);
+                shouldFilter = _systemFolderPaths.Any(subjectPath.StartsWith);
             }
+
+            if (shouldFilter)
+                return true;
 
             var objectItem = SitecoreTripleHelper.UriToItem(triple.Object.ToString());
 
@@ -29,10 +34,10 @@ namespace LinkedData.Filters
             {
                 var objectPath = objectItem.Paths.FullPath.ToLower();
 
-                return _systemFolderPaths.Any(objectPath.StartsWith);
+                shouldFilter = _systemFolderPaths.Any(objectPath.StartsWith);
             }
 
-            return false;
+            return shouldFilter;
         }
     }
 }

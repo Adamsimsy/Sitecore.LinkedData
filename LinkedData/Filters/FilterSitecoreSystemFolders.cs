@@ -14,13 +14,13 @@ namespace LinkedData.Filters
 
         public bool ShouldFilter(Triple triple)
         {
-            var objectItem = SitecoreTripleHelper.UriToItem(triple.Subject.ToString());
+            var subjectItem = SitecoreTripleHelper.UriToItem(triple.Subject.ToString());
 
-            if (objectItem != null)
+            if (subjectItem != null)
             {
-                var objectPath = objectItem.Paths.FullPath.ToLower();
+                var subjectPath = subjectItem.Paths.FullPath.ToLower();
 
-                return _systemFolderPaths.Any(objectPath.StartsWith);
+                return _systemFolderPaths.Any(subjectPath.StartsWith);
             }
             return false;
         }

@@ -14,7 +14,7 @@ namespace LinkedData.Filters
 
         public bool ShouldFilter(Triple triple)
         {
-            var objectItem = SitecoreTripleHelper.UriToItem(triple.Object.ToString());
+            var objectItem = SitecoreTripleHelper.UriToItem(triple.Subject.ToString());
 
             if (objectItem != null)
             {

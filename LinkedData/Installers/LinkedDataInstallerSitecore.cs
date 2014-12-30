@@ -72,7 +72,8 @@ namespace LinkedData.Installers
                     {
                         GraphUri = new Uri("http://sitecore.net/graph-web-public"),
                         GraphType = GraphType.Other,
-                        InFormatters = new List<ITripleFormatter>() { new UriToDynamicUrlFormatter()}
+                        InFormatters = new List<ITripleFormatter>() { new UriToDynamicUrlFormatter()},
+                        InFilters = new List<IFilter>() { new FilterSitecoreSystemFolders() }
                     }
                 };
 

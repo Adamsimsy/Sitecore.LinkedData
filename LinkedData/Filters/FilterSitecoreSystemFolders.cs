@@ -22,6 +22,16 @@ namespace LinkedData.Filters
 
                 return _systemFolderPaths.Any(subjectPath.StartsWith);
             }
+
+            var objectItem = SitecoreTripleHelper.UriToItem(triple.Object.ToString());
+
+            if (objectItem != null)
+            {
+                var objectPath = objectItem.Paths.FullPath.ToLower();
+
+                return _systemFolderPaths.Any(objectPath.StartsWith);
+            }
+
             return false;
         }
     }

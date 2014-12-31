@@ -68,12 +68,12 @@ namespace LinkedData.ContentManager
 
                 if (referrers.Count() > 0)
                 {
-                    RenderReferrersTriples(result, referrers);
+                    RenderTriples(result, referrers, false);
                 }
 
                 if (references.Count() > 0)
                 {
-                    RenderReferencesTriples(result, references);
+                    RenderTriples(result, references, true);
                 }                                        
             }
 
@@ -85,23 +85,29 @@ namespace LinkedData.ContentManager
             this.Links.Controls.Add((System.Web.UI.Control) new LiteralControl(((object) result).ToString()));
         }
 
-        private void RenderReferencesTriples(StringBuilder result, IEnumerable<VDS.RDF.Triple> references)
+        private void RenderTriples(StringBuilder result, IEnumerable<VDS.RDF.Triple> referrers, bool refferences)
         {
-            result.Append("<div style=\"font-weight:bold;padding:2px 0px 4px 0px\">" + Translate.Text("References:") + "</div>");
+            string heading = string.Empty;
 
-            foreach (var triple in references.ToSitecoreTriples())
+            if (refferences)
             {
-                RenderLink(result, triple, true);
+                heading = "References:";
             }
-        }
-
-        private void RenderReferrersTriples(StringBuilder result, IEnumerable<VDS.RDF.Triple> referrers)
-        {
-            result.Append("<div style=\"font-weight:bold;padding:2px 0px 4px 0px\">" + Translate.Text("Referrers:") + "</div>");
-
-            foreach (var triple in referrers.ToSitecoreTriples())
+            else
             {
-                RenderLink(result, triple, false);
+                heading = "Referrers:";
+            }
+
+            foreach (var predicateGroup in referrers.ToSitecoreTriples().GroupBy(x => SitecoreTripleHelper.RemoveLinkFieldFromPredicate(x.PredicateNode)))
+            {
+                var triples = predicateGroup.AsEnumerable();
+
+                result.Append("<div style=\"font-weight:bold;padding:2px 0px 4px 0px\">" + Translate.Text(heading) + predicateGroup.Key.ToString() + "</div>");
+
+                foreach (var triple in triples)
+                {
+                    RenderLink(result, triple, refferences);
+                }                
             }
         }
 

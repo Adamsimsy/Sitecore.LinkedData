@@ -98,6 +98,11 @@ namespace LinkedData.Helpers
             return string.Empty;
         }
 
+        public static string RemoveLinkFieldFromPredicate(INode predicate)
+        {
+            return predicate.ToString().Split('#')[0];
+        }
+
         public static string ItemToUri(Item item)
         {
             if (item != null && item.Uri != null)

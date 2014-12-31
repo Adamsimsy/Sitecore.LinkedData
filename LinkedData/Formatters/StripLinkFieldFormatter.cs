@@ -16,7 +16,7 @@ namespace LinkedData.Formatters
             var g = new Graph();
 
             IUriNode sub = g.CreateUriNode(new Uri(triple.Subject.ToString()));
-            IUriNode pred = g.CreateUriNode(new Uri(triple.Predicate.ToString().Split('#')[0]));
+            IUriNode pred = g.CreateUriNode(new Uri(SitecoreTripleHelper.RemoveLinkFieldFromPredicate(triple.Predicate)));
             IUriNode obj = g.CreateUriNode(new Uri(triple.Object.ToString()));
 
             triple = new Triple(sub, pred, obj);

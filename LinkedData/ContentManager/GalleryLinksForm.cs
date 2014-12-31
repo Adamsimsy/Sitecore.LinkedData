@@ -91,27 +91,7 @@ namespace LinkedData.ContentManager
 
             foreach (var triple in references.ToSitecoreTriples())
             {
-                if (IsHidden(triple.ObjectItem) && !UserOptions.View.ShowHiddenItems)
-                {
-                    return;
-                }
-
-                if (triple.ObjectItem == null)
-                {
-                    result.Append(string.Format("<div class=\"scLink\">{0} {1}: {2}, {3}</div>",
-                        (object)Images.GetImage("Applications/16x16/error.png", 16, 16, "absmiddle", "0px 4px 0px 0px"),
-                        (object)Translate.Text("Not found"), "TODO: Target database for link",
-                        triple.ObjectNode.ToString()));
-                }
-                else
-                {
-                    result.Append(
-                        "<a href=\"#\" class=\"scLink\" onclick='javascript:return scForm.invoke(\"item:load(id=" +
-                        (object)triple.ObjectItem.ID + ",language=" + triple.ObjectItem.Language + ",version=" +
-                        triple.ObjectItem.Version + ")\")'>" +
-                        Images.GetImage(triple.ObjectItem.Appearance.Icon, 16, 16, "absmiddle", "0px 4px 0px 0px") +
-                        triple.ObjectItem.DisplayName + " - [" + triple.ObjectItem.Paths.Path + "]</a>");
-                }
+                RenderLink(result, triple, true);
             }
         }
 
@@ -121,46 +101,65 @@ namespace LinkedData.ContentManager
 
             foreach (var triple in referrers.ToSitecoreTriples())
             {
-                if (IsHidden(triple.SubjectItem) && !UserOptions.View.ShowHiddenItems)
-                {
-                    return;
-                }
+                RenderLink(result, triple, false);
+            }
+        }
 
-                if (triple.SubjectItem == null)
+        private void RenderLink(StringBuilder result, SitecoreTriple triple, bool refferences)
+        {
+            Item item;
+
+            if (refferences)
+            {
+                item = triple.ObjectItem;
+            }
+            else
+            {
+                item = triple.SubjectItem;
+            }
+
+            if (IsHidden(item) && !UserOptions.View.ShowHiddenItems)
+            {
+                return;
+            }
+
+            if (item == null)
+            {
+                result.Append(string.Format("<div class=\"scLink\">{0} {1}: {2}, {3}</div>",
+                    (object)Images.GetImage("Applications/16x16/error.png", 16, 16, "absmiddle", "0px 4px 0px 0px"),
+                    (object)Translate.Text("Not found"), "TODO: Target database for link",
+                    item.ToString()));
+            }
+            else
+            {
+                result.Append("<a href=\"#\" class=\"scLink\" onclick='javascript:return scForm.invoke(\"item:load(id=" +
+                            (object)item.ID + ",language=" + item.Language.ToString() + ",version=" + item.Version.ToString() + ")\")'>" +
+                            Images.GetImage(item.Appearance.Icon, 16, 16, "absmiddle", "0px 4px 0px 0px") +
+                            item.DisplayName);
+
+
+                if (!SitecoreTripleHelper.GetFieldIdFromPredicate(triple.PredicateNode).IsNull)
                 {
-                    result.Append(string.Format("<div class=\"scLink\">{0} {1}: {2}, {3}</div>",
-                        (object)Images.GetImage("Applications/16x16/error.png", 16, 16, "absmiddle", "0px 4px 0px 0px"),
-                        (object)Translate.Text("Not found"), "TODO: Target database for link",
-                        triple.SubjectItem.ToString()));
-                }
-                else
-                {
-                    result.Append(
-                        "<a href=\"#\" class=\"scLink\" onclick='javascript:return scForm.invoke(\"item:load(id=" +
-                        (object)triple.SubjectItem.ID + ",language=" + triple.SubjectItem.Language.ToString() + ",version=" + triple.SubjectItem.Version.ToString() + ")\")'>" +
-                        Images.GetImage(triple.SubjectItem.Appearance.Icon, 16, 16, "absmiddle", "0px 4px 0px 0px") +
-                        triple.SubjectItem.DisplayName);
-                    if (triple.SubjectItem != null && !SitecoreTripleHelper.GetFieldIdFromPredicate(triple.PredicateNode).IsNull)
+                    var linkField = triple.SubjectItem.Fields[SitecoreTripleHelper.GetFieldIdFromPredicate(triple.PredicateNode)];
+
+                    if (linkField != null)
                     {
-                        Field field1 = triple.SubjectItem.Fields[SitecoreTripleHelper.GetFieldIdFromPredicate(triple.PredicateNode)];
-                        if (!string.IsNullOrEmpty(field1.DisplayName))
+                        if (!string.IsNullOrEmpty(linkField.DisplayName))
                         {
                             result.Append(" - ");
-                            result.Append(field1.DisplayName);
-                            if (triple.SubjectItem != null)
+                            result.Append(linkField.DisplayName);
+
+                            if (!linkField.HasValue)
                             {
-                                Field field2 = triple.SubjectItem.Fields[SitecoreTripleHelper.GetFieldIdFromPredicate(triple.PredicateNode)];
-                                if (field2 != null && !field2.HasValue)
-                                {
-                                    result.Append(" <span style=\"color:#999999\">");
-                                    result.Append(Translate.Text("[inherited]"));
-                                    result.Append("</span>");
-                                }
+                                result.Append(" <span style=\"color:#999999\">");
+                                result.Append(Translate.Text("[inherited]"));
+                                result.Append("</span>");
                             }
                         }
                     }
-                    result.Append(" - [" + triple.SubjectItem.Paths.Path + "]</a>");
                 }
+
+                result.Append(" - [" + item.Paths.Path + "]</a>");
             }
         }
 

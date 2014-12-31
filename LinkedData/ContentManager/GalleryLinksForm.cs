@@ -91,18 +91,18 @@ namespace LinkedData.ContentManager
 
             if (refferences)
             {
-                heading = "References:";
+                heading = "References with predicate: ";
             }
             else
             {
-                heading = "Referrers:";
+                heading = "Referrers with predicate: ";
             }
 
             foreach (var predicateGroup in referrers.ToSitecoreTriples().GroupBy(x => SitecoreTripleHelper.RemoveLinkFieldFromPredicate(x.PredicateNode)))
             {
                 var triples = predicateGroup.AsEnumerable();
 
-                result.Append("<div style=\"font-weight:bold;padding:2px 0px 4px 0px\">" + Translate.Text(heading) + predicateGroup.Key.ToString() + "</div>");
+                result.Append("<div style=\"font-weight: bold;font-size: 14px;padding: 15px 15px 5px;\">" + Translate.Text(heading) + predicateGroup.Key.ToString() + "</div>");
 
                 foreach (var triple in triples)
                 {

@@ -59,7 +59,7 @@ namespace LinkedData.ContentManager
 
             if (itemFromQueryString != null)
             {
-                //if (part1 == null || !this.IsHidden(part1) || UserOptions.View.ShowHiddenItems)
+                //
 
                 var _factory = DependencyResolver.Instance.Resolve<SitecoreManagerFactory>();
 
@@ -91,6 +91,11 @@ namespace LinkedData.ContentManager
 
             foreach (var triple in references.ToSitecoreTriples())
             {
+                if (IsHidden(triple.ObjectItem) && !UserOptions.View.ShowHiddenItems)
+                {
+                    return;
+                }
+
                 if (triple.ObjectItem == null)
                 {
                     result.Append(string.Format("<div class=\"scLink\">{0} {1}: {2}, {3}</div>",
@@ -116,6 +121,11 @@ namespace LinkedData.ContentManager
 
             foreach (var triple in referrers.ToSitecoreTriples())
             {
+                if (IsHidden(triple.SubjectItem) && !UserOptions.View.ShowHiddenItems)
+                {
+                    return;
+                }
+
                 if (triple.SubjectItem == null)
                 {
                     result.Append(string.Format("<div class=\"scLink\">{0} {1}: {2}, {3}</div>",

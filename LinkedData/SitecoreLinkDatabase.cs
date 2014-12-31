@@ -57,7 +57,7 @@ namespace LinkedData
 
                 if (sourceItem != null)
                 {
-                    links.Add(new ItemLink(sourceItem.Database.Name, sourceItem.ID, sourceItem.Language, sourceItem.Version, new ID(SitecoreTripleHelper.GetFieldIdFromPredicate(triple.Predicate.ToString())), sourceItem.Database.Name, new ID(Guid.Empty), sourceItem.Language, sourceItem.Version, string.Empty));
+                    links.Add(new ItemLink(sourceItem.Database.Name, sourceItem.ID, sourceItem.Language, sourceItem.Version, SitecoreTripleHelper.GetFieldIdFromPredicate(triple.Predicate), sourceItem.Database.Name, new ID(Guid.Empty), sourceItem.Language, sourceItem.Version, string.Empty));
                 }
 
                 Job job = Context.Job;

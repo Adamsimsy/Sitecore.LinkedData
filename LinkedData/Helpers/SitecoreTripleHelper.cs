@@ -43,7 +43,7 @@ namespace LinkedData.Helpers
                 if (sourceItem != null && targetItem != null)
                 {
                     list.Add(new ItemLink(sourceItem.Database.Name, sourceItem.ID,
-                        new ID(SitecoreTripleHelper.GetFieldIdFromPredicate(triple.Predicate.ToString())),
+                        SitecoreTripleHelper.GetFieldIdFromPredicate(triple.Predicate),
                         targetItem.Database.Name, targetItem.ID,
                         targetItem.Paths.FullPath));
                 }
@@ -79,6 +79,11 @@ namespace LinkedData.Helpers
             IUriNode predicateWithFieldId = g.CreateUriNode(new Uri(predicate.Uri + "#" + itemLink.SourceFieldID));
 
             return new Triple(sub, Tools.CopyNode(predicateWithFieldId, g), obj);
+        }
+
+        public static ID GetFieldIdFromPredicate(INode predicateNode)
+        {
+            return new ID(SitecoreTripleHelper.GetFieldIdFromPredicate(predicateNode.ToString()));
         }
 
         public static string GetFieldIdFromPredicate(string uri)

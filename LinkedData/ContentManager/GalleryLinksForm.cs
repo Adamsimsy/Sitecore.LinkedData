@@ -102,7 +102,7 @@ namespace LinkedData.ContentManager
             {
                 var triples = predicateGroup.AsEnumerable();
 
-                result.Append("<div style=\"font-weight: bold;font-size: 14px;padding: 15px 15px 5px;\">" + Translate.Text(heading) + predicateGroup.Key.ToString() + "</div>");
+                result.Append("<div style=\"font-size:14px; padding:10px 15px 10px;background-color:#474747; color:white\"><span style=\"font-weight:bold; \">" + Translate.Text(heading) + "</span>" + predicateGroup.Key.ToString() + "</div>");
 
                 foreach (var triple in triples)
                 {

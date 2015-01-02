@@ -113,16 +113,7 @@ namespace LinkedData.ContentManager
 
         private void RenderLink(StringBuilder result, SitecoreTriple triple, bool refferences)
         {
-            Item item;
-
-            if (refferences)
-            {
-                item = triple.ObjectItem;
-            }
-            else
-            {
-                item = triple.SubjectItem;
-            }
+            Item item = refferences ? triple.ObjectItem : triple.SubjectItem;
 
             if (IsHidden(item) && !UserOptions.View.ShowHiddenItems)
             {
@@ -133,8 +124,7 @@ namespace LinkedData.ContentManager
             {
                 result.Append(string.Format("<div class=\"scLink\">{0} {1}: {2}, {3}</div>",
                     (object)Images.GetImage("Applications/16x16/error.png", 16, 16, "absmiddle", "0px 4px 0px 0px"),
-                    (object)Translate.Text("Not found"), "TODO: Target database for link",
-                    item.ToString()));
+                    (object)Translate.Text("Not found"), "TODO: Target database for link", "TODO: Target broken link ID"));
             }
             else
             {

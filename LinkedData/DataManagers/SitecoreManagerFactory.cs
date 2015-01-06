@@ -18,6 +18,15 @@ namespace LinkedData.DataManagers
             _contexts = contexts;
         }
 
+        public List<SitecoreLinkedDataManager> GetAllContexts()
+        {
+            var dataManagers = new List<SitecoreLinkedDataManager>();
+
+            _contexts.ForEach(x => x.GraphConfigurations.ForEach(y => dataManagers.Add(y.Manager)));
+
+            return dataManagers;
+        }
+
         public List<SitecoreLinkedDataManager> GetContextSitecoreLinkedDataManagers(Item contextItem)
         {
             return GetContextSitecoreLinkedDataManagers(contextItem.Database.Name);

@@ -168,6 +168,11 @@
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y "$(ProjectDir)App_Config\Include\SitecoreLinkedData.config" "$(SolutionDir)\NugetPackage\content"
+copy /Y "$(ProjectDir)App_Start\LinkedDataInstaller.cs" "$(SolutionDir)\NugetPackage\content"
+copy /Y "$(ProjectDir)sitecore\shell\Applications\Content Manager\Galleries\Links\Gallery Links.xml" "$(SolutionDir)\NugetPackage\content"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -28,7 +28,7 @@
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>.\Debug\</OutputPath>
     <RecursiveDeployAction>Ignore</RecursiveDeployAction>
-    <SitecoreDeployFolder>D:\Sitecore\Instances\SitecoreLinkedData\Website</SitecoreDeployFolder>
+    <SitecoreDeployFolder>c:\Sitecore\Instances\SitecoreLinkedData\Website</SitecoreDeployFolder>
     <SitecoreWebUrl>http://sitecorelinkeddata/</SitecoreWebUrl>
     <SitecoreAccessGuid>bdaf8596-affb-4ddb-892b-bc71975087e9</SitecoreAccessGuid>
     <InstallSitecoreConnector>True</InstallSitecoreConnector>
@@ -400,6 +400,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ExcludedAssemblies Include="Newtonsoft.Json.dll" />
     <ExcludedAssemblies Include="Sitecore.%2a.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\HedgehogDevelopment\SitecoreProject\v9.0\HedgehogDevelopment.SitecoreProject.targets" />

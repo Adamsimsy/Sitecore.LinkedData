@@ -28,7 +28,7 @@
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>.\Debug\</OutputPath>
     <RecursiveDeployAction>Ignore</RecursiveDeployAction>
-    <SitecoreDeployFolder>c:\Sitecore\Instances\SitecoreLinkedData\Website</SitecoreDeployFolder>
+    <SitecoreDeployFolder>d:\Sitecore\Instances\SitecoreLinkedData\Website</SitecoreDeployFolder>
     <SitecoreWebUrl>http://sitecorelinkeddata/</SitecoreWebUrl>
     <SitecoreAccessGuid>bdaf8596-affb-4ddb-892b-bc71975087e9</SitecoreAccessGuid>
     <InstallSitecoreConnector>True</InstallSitecoreConnector>

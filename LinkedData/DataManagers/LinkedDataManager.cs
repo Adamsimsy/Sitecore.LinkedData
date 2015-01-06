@@ -22,6 +22,7 @@ namespace LinkedData.DataManagers
         private readonly IQueryableStorage _store;
         protected readonly IConceptManager ConceptManager;
         private readonly Uri _graphUri;
+        private List<Triple> _tripleWriteBuffer = new List<Triple>();
 
         public LinkedDataManager(IQueryableStorage store, IConceptManager conceptManager, Uri graphUri)
         {
@@ -82,10 +83,32 @@ namespace LinkedData.DataManagers
 
             triples = ApplyFormatters(_inFormatters, triples);
 
-            if (_store.UpdateSupported)
+            //Not need atm.
+            //triples = AddGraphUriToTriples(_graphUri, triples);
+
+            _tripleWriteBuffer.AddRange(triples);
+        }
+
+        public void Flush()
+        {
+            if (_store.UpdateSupported && _tripleWriteBuffer != null && _tripleWriteBuffer.Any())
             {
-                _store.UpdateGraph(_graphUri, triples, null);
+                _store.UpdateGraph(_graphUri, _tripleWriteBuffer, null);
             }
+
+            _tripleWriteBuffer = new List<Triple>();
+        }
+
+        private IEnumerable<Triple> AddGraphUriToTriples(Uri _graphUri, IEnumerable<Triple> triples)
+        {
+            var newTriples = new List<Triple>();
+
+            foreach (var triple in triples)
+            {
+                newTriples.Add(new Triple(triple.Subject, triple.Predicate, triple.Object, _graphUri));
+            }
+
+            return newTriples;
         }
 
         public void DeleteTriple(Triple triple)
@@ -141,7 +164,7 @@ namespace LinkedData.DataManagers
                         if (!filter.ShouldFilter(triple))
                         {
                             innerFilteredTriples.Add(triple);
-                        }          
+                        }
                     }
 
                     FilteredTriples = innerFilteredTriples;

@@ -66,6 +66,9 @@ ipch/
 _ReSharper*/
 *.[Rr]e[Ss]harper
 
+NugetPackage/content/*
+NugetPackage/lib/*
+
 # TeamCity is a build add-in
 _TeamCity*
 
@@ -152,6 +155,7 @@ $RECYCLE.BIN/
 
 
 sc.lib/*.dll
+
 
 
 packages

@@ -30,18 +30,16 @@ namespace LinkedData.Concepts
 
             var predicate = g.CreateUriNode(UriFactory.Create("http://sitecore.net/linkedto"));
 
-            foreach (var baseConcept in _concepts)
+            var sourceItem = SitecoreTripleHelper.UriToItem(subUri);
+            var targetItem = SitecoreTripleHelper.UriToItem(objUri);
+
+            if (sourceItem != null && targetItem != null)
             {
-                var sourceItem = SitecoreTripleHelper.UriToItem(subUri);
-                var targetItem = SitecoreTripleHelper.UriToItem(objUri);
+                var sourceTemplateName = sourceItem.TemplateName;
+                var targetTemplateName = targetItem.TemplateName;
 
-                
-                if (sourceItem!= null &&
-                    targetItem != null)
+                foreach (var baseConcept in _concepts)
                 {
-                    var sourceTemplateName = sourceItem.TemplateName;
-                    var targetTemplateName = targetItem.TemplateName;
-
                     if (baseConcept.IsMatch(sourceTemplateName, targetTemplateName))
                     {
                         predicate = g.CreateUriNode(baseConcept.ConceptUri);

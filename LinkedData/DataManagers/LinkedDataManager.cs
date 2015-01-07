@@ -23,6 +23,7 @@ namespace LinkedData.DataManagers
         protected readonly IConceptManager ConceptManager;
         private readonly Uri _graphUri;
         private List<Triple> _tripleWriteBuffer = new List<Triple>();
+        private Object _tripleWriteBufferLock = new Object();
 
         public LinkedDataManager(IQueryableStorage store, IConceptManager conceptManager, Uri graphUri)
         {
@@ -85,18 +86,23 @@ namespace LinkedData.DataManagers
 
             //Not need atm.
             //triples = AddGraphUriToTriples(_graphUri, triples);
-
-            _tripleWriteBuffer.AddRange(triples);
+            lock (_tripleWriteBufferLock)
+            {
+                _tripleWriteBuffer.AddRange(triples);
+            }
         }
 
         public void Flush()
         {
-            if (_store.UpdateSupported && _tripleWriteBuffer != null && _tripleWriteBuffer.Any())
+            lock (_tripleWriteBufferLock)
             {
-                _store.UpdateGraph(_graphUri, _tripleWriteBuffer, null);
-            }
+                if (_store.UpdateSupported && _tripleWriteBuffer != null && _tripleWriteBuffer.Any())
+                {
+                    _store.UpdateGraph(_graphUri, _tripleWriteBuffer, null);
+                }
 
-            _tripleWriteBuffer = new List<Triple>();
+                _tripleWriteBuffer = new List<Triple>();
+            }
         }
 
         private IEnumerable<Triple> AddGraphUriToTriples(Uri _graphUri, IEnumerable<Triple> triples)

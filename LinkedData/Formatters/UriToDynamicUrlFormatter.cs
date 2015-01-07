@@ -21,10 +21,8 @@ namespace LinkedData.Formatters
                 return triple;
             }
 
-            var urlOptions = new UrlOptions() {AlwaysIncludeServerUrl = true, AddAspxExtension = false, LowercaseUrls = true, LanguageEmbedding = LanguageEmbedding.Never};
-
-            var subjectUrl = LinkManager.GetItemUrl(subjectItem, urlOptions);
-            var objectUrl = LinkManager.GetItemUrl(objectItem, urlOptions);
+            var subjectUrl = LinkManager.GetItemUrl(subjectItem);
+            var objectUrl = LinkManager.GetItemUrl(objectItem);
 
             var g = new Graph();
 

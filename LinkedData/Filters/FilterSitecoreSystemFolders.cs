@@ -10,7 +10,7 @@ namespace LinkedData.Filters
 {
     public class FilterSitecoreSystemFolders : IFilter
     {
-        readonly List<string> _systemFolderPaths = new List<string>() { "/sitecore/templates", "/sitecore/layout", "/sitecore/system" };
+        readonly List<string> _systemFolderPaths = new List<string>() { "/sitecore/templates", "/sitecore/layout", "/sitecore/system", "/sitecore/content/applications", "/sitecore/social" };
 
         public bool ShouldFilter(Triple triple)
         {

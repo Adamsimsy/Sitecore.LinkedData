@@ -40,7 +40,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-	<Reference Include="Castle.Core">
+    <Reference Include="Castle.Core">
       <HintPath>..\packages\Castle.Core.3.2.1\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Windsor">
@@ -127,6 +127,7 @@
     <Content Include="App_Config\Log4Net.config" />
     <Content Include="packages.config" />
     <Content Include="App_Config\Include\SitecoreLinkedData.config" />
+    <Content Include="App_Config\Include\FriendlyUrls.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

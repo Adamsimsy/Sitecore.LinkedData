@@ -21,8 +21,9 @@ namespace LinkedData.Formatters
                 return triple;
             }
 
-            var subjectUrl = LinkManager.GetItemUrl(subjectItem);
-            var objectUrl = LinkManager.GetItemUrl(objectItem);
+            //TODO: Better solution for removing /sitecore/shell from links
+            var subjectUrl = LinkManager.GetItemUrl(subjectItem).Replace("/sitecore/shell","");
+            var objectUrl = LinkManager.GetItemUrl(objectItem).Replace("/sitecore/shell", "");
 
             var g = new Graph();
 

@@ -91,7 +91,7 @@
   <ItemGroup>
     <Content Include="layouts\LinkedData_SparqlQuery_Sublayout.ascx" />
     <Content Include="layouts\Sample layout.aspx" />
-    <Content Include="LinkedData\LinkedDataControl.ascx" />
+    <Content Include="layouts\LinkedData_AllTriples_Sublayout.ascx" />
     <Content Include="LinkedData\PlayersInLeague.ascx" />
     <Content Include="LinkedData\RDF_Layout.aspx" />
     <Content Include="sitecore\shell\Applications\Content Manager\Galleries\Links\Gallery Links.xml" />
@@ -106,12 +106,12 @@
     <Compile Include="layouts\LinkedData_SparqlQuery_Sublayout.ascx.designer.cs">
       <DependentUpon>LinkedData_SparqlQuery_Sublayout.ascx</DependentUpon>
     </Compile>
-    <Compile Include="LinkedData\LinkedDataControl.ascx.cs">
-      <DependentUpon>LinkedDataControl.ascx</DependentUpon>
+    <Compile Include="layouts\LinkedData_AllTriples_Sublayout.ascx.cs">
+      <DependentUpon>LinkedData_AllTriples_Sublayout.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LinkedData\LinkedDataControl.ascx.designer.cs">
-      <DependentUpon>LinkedDataControl.ascx</DependentUpon>
+    <Compile Include="layouts\LinkedData_AllTriples_Sublayout.ascx.designer.cs">
+      <DependentUpon>LinkedData_AllTriples_Sublayout.ascx</DependentUpon>
     </Compile>
     <Compile Include="LinkedData\PlayersInLeague.ascx.cs">
       <DependentUpon>PlayersInLeague.ascx</DependentUpon>

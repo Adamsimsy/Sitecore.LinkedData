@@ -18,7 +18,7 @@
   <form id="mainform" method="post" runat="server">
     <div id="MainPanel">
       <sc:placeholder key="main" runat="server" /> 
-        <sc:Sublayout ID="Sublayout_LinkedDataControl" Cacheable="false" Path="/LinkedData/LinkedDataControl.ascx" runat="server" />
+        <sc:Sublayout ID="Sublayout_LinkedDataControl" Cacheable="false" Path="/layouts/LinkedData_AllTriples_Sublayout.ascx" runat="server" />
         <sc:Sublayout ID="Sublayout1" Cacheable="false" Path="/LinkedData/PlayersInLeague.ascx" runat="server" />
     </div>
   </form>

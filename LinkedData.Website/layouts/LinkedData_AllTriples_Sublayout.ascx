@@ -1,4 +1,4 @@
-﻿<%@ control language="C#" autoeventwireup="true" codebehind="LinkedDataControl.ascx.cs" inherits="LinkedData.Website.LinkedData.LinkedDataControl" %>
+﻿<%@ control language="C#" autoeventwireup="true" codebehind="LinkedData_AllTriples_Sublayout.ascx.cs" inherits="LinkedData.Website.Layouts.LinkedData_AllTriples_Sublayout" %>
 <%@ import namespace="Sitecore.Links" %>
 <h2>Linked data here</h2>
 

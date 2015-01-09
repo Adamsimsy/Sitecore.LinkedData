@@ -14,9 +14,9 @@ using VDS.RDF.Storage;
 using VDS.RDF.Writing;
 using LinkedData.Helpers;
 
-namespace LinkedData.Website.LinkedData
+namespace LinkedData.Website.Layouts
 {
-    public partial class LinkedDataControl : System.Web.UI.UserControl
+    public partial class LinkedData_AllTriples_Sublayout : System.Web.UI.UserControl
     {
         public List<SitecoreTriple> SitecoreReferredTriples { get; set; }
         public List<SitecoreTriple> SitecoreReferringTriples { get; set; }

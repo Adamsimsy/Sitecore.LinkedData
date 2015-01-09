@@ -7,9 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LinkedData.Website.LinkedData {
-    
-    
-    public partial class LinkedDataControl {
+namespace LinkedData.Website.Layouts {
+
+
+    public partial class LinkedData_AllTriples_Sublayout
+    {
     }
 }

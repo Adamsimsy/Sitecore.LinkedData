@@ -13,6 +13,8 @@ using VDS.RDF.Parsing;
 using VDS.RDF.Storage;
 using VDS.RDF.Writing;
 using LinkedData.Helpers;
+using VDS.RDF.Query;
+using Sitecore.Links;
 
 namespace LinkedData.Website.Layouts
 {
@@ -40,9 +42,38 @@ namespace LinkedData.Website.Layouts
                 var formattedQuery = String.Format(sparqlQuery,
                     SitecoreTripleHelper.ItemToUri(Sitecore.Context.Item));
 
-                var triples = manager.TripleQuery(formattedQuery);
+                var sqp = new SparqlQueryParser();
+                var query = sqp.ParseFromString(formattedQuery);
+                
+                if (query.QueryType == SparqlQueryType.Construct)
+                {
+                    var triples = manager.TripleQuery(query);
 
-                SitecoreTriples = triples.ToSitecoreTriples();
+                    SitecoreTriples = triples.ToSitecoreTriples();
+                }
+                else if (query.QueryType == SparqlQueryType.Select || query.QueryType == SparqlQueryType.SelectAll)
+                {
+                    var resultSet = manager.ResultSetQuery(query);
+
+                    foreach (SparqlResult result in resultSet)
+                    {
+                        foreach (var variable in result.ToList())
+                        {
+                            var sitecoreNode = variable.Value.ToSitecoreNode();
+
+                            if (sitecoreNode != null)
+                            {
+                                litSparqlQueryResult.Text += string.Format("Key: {0} Value: <a href=\"{1}\">{2}</a><br/>",
+                                    variable.Key, LinkManager.GetItemUrl(sitecoreNode.Item), sitecoreNode.Item.Name);
+                            }
+                            else
+                            {
+                                litSparqlQueryResult.Text += string.Format("Key: {0} Value: {1}<br/>",
+                                    variable.Key, variable.Value.ToString());
+                            }
+                        }                        
+                    }                    
+                }
             }
         }
     }

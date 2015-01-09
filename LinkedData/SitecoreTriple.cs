@@ -12,19 +12,21 @@ namespace LinkedData
     public class SitecoreTriple
     {
         private readonly Triple _triple;
-        private Item _subjectItem;
-        private Item _objectItem;
+        private readonly SitecoreNode _subjectNode;
+        private readonly SitecoreNode _objectNode;
 
         public SitecoreTriple(Triple triple)
         {
             _triple = triple;
+            _subjectNode = new SitecoreNode(_triple.Subject);
+            _objectNode = new SitecoreNode(_triple.Object);
         }
 
-        public INode SubjectNode
+        public SitecoreNode SubjectNode
         {
             get
             {
-                return _triple.Subject;
+                return _subjectNode;
             }        
         }
 
@@ -36,35 +38,11 @@ namespace LinkedData
             }
         }
 
-        public INode ObjectNode
+        public SitecoreNode ObjectNode
         {
             get
             {
-                return _triple.Object;
-            }
-        }
-
-        public Item SubjectItem
-        {
-            get
-            {
-                if (_subjectItem == null)
-                {
-                    _subjectItem = SitecoreTripleHelper.UriToItem(_triple.Subject.ToString());
-                }
-                return _subjectItem;
-            }
-        }
-
-        public Item ObjectItem
-        {
-            get
-            {
-                if (_objectItem == null)
-                {
-                    _objectItem = SitecoreTripleHelper.UriToItem(_triple.Object.ToString());
-                }
-                return _objectItem;
+                return _objectNode;
             }
         }
     }

@@ -44,17 +44,18 @@ namespace LinkedData.DataManagers
             _graphUri = graphUri;
         }
 
-        public IEnumerable<Triple> GetTriples(string query)
+        public IEnumerable<Triple> TripleQuery(SparqlQuery query)
         {
-            var sqp = new SparqlQueryParser();
-            var sparqlQuery = sqp.ParseFromString(query);
-            sparqlQuery.AddDefaultGraph(_graphUri);
+            return TripleQuery(query.ToString());
+        }
 
-            Object results = _store.Query(sparqlQuery.ToString());
+        public IEnumerable<Triple> TripleQuery(string query)
+        {
+            var result = Query(query);
 
-            if (results is IGraph)
+            if (result is IGraph)
             {
-                var g = (IGraph)results;
+                var g = (IGraph)result;
 
                 var triples = g.Triples;
 
@@ -62,15 +63,36 @@ namespace LinkedData.DataManagers
             }
             else
             {
-                throw new Exception("Did not get a SPARQL Result Set as expected");
+                throw new Exception("Did not get a SPARQL IGraph as expected.");
             }
-
-            return new List<Triple>();
         }
 
-        public IEnumerable<Triple> GetTriples(SparqlQuery query)
+        public SparqlResultSet ResultSetQuery(SparqlQuery query)
         {
-            return GetTriples(query.ToString());
+            return ResultSetQuery(query.ToString());
+        }
+
+        public SparqlResultSet ResultSetQuery(string query)
+        {
+            var result = Query(query);
+
+            if (result is SparqlResultSet)
+            {
+                return (SparqlResultSet)result;
+            }
+            else
+            {
+                throw new Exception("Did not get a SparqlResultSet as expected.");
+            }
+        }
+
+        private object Query(string query)
+        {
+            var sqp = new SparqlQueryParser();
+            var sparqlQuery = sqp.ParseFromString(query);
+            sparqlQuery.AddDefaultGraph(_graphUri);
+
+            return _store.Query(sparqlQuery.ToString());
         }
 
         public void WriteTriple(Triple triple)

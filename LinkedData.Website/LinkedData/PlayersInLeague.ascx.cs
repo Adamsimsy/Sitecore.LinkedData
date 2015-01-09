@@ -24,7 +24,7 @@ namespace LinkedData.Website.LinkedData
             var formattedQuery = String.Format(playersInLeaguesQuery,
                 SitecoreTripleHelper.ItemToUri(Sitecore.Context.Item));
 
-            var triples = manager.GetTriples(formattedQuery);
+            var triples = manager.TripleQuery(formattedQuery);
 
             SitecoreTriples = triples.ToSitecoreTriples();
         }

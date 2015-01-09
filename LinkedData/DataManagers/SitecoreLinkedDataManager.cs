@@ -39,7 +39,7 @@ namespace LinkedData.DataManagers
 
             var query = SitecoreTripleHelper.StringToSparqlQuery(String.Format(TriplesByObjectFormat, itemUri));
 
-            return GetTriples(query);
+            return TripleQuery(query);
         }
 
         public IEnumerable<Triple> GetItemTriplesBySubject(Item item)
@@ -48,7 +48,7 @@ namespace LinkedData.DataManagers
 
             var query = SitecoreTripleHelper.StringToSparqlQuery(String.Format(TriplesBySubjectFormat, itemUri));
 
-            return GetTriples(query);
+            return TripleQuery(query);
         }
 
         public IEnumerable<Triple> GetItemTriplesBySubjectPredicate(Item item, string predicate)
@@ -57,7 +57,7 @@ namespace LinkedData.DataManagers
 
             var query = SitecoreTripleHelper.StringToSparqlQuery(String.Format(TriplesBySubjectPredicateFormat, itemUri, predicate));
 
-            return GetTriples(query);
+            return TripleQuery(query);
         }
 
         public void AddLink(Item item, ItemLink link)
@@ -76,7 +76,7 @@ namespace LinkedData.DataManagers
 
             var query = SitecoreTripleHelper.StringToSparqlQuery(String.Format(TriplesBySubjectObjectFormat, subjectUri, objectUri));
 
-            var triplesToDelete = GetTriples(query);
+            var triplesToDelete = TripleQuery(query);
 
             DeleteTriples(triplesToDelete);
         }

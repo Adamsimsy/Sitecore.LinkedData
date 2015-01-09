@@ -47,7 +47,7 @@ namespace LinkedData
 
             query = String.Format(query, SitecoreTripleHelper.BrokenLinkUri.ToString());
 
-            var triples = manager.GetTriples(query);
+            var triples = manager.TripleQuery(query);
 
             var links = new List<ItemLink>();
 

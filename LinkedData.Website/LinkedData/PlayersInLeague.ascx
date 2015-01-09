@@ -5,8 +5,7 @@
 
 <% foreach (var sitecoreTriple in SitecoreTriples)
    { %>
-    Subject: <a href="<%= LinkManager.GetItemUrl(sitecoreTriple.SubjectItem) %>"><%= sitecoreTriple.SubjectItem.Name %></a>
-Predicate: <a href="<%= sitecoreTriple.PredicateNode.ToString() %>"><%= sitecoreTriple.PredicateNode.ToString() %></a>
-    Object: <a href="<%= LinkManager.GetItemUrl(sitecoreTriple.ObjectItem) %>"><%= sitecoreTriple.ObjectItem.Name %></a><br />      
-
-   <% } %>
+    Subject: <a href="<%= LinkManager.GetItemUrl(sitecoreTriple.SubjectNode.Item) %>"><%= sitecoreTriple.SubjectNode.Item.Name %></a>
+    Predicate: <a href="<%= sitecoreTriple.PredicateNode.ToString() %>"><%= sitecoreTriple.PredicateNode.ToString() %></a>
+    Object: <a href="<%= LinkManager.GetItemUrl(sitecoreTriple.ObjectNode.Item) %>"><%= sitecoreTriple.ObjectNode.Item.Name %></a><br />
+<% } %>

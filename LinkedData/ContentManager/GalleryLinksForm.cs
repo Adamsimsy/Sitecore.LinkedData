@@ -113,7 +113,7 @@ namespace LinkedData.ContentManager
 
         private void RenderLink(StringBuilder result, SitecoreTriple triple, bool refferences)
         {
-            Item item = refferences ? triple.ObjectItem : triple.SubjectItem;
+            Item item = refferences ? triple.ObjectNode.Item : triple.SubjectNode.Item;
 
             if (IsHidden(item) && !UserOptions.View.ShowHiddenItems)
             {
@@ -136,7 +136,7 @@ namespace LinkedData.ContentManager
 
                 if (!SitecoreTripleHelper.GetFieldIdFromPredicate(triple.PredicateNode).IsNull)
                 {
-                    var linkField = triple.SubjectItem.Fields[SitecoreTripleHelper.GetFieldIdFromPredicate(triple.PredicateNode)];
+                    var linkField = triple.SubjectNode.Item.Fields[SitecoreTripleHelper.GetFieldIdFromPredicate(triple.PredicateNode)];
 
                     if (linkField != null)
                     {

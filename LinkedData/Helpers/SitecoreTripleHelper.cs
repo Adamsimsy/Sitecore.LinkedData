@@ -17,6 +17,17 @@ namespace LinkedData.Helpers
     {
         public static Uri BrokenLinkUri = new Uri("sitecore://broken-link");
 
+        public static SitecoreNode ToSitecoreNode(this INode node)
+        {
+            var sitecoreNode = new SitecoreNode(node);
+
+            if (sitecoreNode.Item == null)
+            {
+                return null;
+            }
+            return sitecoreNode;
+        }
+
         public static List<SitecoreTriple> ToSitecoreTriples(this IEnumerable<Triple> triples)
         {
             var sitecoreTriples = new List<SitecoreTriple>();

@@ -12,15 +12,15 @@ templatekey: League
 ----version----
 language: en
 version: 1
-revision: 9f10c54b-afd0-4810-93e6-0dbb3aaae294
+revision: 170c4ca5-3c06-4308-8604-3120eb3757b1
 
 ----field----
 field: {532FF8C8-D12C-4B2C-BBA0-69B20FBCDBFF}
 name: Title
 key: title
-content-length: 8
+content-length: 14
 
-La Liga 
+La Liga       
 ----field----
 field: {181E43AC-C7F3-4C8A-9888-FFC25E052BCA}
 name: Teams
@@ -28,6 +28,13 @@ key: teams
 content-length: 77
 
 {983E63BF-C4F4-4239-AFE2-24724CC08C12}|{1D5654E6-EEAC-4FF2-80B9-E6BC48187464}
+----field----
+field: {04BF00DB-F5FB-41F7-8AB7-22408372A981}
+name: __Final Renderings
+key: __final renderings
+content-length: 400
+
+<r xmlns:p="p" xmlns:s="s" p:p="1"><d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"><r uid="{297B236C-3449-4D67-90D8-95BCF57BEFC3}" s:ds="" s:id="{2D6B171E-9F44-4A73-8655-B5C69688F5C8}" s:par="Title=Players%20in%20league%20-%20using%20SELECT&amp;SparqlQuery=SELECT%20%3Fo2%20WHERE%20%7B%7B%20%3C%7B0%7D%3E%20%3Fp%20%3Fo%20.%20%3Fo%20%3Fp2%20%3Fo2%20.%7D%7D" s:ph="/main/centercolumn/content" /></d></r>
 ----field----
 field: {25BED78C-4957-4165-998A-CA1B52F67497}
 name: __Created
@@ -41,14 +48,14 @@ name: __Revision
 key: __revision
 content-length: 36
 
-9f10c54b-afd0-4810-93e6-0dbb3aaae294
+170c4ca5-3c06-4308-8604-3120eb3757b1
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
-content-length: 34
+content-length: 35
 
-20140701T185036:635398374361007440
+20150109T234800:635564440808135307Z
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by
@@ -56,3 +63,10 @@ key: __updated by
 content-length: 14
 
 sitecore\admin
+----field----
+field: {001DD393-96C5-490B-924A-B0F25CD9EFD8}
+name: __Lock
+key: __lock
+content-length: 5
+
+<r />

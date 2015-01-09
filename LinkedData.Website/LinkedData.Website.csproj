@@ -89,6 +89,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="layouts\LinkedData_SparqlQuery_Sublayout.ascx" />
     <Content Include="layouts\Sample layout.aspx" />
     <Content Include="LinkedData\LinkedDataControl.ascx" />
     <Content Include="LinkedData\PlayersInLeague.ascx" />
@@ -98,6 +99,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\LinkedDataInstaller.cs" />
+    <Compile Include="layouts\LinkedData_SparqlQuery_Sublayout.ascx.cs">
+      <DependentUpon>LinkedData_SparqlQuery_Sublayout.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="layouts\LinkedData_SparqlQuery_Sublayout.ascx.designer.cs">
+      <DependentUpon>LinkedData_SparqlQuery_Sublayout.ascx</DependentUpon>
+    </Compile>
     <Compile Include="LinkedData\LinkedDataControl.ascx.cs">
       <DependentUpon>LinkedDataControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

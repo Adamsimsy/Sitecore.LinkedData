@@ -7,7 +7,8 @@
 
         public override bool IsMatch(string subjectCompareValue, string objectCompareValue)
         {
-            return subjectCompareValue.ToLower().Equals(SubjectTemplateName.ToLower()) && objectCompareValue.ToLower().Equals(ObjectTemplateName.ToLower());
+            return subjectCompareValue.ToLower().Equals(SubjectTemplateName.ToLower())
+                && (objectCompareValue.ToLower().Equals(ObjectTemplateName.ToLower()) || ObjectTemplateName.Equals("*"));
         }
     }
 }

@@ -90,7 +90,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="layouts\LinkedData_SparqlQuery_Sublayout.ascx" />
-    <Content Include="layouts\Sample layout.aspx" />
     <Content Include="layouts\LinkedData_AllTriples_Sublayout.ascx" />
     <Content Include="sitecore\shell\Applications\Content Manager\Galleries\Links\Gallery Links.xml" />
     <Content Include="Web.config" />

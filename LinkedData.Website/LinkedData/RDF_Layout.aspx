@@ -1,1 +1,0 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RDF_Layout.aspx.cs" Inherits="LinkedData.Website.LinkedData.RDF_Layout" %>

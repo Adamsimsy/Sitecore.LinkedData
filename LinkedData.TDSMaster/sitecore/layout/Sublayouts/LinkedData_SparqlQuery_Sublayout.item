@@ -1,0 +1,86 @@
+----item----
+version: 1
+id: {2D6B171E-9F44-4A73-8655-B5C69688F5C8}
+database: master
+path: /sitecore/layout/Sublayouts/LinkedData_SparqlQuery_Sublayout
+parent: {EB443C0B-F923-409E-85F3-E7893C8C30C2}
+name: LinkedData_SparqlQuery_Sublayout
+master: {00000000-0000-0000-0000-000000000000}
+template: {0A98E368-CDB9-4E1E-927C-8E0C24A003FB}
+templatekey: Sublayout
+
+----field----
+field: {E28F0784-53EC-4B5C-803E-638FDB1EC15D}
+name: Parameters Template
+key: parameters template
+content-length: 38
+
+{5562A216-1182-4B77-BC10-6A1CB77C9AC7}
+----field----
+field: {462A3406-2182-4134-8484-FDC3DD0326DD}
+name: Open Properties after Add
+key: open properties after add
+content-length: 1
+
+1
+----field----
+field: {E42081B6-8A95-4A11-89CE-DF70ED502F57}
+name: Path
+key: path
+content-length: 46
+
+/layouts/LinkedData_SparqlQuery_Sublayout.ascx
+----field----
+field: {32CEE5FB-EFCE-4CA6-B697-3B97900C40D3}
+name: Placeholder
+key: placeholder
+content-length: 7
+
+content
+----version----
+language: en
+version: 1
+revision: 83be2e72-59db-4893-b1b8-8a93255b2028
+
+----field----
+field: {B5E02AD9-D56F-4C41-A065-A133DB87BDEB}
+name: __Display name
+key: __display name
+content-length: 23
+
+LinkedData Sparql Query
+----field----
+field: {25BED78C-4957-4165-998A-CA1B52F67497}
+name: __Created
+key: __created
+content-length: 16
+
+20150108T213437Z
+----field----
+field: {5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}
+name: __Created by
+key: __created by
+content-length: 14
+
+sitecore\admin
+----field----
+field: {8CDC337E-A112-42FB-BBB4-4143751E123F}
+name: __Revision
+key: __revision
+content-length: 36
+
+83be2e72-59db-4893-b1b8-8a93255b2028
+----field----
+field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
+name: __Updated
+key: __updated
+content-length: 35
+
+20150108T222542:635563527428909674Z
+----field----
+field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
+name: __Updated by
+key: __updated by
+content-length: 14
+
+sitecore\admin

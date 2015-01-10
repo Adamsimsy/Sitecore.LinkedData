@@ -1,10 +1,10 @@
 ----item----
 version: 1
-id: {F4EAD863-ECC0-4630-AD90-316D03C24E29}
+id: {0C613816-AFBE-4285-A6BA-B607BBD46AAB}
 database: master
-path: /sitecore/content/Home/News/2014/12/21/15/43/Real madrid take on barcelona in la league show down
-parent: {ED60BF59-1E94-4D6A-8882-4DFF3789FD4D}
-name: Real madrid take on barcelona in la league show down
+path: /sitecore/content/Home/News/2015/01/10/00/05/Arsenal take on Barcelona in Champions league final
+parent: {6D4766DC-8CAD-41F1-8E5B-519E2DC60694}
+name: Arsenal take on Barcelona in Champions league final
 master: {00000000-0000-0000-0000-000000000000}
 template: {F3BF19A2-9D11-4BFA-82CC-362CA7C11C25}
 templatekey: NewsStory
@@ -12,22 +12,22 @@ templatekey: NewsStory
 ----version----
 language: en
 version: 1
-revision: 39abaf10-276b-42ec-9516-a380961bf18d
+revision: 20d52623-804f-4fab-896e-8898e768abe3
 
 ----field----
 field: {9BE0C7AA-AC23-4841-938D-5A0496776C43}
 name: Title
 key: title
-content-length: 55
+content-length: 51
 
-Real madrid take on barcelona in la league show down   
+Arsenal take on Barcelona in Champions League Final
 ----field----
 field: {30ED6379-F22F-4F4C-858C-3DDAA4D39C22}
 name: Body
 key: body
-content-length: 357
+content-length: 236
 
-<p>On the final day of the <a href="~/link.aspx?_id=9C6F196F41B74FF2905B9F53BEC97B4D&amp;_z=z">La Liga</a> season, <a href="~/link.aspx?_id=1D5654E6EEAC4FF280B9E6BC48187464&amp;_z=z">Real Madrid</a> take on <a href="~/link.aspx?_id=983E63BFC4F44239AFE224724CC08C12&amp;_z=z">Barcelona</a> in a title decider at the&nbsp;Santiago Bernab&eacute;u Stadium.</p>
+<p><a href="~/link.aspx?_id=A3CBA4A0415D42388D82DB21830E12E7&amp;_z=z">Arsenal</a> take on <a href="~/link.aspx?_id=983E63BFC4F44239AFE224724CC08C12&amp;_z=z">Barcelona</a> in Champions League Final&nbsp;at the&nbsp;Wembley Stadium.</p>
 ----field----
 field: {04BF00DB-F5FB-41F7-8AB7-22408372A981}
 name: __Final Renderings
@@ -48,14 +48,14 @@ name: __Revision
 key: __revision
 content-length: 36
 
-39abaf10-276b-42ec-9516-a380961bf18d
+20d52623-804f-4fab-896e-8898e768abe3
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
 content-length: 35
 
-20150110T000402:635564450421280945Z
+20150110T000945:635564453856278048Z
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by
@@ -63,10 +63,3 @@ key: __updated by
 content-length: 14
 
 sitecore\admin
-----field----
-field: {001DD393-96C5-490B-924A-B0F25CD9EFD8}
-name: __Lock
-key: __lock
-content-length: 5
-
-<r />

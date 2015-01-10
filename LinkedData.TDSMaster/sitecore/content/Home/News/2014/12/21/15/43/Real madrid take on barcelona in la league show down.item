@@ -12,7 +12,7 @@ templatekey: NewsStory
 ----version----
 language: en
 version: 1
-revision: 39abaf10-276b-42ec-9516-a380961bf18d
+revision: 60c2c6d5-2249-48b5-86e6-823801024fe2
 
 ----field----
 field: {9BE0C7AA-AC23-4841-938D-5A0496776C43}
@@ -29,13 +29,6 @@ content-length: 357
 
 <p>On the final day of the <a href="~/link.aspx?_id=9C6F196F41B74FF2905B9F53BEC97B4D&amp;_z=z">La Liga</a> season, <a href="~/link.aspx?_id=1D5654E6EEAC4FF280B9E6BC48187464&amp;_z=z">Real Madrid</a> take on <a href="~/link.aspx?_id=983E63BFC4F44239AFE224724CC08C12&amp;_z=z">Barcelona</a> in a title decider at the&nbsp;Santiago Bernab&eacute;u Stadium.</p>
 ----field----
-field: {04BF00DB-F5FB-41F7-8AB7-22408372A981}
-name: __Final Renderings
-key: __final renderings
-content-length: 497
-
-<r xmlns:p="p" xmlns:s="s" p:p="1" s:xsd="http://www.w3.org/2001/XMLSchema"><d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"><r uid="{D230BDC6-F2B9-4854-AE88-36F739AB7E99}" s:ds="" s:id="{2D6B171E-9F44-4A73-8655-B5C69688F5C8}" s:par="Title=Players%20associated%20through%20linked%20teams&amp;SparqlQuery=SELECT%20%3Fplayer%20WHERE%20%7B%7B%20%3C%7B0%7D%3E%20%3Fp%20%3Fo%20.%20%3Fo%20%3Chttp%3A%2F%2Ffootball.com%2Fteam-to-player%3E%20%3Fplayer%20.%7D%7D" s:ph="/main/centercolumn/content" /></d></r>
-----field----
 field: {25BED78C-4957-4165-998A-CA1B52F67497}
 name: __Created
 key: __created
@@ -48,14 +41,14 @@ name: __Revision
 key: __revision
 content-length: 36
 
-39abaf10-276b-42ec-9516-a380961bf18d
+60c2c6d5-2249-48b5-86e6-823801024fe2
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
 content-length: 35
 
-20150110T000402:635564450421280945Z
+20150110T203522:635565189227144383Z
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by

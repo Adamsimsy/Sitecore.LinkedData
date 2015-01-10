@@ -26,7 +26,7 @@ content-length: 488
 ----version----
 language: en
 version: 1
-revision: 88d6ce52-ef86-4961-8950-644c9dc30bb3
+revision: 85f4ba97-481f-40e3-8917-9eba6ae2011f
 
 ----field----
 field: {13440EA4-5C57-4C5E-AC53-5850686DC4A5}
@@ -35,6 +35,13 @@ key: title
 content-length: 5
 
 $name
+----field----
+field: {04BF00DB-F5FB-41F7-8AB7-22408372A981}
+name: __Final Renderings
+key: __final renderings
+content-length: 733
+
+<r xmlns:p="p" xmlns:s="s" p:p="1" s:xsd="http://www.w3.org/2001/XMLSchema"><d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"><r uid="{9DA55218-8266-4C68-9B06-784E34490B34}" p:before="r[@uid='{E029CFB2-C99B-4B74-9741-7EB76EC5A231}']" s:ds="{483F973D-F129-4C16-A012-0A3AE966303B}" s:id="{2D6B171E-9F44-4A73-8655-B5C69688F5C8}" s:ph="/main/centercolumn/content" /><r uid="{E029CFB2-C99B-4B74-9741-7EB76EC5A231}" p:before="r[@uid='{248508B6-7EF2-4B6E-B3D9-B2A55FAD0219}']" s:ds="{14C6E60D-8D0E-4DC9-ACC9-DFA235AECE9D}" s:id="{2D6B171E-9F44-4A73-8655-B5C69688F5C8}" s:ph="/main/centercolumn/content" /><r uid="{248508B6-7EF2-4B6E-B3D9-B2A55FAD0219}" s:id="{3CB3A14C-E0D6-4C9D-9081-60FC99B85A41}" s:ph="/main/centercolumn/content" /></d></r>
 ----field----
 field: {52807595-0F8F-4B20-8D2A-CB71D28C6103}
 name: __Owner
@@ -62,14 +69,14 @@ name: __Revision
 key: __revision
 content-length: 36
 
-88d6ce52-ef86-4961-8950-644c9dc30bb3
+85f4ba97-481f-40e3-8917-9eba6ae2011f
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
-content-length: 34
+content-length: 35
 
-20140701T171348:635398316281579616
+20150110T210226:635565205460022871Z
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by
@@ -77,3 +84,10 @@ key: __updated by
 content-length: 14
 
 sitecore\admin
+----field----
+field: {001DD393-96C5-490B-924A-B0F25CD9EFD8}
+name: __Lock
+key: __lock
+content-length: 5
+
+<r />

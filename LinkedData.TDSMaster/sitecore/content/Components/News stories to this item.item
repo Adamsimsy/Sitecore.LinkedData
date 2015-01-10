@@ -1,0 +1,58 @@
+----item----
+version: 1
+id: {14C6E60D-8D0E-4DC9-ACC9-DFA235AECE9D}
+database: master
+path: /sitecore/content/Components/News stories to this item
+parent: {36E6F39F-2234-4D44-9C3A-FA877BEB5FA7}
+name: News stories to this item
+master: {00000000-0000-0000-0000-000000000000}
+template: {967A26E5-3D14-47E4-B970-699305C97BA9}
+templatekey: LinkedData_SparqlQuery_DataSource
+
+----version----
+language: en
+version: 1
+revision: d407595e-9769-4677-a8c2-3122167b28cb
+
+----field----
+field: {CC752216-EF04-4163-BBEB-7001DC7B31D0}
+name: Title
+key: title
+content-length: 25
+
+News stories to this item
+----field----
+field: {BFAB6F3D-4F82-4951-8461-032EB1342CB5}
+name: SparqlQuery
+key: sparqlquery
+content-length: 74
+
+SELECT ?news WHERE {{ ?news  <http://football.com/news-to-item> <{0}> . }}
+----field----
+field: {25BED78C-4957-4165-998A-CA1B52F67497}
+name: __Created
+key: __created
+content-length: 16
+
+20150110T195645Z
+----field----
+field: {8CDC337E-A112-42FB-BBB4-4143751E123F}
+name: __Revision
+key: __revision
+content-length: 36
+
+d407595e-9769-4677-a8c2-3122167b28cb
+----field----
+field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
+name: __Updated
+key: __updated
+content-length: 35
+
+20150110T202639:635565183994134070Z
+----field----
+field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
+name: __Updated by
+key: __updated by
+content-length: 14
+
+sitecore\admin

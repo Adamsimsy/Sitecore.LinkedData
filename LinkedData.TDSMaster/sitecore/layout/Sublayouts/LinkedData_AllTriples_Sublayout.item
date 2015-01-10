@@ -1,10 +1,10 @@
 ----item----
 version: 1
-id: {2D6B171E-9F44-4A73-8655-B5C69688F5C8}
+id: {3CB3A14C-E0D6-4C9D-9081-60FC99B85A41}
 database: master
-path: /sitecore/layout/Sublayouts/LinkedData_SparqlQuery_Sublayout
+path: /sitecore/layout/Sublayouts/LinkedData_AllTriples_Sublayout
 parent: {EB443C0B-F923-409E-85F3-E7893C8C30C2}
-name: LinkedData_SparqlQuery_Sublayout
+name: LinkedData_AllTriples_Sublayout
 master: {00000000-0000-0000-0000-000000000000}
 template: {0A98E368-CDB9-4E1E-927C-8E0C24A003FB}
 templatekey: Sublayout
@@ -27,9 +27,9 @@ content-length: 1
 field: {E42081B6-8A95-4A11-89CE-DF70ED502F57}
 name: Path
 key: path
-content-length: 46
+content-length: 45
 
-/layouts/LinkedData_SparqlQuery_Sublayout.ascx
+/layouts/LinkedData_AllTriples_Sublayout.ascx
 ----field----
 field: {32CEE5FB-EFCE-4CA6-B697-3B97900C40D3}
 name: Placeholder
@@ -41,28 +41,28 @@ content
 field: {B5B27AF1-25EF-405C-87CE-369B3A004016}
 name: Datasource Location
 key: datasource location
-content-length: 28
+content-length: 0
 
-/sitecore/content/Components
+
 ----field----
 field: {1A7C85E5-DC0B-490D-9187-BB1DBCB4C72F}
 name: Datasource Template
 key: datasource template
-content-length: 66
+content-length: 0
 
-/sitecore/templates/User Defined/LinkedData_SparqlQuery_DataSource
+
 ----version----
 language: en
 version: 1
-revision: bba2b83d-489b-45a4-a88f-3c72e2c2dfad
+revision: 214f56b3-3dd6-4ea7-85da-adb79f28e679
 
 ----field----
 field: {B5E02AD9-D56F-4C41-A065-A133DB87BDEB}
 name: __Display name
 key: __display name
-content-length: 23
+content-length: 0
 
-LinkedData Sparql Query
+
 ----field----
 field: {25BED78C-4957-4165-998A-CA1B52F67497}
 name: __Created
@@ -83,14 +83,14 @@ name: __Revision
 key: __revision
 content-length: 36
 
-bba2b83d-489b-45a4-a88f-3c72e2c2dfad
+214f56b3-3dd6-4ea7-85da-adb79f28e679
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
 content-length: 35
 
-20150110T203238:635565187582872086Z
+20150110T210013:635565204131563681Z
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by

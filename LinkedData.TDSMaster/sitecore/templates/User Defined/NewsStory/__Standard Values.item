@@ -26,7 +26,7 @@ content-length: 488
 ----version----
 language: en
 version: 1
-revision: 7487befc-1c6b-4c6a-9181-83509061224f
+revision: 118fe473-408d-4592-bba7-4d69f4aafdf9
 
 ----field----
 field: {9BE0C7AA-AC23-4841-938D-5A0496776C43}
@@ -35,6 +35,13 @@ key: title
 content-length: 5
 
 $name
+----field----
+field: {04BF00DB-F5FB-41F7-8AB7-22408372A981}
+name: __Final Renderings
+key: __final renderings
+content-length: 497
+
+<r xmlns:p="p" xmlns:s="s" p:p="1" s:xsd="http://www.w3.org/2001/XMLSchema"><d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"><r uid="{04AA49CB-109F-4DB8-88A0-69D7B02EA810}" p:before="r[@uid='{C454432D-7A5E-481A-8CD9-6775C629731B}']" s:ds="{746C5BA0-80FF-4591-A40C-D0FD2EA43C7C}" s:id="{2D6B171E-9F44-4A73-8655-B5C69688F5C8}" s:ph="/main/centercolumn/content" /><r uid="{C454432D-7A5E-481A-8CD9-6775C629731B}" s:id="{3CB3A14C-E0D6-4C9D-9081-60FC99B85A41}" s:ph="/main/centercolumn/content" /></d></r>
 ----field----
 field: {52807595-0F8F-4B20-8D2A-CB71D28C6103}
 name: __Owner
@@ -62,14 +69,14 @@ name: __Revision
 key: __revision
 content-length: 36
 
-7487befc-1c6b-4c6a-9181-83509061224f
+118fe473-408d-4592-bba7-4d69f4aafdf9
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
-content-length: 34
+content-length: 35
 
-20140701T171353:635398316332492528
+20150110T210240:635565205601210946Z
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by
@@ -77,3 +84,10 @@ key: __updated by
 content-length: 14
 
 sitecore\admin
+----field----
+field: {001DD393-96C5-490B-924A-B0F25CD9EFD8}
+name: __Lock
+key: __lock
+content-length: 5
+
+<r />

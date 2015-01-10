@@ -80,13 +80,6 @@ content-length: 77
 
 {76036F5E-CBCE-46D1-AF0A-4143F9B557AA}|{A87A00B1-E6DB-45AB-8B54-636FEC3B5523}
 ----field----
-field: {F1A1FE9E-A60C-4DDB-A3A0-BB5B29FE732E}
-name: __Renderings
-key: __renderings
-content-length: 37
-
-<r xmlns:p="p" xmlns:s="s" p:p="1" />
-----field----
 field: {86FE4F77-4D9A-4EC3-9ED9-263D03BD1965}
 name: __Publish
 key: __publish
@@ -152,7 +145,7 @@ content-length: 0
 ----version----
 language: da
 version: 1
-revision: bb729561-2566-4671-b544-f0aa843d6a1b
+revision: c2839d8a-3e4a-4b6e-ab04-5216c8b54a5a
 
 ----field----
 field: {75577384-3C97-45DA-A847-81B00500E250}
@@ -216,14 +209,14 @@ name: __Revision
 key: __revision
 content-length: 36
 
-bb729561-2566-4671-b544-f0aa843d6a1b
+c2839d8a-3e4a-4b6e-ab04-5216c8b54a5a
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
 content-length: 35
 
-20141212T145207:635539927275443694Z
+20150110T202035:635565180352101514Z
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by
@@ -234,7 +227,7 @@ sitecore\admin
 ----version----
 language: de-DE
 version: 1
-revision: 1c3dc1e7-4de4-4c1d-ab8a-b06cf8dcbca7
+revision: c87bf48e-ef12-42d4-8e7c-4eb27fc488b8
 
 ----field----
 field: {75577384-3C97-45DA-A847-81B00500E250}
@@ -298,14 +291,14 @@ name: __Revision
 key: __revision
 content-length: 36
 
-1c3dc1e7-4de4-4c1d-ab8a-b06cf8dcbca7
+c87bf48e-ef12-42d4-8e7c-4eb27fc488b8
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
 content-length: 35
 
-20141212T145041:635539926411403608Z
+20150110T202034:635565180345321126Z
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by
@@ -316,7 +309,7 @@ sitecore\admin
 ----version----
 language: en
 version: 1
-revision: 304003f6-d97d-47de-bb49-c2b20cbfa728
+revision: 65996f8f-915b-4884-8046-4b9e9fd9b482
 
 ----field----
 field: {75577384-3C97-45DA-A847-81B00500E250}
@@ -329,9 +322,9 @@ Sitecore Experience Platform
 field: {A60ACD61-A6DB-4182-8329-C957982CEC74}
 name: Text
 key: text
-content-length: 789
+content-length: 783
 
-<p style="line-height: 22px;">From a single connected platform that also integrates with other customer-facing platforms, to a single view of the customer in a big data marketing repository, to a completely eliminating much of the complexity that has previously held marketers back, the latest version of Sitecore makes customer experience highly achievable. Learn how the latest version of Sitecore gives marketers the complete data, integrated tools, and automation capabilities to engage customers throughout an iterative lifecycle &ndash; the technology foundation absolutely necessary to win customers for life.</p>
+<p style="line-height: 22px;">From a single connected platform that also integrates with other customer-facing platforms, to a single view of the customer in a big data marketing repository, to a completely eliminating much of the complexity that has previously held marketers back, the latest version of Sitecore makes customer experience highly achievable. Learn how the latest version of Sitecore gives marketers the complete data, integrated tools, and automation capabilities to engage customers throughout an iterative lifecycle – the technology foundation absolutely necessary to win customers for life.</p>
 <p>For further information, please go to the <a href="https://doc.sitecore.net/" target="_blank" title="Sitecore Documentation site">Sitecore Documentation site</a></p>
 ----field----
 field: {B5E02AD9-D56F-4C41-A065-A133DB87BDEB}
@@ -395,14 +388,14 @@ name: __Revision
 key: __revision
 content-length: 36
 
-304003f6-d97d-47de-bb49-c2b20cbfa728
+65996f8f-915b-4884-8046-4b9e9fd9b482
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
 content-length: 35
 
-20141110T100309:635512105892521099Z
+20150110T202029:635565180299008477Z
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by
@@ -410,10 +403,17 @@ key: __updated by
 content-length: 14
 
 sitecore\admin
+----field----
+field: {001DD393-96C5-490B-924A-B0F25CD9EFD8}
+name: __Lock
+key: __lock
+content-length: 5
+
+<r />
 ----version----
 language: ja-JP
 version: 1
-revision: 397f45d4-7424-4ed1-8a7e-9875fa2e321e
+revision: 4bc07dba-9b2e-49e7-a7c9-b64ae96ddab5
 
 ----field----
 field: {75577384-3C97-45DA-A847-81B00500E250}
@@ -477,14 +477,14 @@ name: __Revision
 key: __revision
 content-length: 36
 
-397f45d4-7424-4ed1-8a7e-9875fa2e321e
+4bc07dba-9b2e-49e7-a7c9-b64ae96ddab5
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
 content-length: 35
 
-20141212T145324:635539928043545781Z
+20150110T202033:635565180338130715Z
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by

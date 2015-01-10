@@ -23,20 +23,41 @@ namespace LinkedData.Website.App_Start
         {
             var container = new WindsorContainer();
 
-            container.Register(Component.For<IQueryableStorage>().ImplementedBy<SesameHttpProtocolVersion6Connector>().LifestyleSingleton()
-                .DependsOn(Dependency.OnValue("baseUri", "http://54.154.29.33:8080/openrdf-sesame"), Dependency.OnValue("storeID", "in-mem-sesame")));
+            SetupTripleStore(container);
 
-            //container.Register(Component.For<IQueryableStorage>().ImplementedBy<InMemoryManager>().LifestyleSingleton());
+            SetupConcepts(container);
 
+            container.Install(new BaseSitecoreLinkedDataInstaller());
+        }
+
+        /// <summary>
+        /// Setup the triple store. See http://github.com/Adamsimsy/Sitecore.LinkedData/wiki/Triple-store-configuration for configuration details.
+        /// </summary>
+        /// <param name="container"></param>
+        private static void SetupTripleStore(IWindsorContainer container)
+        {
+            //InMemory Triple Store for testing.
+            container.Register(Component.For<IQueryableStorage>().ImplementedBy<InMemoryManager>().LifestyleSingleton());
+
+            //Sesame Triple Store example.
+            //container.Register(Component.For<IQueryableStorage>().ImplementedBy<SesameHttpProtocolVersion6Connector>().LifestyleSingleton()
+            //.DependsOn(Dependency.OnValue("baseUri", "http://server_name:8080/openrdf-sesame"), Dependency.OnValue("storeID", "repository_name")));
+        }
+
+        /// <summary>
+        /// Setup link concepts. See http://github.com/Adamsimsy/Sitecore.LinkedData/wiki/Link-configuration for configuration details.
+        /// </summary>
+        /// <param name="container"></param>
+        private static void SetupConcepts(IWindsorContainer container)
+        {
             var concepts = new List<BaseConcept>();
 
+            //Example football concepts for use with http://github.com/Adamsimsy/Sitecore.LinkedData/wiki/Example-content.
             concepts.Add(new SitecoreTemplateConcept() { SubjectTemplateName = "league", ConceptUri = new Uri("http://football.com/league-to-team"), ObjectTemplateName = "team" });
             concepts.Add(new SitecoreTemplateConcept() { SubjectTemplateName = "team", ConceptUri = new Uri("http://football.com/team-to-player"), ObjectTemplateName = "player" });
             concepts.Add(new SitecoreTemplateConcept() { SubjectTemplateName = "newsstory", ConceptUri = new Uri("http://football.com/news-to-item"), ObjectTemplateName = "*" });
 
             container.Register(Component.For<IConceptProvider>().Instance(new SitecoreConceptProvider(concepts)).LifestyleSingleton());
-
-            container.Install(new LinkedDataInstallerSitecore());
         }
     }
 }

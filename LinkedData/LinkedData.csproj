@@ -88,7 +88,7 @@
     <Compile Include="Formatters\StripLinkFieldFormatter.cs" />
     <Compile Include="Formatters\UriToDynamicUrlFormatter.cs" />
     <Compile Include="Hook\LinkedDataHook.cs" />
-    <Compile Include="Installers\LinkedDataInstallerSitecore.cs" />
+    <Compile Include="Installers\BaseSitecoreLinkedDataInstaller.cs" />
     <Compile Include="SitecoreLinkDatabase.cs" />
     <Compile Include="Concepts\SitecoreConceptManager.cs" />
     <Compile Include="Concepts\IConceptManager.cs" />

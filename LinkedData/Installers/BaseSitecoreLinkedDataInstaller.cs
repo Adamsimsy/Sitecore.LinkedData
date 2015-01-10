@@ -15,7 +15,7 @@ using VDS.RDF.Storage;
 
 namespace LinkedData.Installers
 {
-    public class LinkedDataInstallerSitecore : IWindsorInstaller
+    public class BaseSitecoreLinkedDataInstaller : IWindsorInstaller
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {

@@ -1,6 +1,6 @@
 ﻿<%@ control language="C#" autoeventwireup="true" codebehind="LinkedData_AllTriples_Sublayout.ascx.cs" inherits="LinkedData.Website.Layouts.LinkedData_AllTriples_Sublayout" %>
 <%@ import namespace="Sitecore.Links" %>
-<h2>Linked data here</h2>
+<h2>All triple data for debug</h2>
 
 <h3>All reffered triple objects</h3>
 <% foreach (var sitecoreTriple in SitecoreReferredTriples)

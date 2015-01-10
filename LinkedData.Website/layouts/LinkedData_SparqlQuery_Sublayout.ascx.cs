@@ -24,13 +24,16 @@ namespace LinkedData.Website.Layouts
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            var sublayout = Parent as Sitecore.Web.UI.WebControls.Sublayout;
+            var dataSourceItem = Sitecore.Context.Database.GetItem(sublayout.DataSource);
+
             var factory = DependencyResolver.Instance.Resolve<SitecoreManagerFactory>();
             var manager = factory.GetContextWebDatabaseDataManager();
 
-            string rawParameters = Attributes["sc_parameters"]; 
-            var parameters = Sitecore.Web.WebUtil.ParseUrlParameters(rawParameters); 
-            var title = parameters["Title"];
-            var sparqlQuery = parameters["SparqlQuery"];
+            //string rawParameters = Attributes["sc_parameters"]; 
+            //var parameters = Sitecore.Web.WebUtil.ParseUrlParameters(rawParameters); 
+            var title = dataSourceItem.Fields["Title"].Value;
+            var sparqlQuery = dataSourceItem.Fields["SparqlQuery"].Value;
 
             litTitle.Text = title;
 

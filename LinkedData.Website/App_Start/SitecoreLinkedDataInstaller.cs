@@ -37,11 +37,11 @@ namespace LinkedData.Website.App_Start
         private static void SetupTripleStore(IWindsorContainer container)
         {
             //InMemory Triple Store for testing.
-            //container.Register(Component.For<IQueryableStorage>().ImplementedBy<InMemoryManager>().LifestyleSingleton());
+            container.Register(Component.For<IQueryableStorage>().ImplementedBy<InMemoryManager>().LifestyleSingleton());
 
             //Sesame Triple Store example.
-            container.Register(Component.For<IQueryableStorage>().ImplementedBy<SesameHttpProtocolVersion6Connector>().LifestyleSingleton()
-            .DependsOn(Dependency.OnValue("baseUri", "http://54.154.29.33:8080/openrdf-sesame"), Dependency.OnValue("storeID", "in-mem-sesame")));
+            //container.Register(Component.For<IQueryableStorage>().ImplementedBy<SesameHttpProtocolVersion6Connector>().LifestyleSingleton()
+            //.DependsOn(Dependency.OnValue("baseUri", "http://server_name:8080/openrdf-sesame"), Dependency.OnValue("storeID", "repository_name")));
         }
 
         /// <summary>

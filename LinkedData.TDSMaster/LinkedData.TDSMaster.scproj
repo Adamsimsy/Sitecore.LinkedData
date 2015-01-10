@@ -38,6 +38,17 @@
     <DebugSymbols>false</DebugSymbols>
     <OutputPath>.\Release\</OutputPath>
     <RecursiveDeployAction>Ignore</RecursiveDeployAction>
+    <PackageName>LinkedData.TDSMaster</PackageName>
+    <GeneratePackage>True</GeneratePackage>
+    <SeperateFilesAndItems>False</SeperateFilesAndItems>
+    <PackageExcludeCode>True</PackageExcludeCode>
+    <AddDateTimeToPackageName>False</AddDateTimeToPackageName>
+    <PackageAuthor>Adamsimsy</PackageAuthor>
+    <PackagePublisher>Adamsimsy</PackagePublisher>
+    <PackageReadme>
+    </PackageReadme>
+    <PackageVersion>0.1.8</PackageVersion>
+    <SitecoreAssemblyPath>..\sc.lib</SitecoreAssemblyPath>
   </PropertyGroup>
   <ItemGroup>
     <AssemblyAttributes Include="AssemblyFileVersion">

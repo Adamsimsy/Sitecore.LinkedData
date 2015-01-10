@@ -12,7 +12,7 @@ templatekey: LinkedData_SparqlQuery_DataSource
 ----version----
 language: en
 version: 1
-revision: ee08def5-b33c-4704-947c-ef5fb540fbc6
+revision: 190f805b-6b02-4089-8653-ca8b8e022d30
 
 ----field----
 field: {CC752216-EF04-4163-BBEB-7001DC7B31D0}
@@ -25,9 +25,9 @@ Players in team
 field: {BFAB6F3D-4F82-4951-8461-032EB1342CB5}
 name: SparqlQuery
 key: sparqlquery
-content-length: 41
+content-length: 64
 
-SELECT ?name WHERE {{  <{0}> ?p ?name .}}
+CONSTRUCT {{ <{0}> ?p ?players }} WHERE {{ <{0}> ?p ?players .}}
 ----field----
 field: {25BED78C-4957-4165-998A-CA1B52F67497}
 name: __Created
@@ -41,14 +41,14 @@ name: __Revision
 key: __revision
 content-length: 36
 
-ee08def5-b33c-4704-947c-ef5fb540fbc6
+190f805b-6b02-4089-8653-ca8b8e022d30
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
 content-length: 35
 
-20150110T205142:635565199027547894Z
+20150110T233241:635565295611628111Z
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by

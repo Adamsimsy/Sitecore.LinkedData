@@ -22,7 +22,7 @@ Please note: This package is purely experimental and you should refer to the pro
     <files>
         <file src="lib\LinkedData.dll" target="lib" />
 		<file src="content\SitecoreLinkedData.config" target="content\App_Config\Include\SitecoreLinkedData.config" />
-		<file src="content\LinkedDataInstaller.cs" target="content\App_Start\LinkedDataInstaller.cs" />
+		<file src="content\SitecoreLinkedDataInstaller.cs" target="content\App_Start\SitecoreLinkedDataInstaller.cs" />
 		<file src="content\Gallery Links.xml" target="content\sitecore\shell\Applications\Content Manager\Galleries\Links\Gallery Links.xml" />
     </files>
 </package>

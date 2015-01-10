@@ -13,11 +13,11 @@ using LinkedData.Website.App_Start;
 using Sitecore.ApplicationCenter.Applications;
 using VDS.RDF.Storage;
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(LinkedDataInstaller), "Start")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(SitecoreLinkedDataInstaller), "Start")]
 
 namespace LinkedData.Website.App_Start
 {
-    public static class LinkedDataInstaller
+    public static class SitecoreLinkedDataInstaller
     {
         public static void Start()
         {

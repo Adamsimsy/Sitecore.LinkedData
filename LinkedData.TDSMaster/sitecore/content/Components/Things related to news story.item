@@ -12,7 +12,7 @@ templatekey: LinkedData_SparqlQuery_DataSource
 ----version----
 language: en
 version: 1
-revision: 9b1d0cf7-7944-4410-b103-f7766ee45471
+revision: e48c4480-7dea-4e3a-8065-45a723cdbc8a
 
 ----field----
 field: {CC752216-EF04-4163-BBEB-7001DC7B31D0}
@@ -21,6 +21,13 @@ key: title
 content-length: 28
 
 Things related to news story
+----field----
+field: {BFAB6F3D-4F82-4951-8461-032EB1342CB5}
+name: SparqlQuery
+key: sparqlquery
+content-length: 53
+
+CONSTRUCT {{ <{0}> ?p ?o }} WHERE {{ <{0}> ?p ?o  .}}
 ----field----
 field: {25BED78C-4957-4165-998A-CA1B52F67497}
 name: __Created
@@ -34,14 +41,14 @@ name: __Revision
 key: __revision
 content-length: 36
 
-9b1d0cf7-7944-4410-b103-f7766ee45471
+e48c4480-7dea-4e3a-8065-45a723cdbc8a
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
 content-length: 35
 
-20150110T205702:635565202224544630Z
+20150111T001920:635565323605965696Z
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by

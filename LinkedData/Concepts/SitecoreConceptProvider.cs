@@ -11,9 +11,6 @@ namespace LinkedData.Concepts
         public SitecoreConceptProvider()
         {
             _concepts = new List<BaseConcept>();
-
-            _concepts.Add(new SitecoreTemplateConcept() { SubjectTemplateName = "home", ConceptUri = new Uri("http://example.org/home-to-sampleitem"), ObjectTemplateName = "sample item" });
-            _concepts.Add(new SitecoreTemplateConcept() { SubjectTemplateName = "sample item", ConceptUri = new Uri("http://example.org/sampleitem-to-home"), ObjectTemplateName = "home" });
         }
 
         public SitecoreConceptProvider(List<BaseConcept> concepts)

@@ -21,7 +21,10 @@ namespace LinkedData.ComputedLinks
         {
             var items = new List<ItemLink>();
 
-            _computedLinkItems.ToList().ForEach(x => items.AddRange(x.ComputeLinkItem(item)));
+            if (_computedLinkItems != null)
+            {
+                _computedLinkItems.ToList().ForEach(x => items.AddRange(x.ComputeLinkItem(item)));
+            }
 
             return items;
         }

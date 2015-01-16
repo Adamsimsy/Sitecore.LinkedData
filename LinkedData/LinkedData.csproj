@@ -71,6 +71,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComputedLinks\DescendantComputedLinkItem.cs" />
     <Compile Include="ComputedLinks\IComputedLinkItem.cs" />
     <Compile Include="ComputedLinks\AncestorComputedLinkItem.cs" />
     <Compile Include="ComputedLinks\IComputedLinkManager.cs" />

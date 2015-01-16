@@ -60,6 +60,7 @@ namespace LinkedData.Website.App_Start
             concepts.Add(new SitecoreTemplateConcept() { SubjectTemplateName = "team", ConceptUri = new Uri("http://football.com/team-to-player"), ObjectTemplateName = "player" });
             concepts.Add(new SitecoreTemplateConcept() { SubjectTemplateName = "newsstory", ConceptUri = new Uri("http://football.com/news-to-item"), ObjectTemplateName = "*" });
             concepts.Add(new SitecoreTemplateConcept() { SubjectTemplateName = "ground", ConceptUri = new Uri("http://football.com/home-of-team"), ObjectTemplateName = "team" });
+            concepts.Add(new SitecoreTemplateConcept() { SubjectTemplateName = "team", ConceptUri = new Uri("http://football.com/team-staff"), ObjectTemplateName = "staff" });
 
             container.Register(Component.For<IConceptProvider>().Instance(new SitecoreConceptProvider(concepts)).LifestyleSingleton());
         }
@@ -72,7 +73,9 @@ namespace LinkedData.Website.App_Start
         {
             var computedLinkItems = new List<IComputedLinkItem>();
 
+            //Example football computed links for use with http://github.com/Adamsimsy/Sitecore.LinkedData/wiki/Example-content.
             computedLinkItems.Add(new AncestorComputedLinkItem("team", "ground"));
+            computedLinkItems.Add(new DescendantComputedLinkItem("staff", "team"));
 
             container.Register(Component.For<IComputedLinkManager>().Instance(new SitecoreComputedLinkManager(computedLinkItems)).LifestyleSingleton());
         }

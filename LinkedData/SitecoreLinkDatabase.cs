@@ -19,6 +19,7 @@ using Sitecore.Jobs;
 using Sitecore.Links;
 using Sitecore.SecurityModel;
 using VDS.RDF.Storage;
+using LinkedData.ComputedLinks;
 
 namespace LinkedData
 {
@@ -26,10 +27,12 @@ namespace LinkedData
     {
         private readonly LockSet locks = new LockSet();
         private readonly SitecoreManagerFactory _factory;
+        private readonly IComputedLinkManager _computedLinkManager;
 
         public SitecoreLinkDatabase(string connectionString)
         {
             _factory = DependencyResolver.Instance.Resolve<SitecoreManagerFactory>();
+            _computedLinkManager = DependencyResolver.Instance.Resolve<IComputedLinkManager>();
         }
 
         public override void Compact(Database database)
@@ -182,9 +185,13 @@ namespace LinkedData
 
             lock (this.locks.GetLock((object)"rdflock"))
             {
+                var allLinks = _computedLinkManager.GetComputedLinkItems(item);
+
+                allLinks.Add(link);
+
                 foreach (var manager in _factory.GetContextSitecoreLinkedDataManagers(item))
                 {
-                    manager.AddLink(item, link);
+                    allLinks.ToList().ForEach(computedLink => manager.AddLink(item, computedLink));
                 }
             }
         }
@@ -230,12 +237,13 @@ namespace LinkedData
             Assert.ArgumentNotNull((object)item, "item");
             Assert.ArgumentNotNull((object)links, "links");
 
+            var allLinks = _computedLinkManager.GetComputedLinkItems(item);
+
+            allLinks.AddRange(links);
+
             foreach (var manager in _factory.GetContextSitecoreLinkedDataManagers(item))
             {
-                foreach (var itemLink in links)
-                {
-                    manager.AddLink(item, itemLink);
-                }
+                allLinks.ToList().ForEach(computedLink => manager.AddLink(item, computedLink));
             }
         }
 
@@ -244,12 +252,13 @@ namespace LinkedData
             Assert.ArgumentNotNull((object)item, "item");
             Assert.ArgumentNotNull((object)links, "links");
 
+            var allLinks = _computedLinkManager.GetComputedLinkItems(item);
+
+            allLinks.AddRange(links);
+
             foreach (var manager in _factory.GetContextSitecoreLinkedDataManagers(item))
             {
-                foreach (var itemLink in links)
-                {
-                    manager.AddLink(item, itemLink);
-                }
+                allLinks.ToList().ForEach(computedLink => manager.AddLink(item, computedLink));
 
                 //Now remove removed links
                 var oldLinks = GetReferences(item);
@@ -257,7 +266,7 @@ namespace LinkedData
 
                 foreach (var link in oldLinks)
                 {
-                    if (!links.ToList().Where(x => x.TargetItemID.Guid == link.TargetItemID.Guid).Any())
+                    if (!allLinks.Where(x => x.TargetItemID.Guid == link.TargetItemID.Guid).Any())
                     {
                         removeLinks.Add(link);
                     }

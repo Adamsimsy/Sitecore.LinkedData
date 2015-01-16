@@ -71,6 +71,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComputedLinks\IComputedLinkItem.cs" />
+    <Compile Include="ComputedLinks\AncestorComputedLinkItem.cs" />
+    <Compile Include="ComputedLinks\IComputedLinkManager.cs" />
+    <Compile Include="ComputedLinks\SitecoreComputedLinkManager.cs" />
     <Compile Include="ContentManager\GalleryLinksForm.cs" />
     <Compile Include="DatabaseContext\GraphConfiguration.cs" />
     <Compile Include="DataManagers\SitecoreLinkedDataContext.cs" />

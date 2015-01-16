@@ -30,7 +30,7 @@ namespace LinkedData.ComputedLinks
         {
             var links = new List<ItemLink>();
 
-            if (item != null)
+            if (item != null && item.Axes != null)
             {
                 if (SourceTemplateName == null || item.TemplateName.ToLower().Equals(SourceTemplateName.ToLower()))
                 {

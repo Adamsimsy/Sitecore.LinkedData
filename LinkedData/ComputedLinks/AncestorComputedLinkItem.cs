@@ -47,7 +47,7 @@ namespace LinkedData.ComputedLinks
                 }
             }
 
-            return null;
+            return links;
         }
     }
 }

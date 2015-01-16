@@ -30,19 +30,24 @@ namespace LinkedData.ComputedLinks
         {
             var links = new List<ItemLink>();
 
-            if (item != null && item.Axes != null)
+            if (item != null && item.Axes != null && item.Axes.GetAncestors() != null)
             {
                 if (SourceTemplateName == null || item.TemplateName.ToLower().Equals(SourceTemplateName.ToLower()))
                 {
-                    var matchingAncestor = item.Axes.GetAncestors().ToList().Where(x => x.TemplateName.ToLower().Equals(AncestorTemplateName.ToLower())).Last();
+                    var matches = item.Axes.GetAncestors().ToList().Where(x => x.TemplateName.ToLower().Equals(AncestorTemplateName.ToLower()));
 
-                    if (matchingAncestor != null)
+                    if (matches != null && matches.Any())
                     {
-                        links = new List<ItemLink>();
+                        var matchingAncestor = matches.Last();
 
-                        links.Add(new ItemLink(item, ID.Undefined, matchingAncestor, matchingAncestor.Paths.FullPath));
+                        if (matchingAncestor != null)
+                        {
+                            links = new List<ItemLink>();
 
-                        return links;
+                            links.Add(new ItemLink(item, ID.Undefined, matchingAncestor, matchingAncestor.Paths.FullPath));
+
+                            return links;
+                        }
                     }
                 }
             }

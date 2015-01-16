@@ -12,6 +12,7 @@ using LinkedData.Installers;
 using LinkedData.Website.App_Start;
 using Sitecore.ApplicationCenter.Applications;
 using VDS.RDF.Storage;
+using LinkedData.ComputedLinks;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(SitecoreLinkedDataInstaller), "Start")]
 
@@ -26,6 +27,8 @@ namespace LinkedData.Website.App_Start
             SetupTripleStore(container);
 
             SetupConcepts(container);
+
+            SetupComputedLinkItems(container);
 
             container.Install(new BaseSitecoreLinkedDataInstaller());
         }
@@ -45,7 +48,7 @@ namespace LinkedData.Website.App_Start
         }
 
         /// <summary>
-        /// Setup link concepts. See http://github.com/Adamsimsy/Sitecore.LinkedData/wiki/Link-configuration for configuration details.
+        /// Setup link concepts. See http://github.com/Adamsimsy/Sitecore.LinkedData/wiki/Concept-configuration for configuration details.
         /// </summary>
         /// <param name="container"></param>
         private static void SetupConcepts(IWindsorContainer container)
@@ -56,8 +59,22 @@ namespace LinkedData.Website.App_Start
             concepts.Add(new SitecoreTemplateConcept() { SubjectTemplateName = "league", ConceptUri = new Uri("http://football.com/league-to-team"), ObjectTemplateName = "team" });
             concepts.Add(new SitecoreTemplateConcept() { SubjectTemplateName = "team", ConceptUri = new Uri("http://football.com/team-to-player"), ObjectTemplateName = "player" });
             concepts.Add(new SitecoreTemplateConcept() { SubjectTemplateName = "newsstory", ConceptUri = new Uri("http://football.com/news-to-item"), ObjectTemplateName = "*" });
+            concepts.Add(new SitecoreTemplateConcept() { SubjectTemplateName = "ground", ConceptUri = new Uri("http://football.com/home-of-team"), ObjectTemplateName = "team" });
 
             container.Register(Component.For<IConceptProvider>().Instance(new SitecoreConceptProvider(concepts)).LifestyleSingleton());
+        }
+
+        /// <summary>
+        /// Setup of computed links. See http://github.com/Adamsimsy/Sitecore.LinkedData/wiki/Computed-link-configuration for configuration details.
+        /// </summary>
+        /// <param name="container"></param>
+        private static void SetupComputedLinkItems(IWindsorContainer container)
+        {
+            var computedLinkItems = new List<IComputedLinkItem>();
+
+            computedLinkItems.Add(new AncestorComputedLinkItem("team", "ground"));
+
+            container.Register(Component.For<IComputedLinkManager>().Instance(new SitecoreComputedLinkManager(computedLinkItems)).LifestyleSingleton());
         }
     }
 }
